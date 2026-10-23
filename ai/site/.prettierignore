@@ -1,7 +1,0 @@
-docs/spec/
-reference/
-src/generated/
-dist/
-dist-demo/
-.astro/
-package-lock.json
