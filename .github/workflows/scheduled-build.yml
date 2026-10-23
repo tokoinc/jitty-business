@@ -11,8 +11,10 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version-file: .nvmrc, cache: npm }
       - run: npm ci
-      # テンプレートは demo のまま。本番リポジトリでは DD_MODE と DD_SITE_URL を env に足す（docs/deploy.md）
-      - run: npm run build
+      # いまは demo のまま。本番では DD_MODE=production を env に足す（apps/site/docs/deploy.md）。
+      # URL は slug から https://business.jitty.jp/<slug> になるので、DD_SITE_URL は全サイトに効くここでは使わない
+
+      - run: npm run build:all
       - name: deploy hook
         if: success()
         env:

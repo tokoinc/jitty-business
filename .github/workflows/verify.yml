@@ -9,4 +9,7 @@ jobs:
         with: { node-version-file: .nvmrc, cache: npm }
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      # apps/site は DD_SITE=advisors（既定）、apps/tenshoku-dokuritsu はそのまま verify する
       - run: npm run verify
+      # 残りのサイトも build が通るかを確かめる
+      - run: npm run build:all

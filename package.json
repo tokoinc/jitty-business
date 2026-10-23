@@ -1,0 +1,30 @@
+{
+  "name": "jitty-business",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "site": "node scripts/site.mjs",
+    "dev": "node scripts/site.mjs advisors dev",
+    "build:all": "node scripts/build-all.mjs",
+    "lint": "npm run lint --workspaces",
+    "test": "npm run test --workspaces",
+    "verify": "cross-env DD_BASE=/ npm run verify -w @jitty-business/site && npm run lint -w @jitty-business/tenshoku-dokuritsu && npm run test -w @jitty-business/tenshoku-dokuritsu"
+  },
+  "allowScripts": {
+    "esbuild": true
+  },
+  "overrides": {
+    "eslint-plugin-jsx-a11y": {
+      "eslint": "^10.12.0"
+    }
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
+  }
+}
