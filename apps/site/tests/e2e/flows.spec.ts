@@ -1,9 +1,10 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
+import { site } from "../../src/site.config";
 
 const ARTICLE = "/articles/sample-work-style-basics/";
 const OTHER = "/articles/sample-independence-steps/";
 const INSURANCE = "/articles/sample-social-insurance/";
-const NS = "decision-desk:v1";
+const NS = site.storage.namespace;
 const SAVE_FAIL = "この端末に保存できませんでした。ページを閉じると元に戻ります。";
 const SEARCH_FAIL = "検索を読み込めませんでした。棚・目的・用語集から探せます。";
 
@@ -102,13 +103,13 @@ test("続きから読む", async ({ page }) => {
   await heading.evaluate((el) => el.scrollIntoView({ block: "start" }));
   await page.evaluate(() => window.scrollBy(0, 1));
   await page.waitForFunction(
-    (headingId) => {
-      const raw = localStorage.getItem("decision-desk:v1:resume");
+    ([headingId, ns]) => {
+      const raw = localStorage.getItem(`${ns}:resume`);
       if (!raw) return false;
       const data = JSON.parse(raw) as Record<string, { headingId?: string }>;
       return Object.values(data).some((point) => point.headingId === headingId);
     },
-    id,
+    [id, NS],
   );
   await page.reload();
   const resume = page.getByRole("button", { name: `前回の続き（${name}）から読む` });

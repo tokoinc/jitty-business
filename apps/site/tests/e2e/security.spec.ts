@@ -1,7 +1,8 @@
 // 注入と外部通信の回帰テスト（ADR-0012）
 import { expect, test, type Page } from "@playwright/test";
+import { site } from "../../src/site.config";
 
-const NS = "decision-desk:v1";
+const NS = site.storage.namespace;
 const ARTICLE = "/articles/sample-work-style-basics/";
 const PAYLOAD = `<img src=x onerror="window.__xss=1">"'><script>window.__xss=2</script>`;
 
