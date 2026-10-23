@@ -1,0 +1,48 @@
+---
+import ListLayout from "@/layouts/ListLayout.astro";
+import { site } from "@/site.config";
+import { listCrumbs } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+
+const frame = await frameProps("page");
+const contactReady = Boolean(site.contact.email || site.contact.formUrl);
+const analyticsLine = site.analytics.enabled
+  ? "アクセス解析を使います。計測の範囲は、運営者が実態に合わせて書きます。"
+  : "アクセス解析は使っていません。";
+const lead = "問い合わせ、ブラウザに残すデータ、アクセス解析の有無です。";
+---
+
+<ListLayout
+  title="プライバシー"
+  description={lead}
+  frame={frame}
+  page="page"
+  tab="プライバシー"
+  crumbs={listCrumbs([{ label: "プライバシー" }])}
+  heading="プライバシー"
+  lead={lead}
+>
+  <div class="dd-prose">
+    <h2>問い合わせ</h2>
+    {
+      contactReady ? (
+        <p>問い合わせ先を設定しているときは、その窓口へ連絡できます。</p>
+      ) : (
+        <p>問い合わせ先が設定されるまで、フォームの送信はありません。</p>
+      )
+    }
+    <h2>ブラウザに残すデータ</h2>
+    <ul>
+      <li>あとで読む（保存した記事）</li>
+      <li>続きから読む位置</li>
+      <li>表示設定（画面の明暗と、文字の大きさ）</li>
+    </ul>
+    <p>あとで読むと続きから読むは、そのブラウザの中だけに残ります。サーバーへは送りません。</p>
+    <h2>移行カレンダー</h2>
+    <p>
+      移行カレンダーは、このサイトのページで、ブラウザの中だけで確認リストを作ります。入力はサーバーへ送らず、端末へ自動保存しません。
+    </p>
+    <h2>アクセス解析</h2>
+    <p>{analyticsLine}</p>
+  </div>
+</ListLayout>

@@ -1,0 +1,219 @@
+---
+import { getEntry } from "astro:content";
+import { ArticleFace, FaceGrid, Frame, SectionHeading } from "@/generated/ui";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/site.config";
+import { toFace } from "@/utils/cards";
+import { getSiteData, type Article } from "@/utils/content";
+import { publishedIn } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { homeJsonLd } from "@/utils/seo";
+import { PROTECT_GUIDE_PATH, STORIES_PATH, protectGuideOpen, storyArticleIds, toThemeArticles } from "@/utils/themes";
+import { articleHref, href } from "@/utils/url";
+
+const d = await getSiteData();
+const home = (await getEntry("home", "home"))?.data;
+if (!home) throw new Error("home.yaml がない");
+const nav = await frameProps("home", { home: true });
+const primary = d.byId.get(home.hero.primaryArticle);
+const secondary = d.byId.get(home.hero.secondaryArticle);
+const entrances = home.entrances.flatMap((item) => {
+  const article = d.byId.get(item.article);
+  return article ? [{ label: item.label, href: articleHref(article.id) }] : [];
+});
+const independence = publishedIn(d.byId, home.prepare.independence, 3);
+const career = publishedIn(d.byId, home.prepare.career, 3);
+const around = publishedIn(d.byId, home.around);
+const protect = publishedIn(d.byId, home.protect);
+const theme = toThemeArticles(d.articles);
+const stories = storyArticleIds(theme).flatMap((id) => {
+  const article = d.byId.get(id);
+  return article ? [article] : [];
+});
+const protectGuide = protectGuideOpen(theme);
+const starter = publishedIn(d.byId, home.starter);
+const calendarHref = home.calendar.href.trim();
+const calendar =
+  calendarHref.length === 0 ? "" : /^https?:\/\//.test(calendarHref) ? calendarHref : href(calendarHref);
+const showPrepare = independence.length > 0 || career.length > 0;
+const sections = [
+  entrances.length > 0 ? "entrances" : "",
+  showPrepare ? "prepare" : "",
+  around.length > 0 ? "around" : "",
+  protect.length > 0 ? "protect" : "",
+  stories.length > 0 ? "stories" : "",
+  starter.length > 0 ? "starter" : "",
+  "stance",
+].filter((id) => id.length > 0);
+const sectionIndex = (id: string) => sections.indexOf(id) + 1;
+const origin = Astro.site;
+if (!origin) throw new Error("astro.config の site が未設定");
+const homeUrl = new URL(Astro.url.pathname, origin).href;
+
+function faces(articles: Article[]) {
+  return articles.map((article, i) => ({ face: toFace(article, d), index: i + 1 }));
+}
+---
+
+<BaseLayout
+  title={site.name}
+  description={site.description}
+  page="home"
+  jsonLd={homeJsonLd({
+    name: site.name,
+    description: site.description,
+    url: homeUrl,
+    organizationName: site.organization.name,
+    logoUrl: new URL(href("favicon.svg"), origin).href,
+  })}
+>
+  <Frame {...nav}>
+    <header>
+      <h1 class="dd-title">{home.hero.title}</h1>
+      <p class="dd-lead">{home.hero.lead}</p>
+      {(calendar || primary || secondary) && (
+        <ul class="dd-index">
+          {calendar ? (
+            <li>
+              <a href={calendar}>退職予定日から、移行カレンダーを作る</a>
+            </li>
+          ) : (
+            primary && (
+              <li>
+                <a href={articleHref(primary.id)}>{home.hero.primaryLabel}</a>
+              </li>
+            )
+          )}
+          {secondary && (
+            <li>
+              <a href={articleHref(secondary.id)}>{home.hero.secondaryLabel}</a>
+            </li>
+          )}
+        </ul>
+      )}
+    </header>
+    {entrances.length > 0 && (
+      <>
+        <SectionHeading id="entrances" index={sectionIndex("entrances")} context="section">
+          3つの入口
+        </SectionHeading>
+        <ul class="dd-index">
+          {entrances.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+    {showPrepare && (
+      <>
+        <SectionHeading id="prepare" index={sectionIndex("prepare")} context="section">
+          独立と転職の準備
+        </SectionHeading>
+        <div class:list={[{ "dd-pair": independence.length > 0 && career.length > 0 }]}>
+          {independence.length > 0 && (
+            <section aria-labelledby="prepare-independence">
+              <h3 id="prepare-independence">独立する</h3>
+              <FaceGrid layout="list">
+                {faces(independence).map(({ face, index }) => (
+                  <ArticleFace face={face} emphasis="default" headingLevel={3} index={index} />
+                ))}
+              </FaceGrid>
+            </section>
+          )}
+          {career.length > 0 && (
+            <section aria-labelledby="prepare-career">
+              <h3 id="prepare-career">転職する</h3>
+              <FaceGrid layout="list">
+                {faces(career).map(({ face, index }) => (
+                  <ArticleFace face={face} emphasis="default" headingLevel={3} index={index} />
+                ))}
+              </FaceGrid>
+            </section>
+          )}
+        </div>
+      </>
+    )}
+    {around.length > 0 && (
+      <>
+        <SectionHeading id="around" index={sectionIndex("around")} context="section">
+          移る前後の確認
+        </SectionHeading>
+        <FaceGrid layout="list">
+          {faces(around).map(({ face, index }) => (
+            <ArticleFace face={face} emphasis="default" headingLevel={3} index={index} />
+          ))}
+        </FaceGrid>
+        {calendar && (
+          <p>
+            <a href={calendar}>移行カレンダー</a>
+          </p>
+        )}
+      </>
+    )}
+    {protect.length > 0 && (
+      <>
+        <SectionHeading id="protect" index={sectionIndex("protect")} context="section">
+          退職金を守る
+        </SectionHeading>
+        <p class="dd-lead">勧誘、総費用、契約、生活の見通しを確認するための記事です。</p>
+        <FaceGrid layout="list">
+          {faces(protect).map(({ face, index }) => (
+            <ArticleFace face={face} emphasis="default" headingLevel={3} index={index} />
+          ))}
+        </FaceGrid>
+        {protectGuide && (
+          <p>
+            <a href={href(PROTECT_GUIDE_PATH)}>退職金を守る案内</a>
+          </p>
+        )}
+      </>
+    )}
+    {stories.length > 0 && (
+      <>
+        <SectionHeading id="stories" index={sectionIndex("stories")} context="section">
+          体験談
+        </SectionHeading>
+        <FaceGrid layout="list">
+          {faces(stories).map(({ face, index }) => (
+            <ArticleFace face={face} emphasis="default" headingLevel={3} index={index} />
+          ))}
+        </FaceGrid>
+        <p>
+          <a href={href(STORIES_PATH)}>体験談の一覧</a>
+        </p>
+      </>
+    )}
+    {starter.length > 0 && (
+      <>
+        <SectionHeading id="starter" index={sectionIndex("starter")} context="section">
+          はじめに読む
+        </SectionHeading>
+        <FaceGrid layout="list">
+          {faces(starter).map(({ face, index }) => (
+            <ArticleFace face={face} emphasis="default" headingLevel={3} index={index} />
+          ))}
+        </FaceGrid>
+      </>
+    )}
+    <SectionHeading id="stance" index={sectionIndex("stance")} context="section">
+      メディアの立場
+    </SectionHeading>
+    <div class="dd-prose">
+      <h3>比べる基準</h3>
+      <p>独立と転職を、共通の軸と情報の時点で比べます。どちらも、無条件の正解にはしません。</p>
+      <h3>退職金を守る立場</h3>
+      <p>
+        退職金は、勧誘、総費用、契約、生活の見通しを確認してから判断します。独立を勧める広告としては書きません。
+      </p>
+      <h3>編集者として調べて整理すること</h3>
+      <p>
+        編集部は、公開されている情報を調べて整理します。個別の税額、給付額、採算、契約の適法性は判定しません。
+      </p>
+      <p>
+        <a href={href("about/")}>このサイトについて</a>、<a href={href("editorial-policy/")}>編集方針</a>
+      </p>
+    </div>
+  </Frame>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import ListLayout from "@/layouts/ListLayout.astro";
+import { listCrumbs } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+
+const frame = await frameProps("page");
+const lead = "一次情報を根拠に、比べ方と更新のしかたを揃えます。";
+---
+
+<ListLayout
+  title="編集方針"
+  description={lead}
+  frame={frame}
+  page="page"
+  tab="方針"
+  crumbs={listCrumbs([{ label: "編集方針" }])}
+  heading="編集方針"
+  lead={lead}
+>
+  <div class="dd-prose">
+    <h2>根拠</h2>
+    <p>記事は、官公庁や事業者の公開ページなど、一次情報を根拠にします。</p>
+    <h2>比べ方</h2>
+    <p>
+      比較は、共通の軸と情報の時点を揃えます。独立と転職のどちらも、無条件の正解にはしません。
+    </p>
+    <h2>更新と訂正</h2>
+    <p>
+      更新と訂正は、記事の history に残します。日付を自動で更新して、情報があたらしいように見せることはしません。
+    </p>
+    <h2>取材とアンケート</h2>
+    <p>取材とアンケートは、実施条件、対象、実施日が揃ってから公開します。</p>
+    <h2>確認</h2>
+    <p>確認担当は編集部です。専門家監修ではありません。</p>
+    <p>制度の定期確認は、1月と4月です。金融・サービスの条件は、比較記事の公開時と、四半期ごとに確認します。</p>
+  </div>
+</ListLayout>

@@ -1,0 +1,168 @@
+---
+import Breadcrumbs from "@/components/common/Breadcrumbs.astro";
+import Pager from "@/components/common/Pager.astro";
+import type { FaceData, FrameProps, PageKind, ShelfMark } from "@/design-sets/contract";
+import { ArticleFace, CategoryMark, CheckPanel, FaceGrid, Frame } from "@/generated/ui";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface TermLink {
+  label: string;
+  href: string;
+}
+interface ShelfInfo {
+  description: string;
+  ownerName?: string;
+  ownerHref?: string;
+  updatePolicy?: string;
+}
+interface EmptyTarget {
+  shelves: { label: string; href: string; count: number }[];
+  searchHref: string;
+}
+interface Props {
+  title: string;
+  description: string;
+  frame: FrameProps;
+  /** 棚以外の一覧。棚は shelf の CategoryMark が上タブになる */
+  tab?: string;
+  crumbs: Crumb[];
+  /** 省略したときは、ページが h1 を出す（用語ページは h1 を data-pagefind-body の中に置く） */
+  heading?: string;
+  lead?: string;
+  shelf?: ShelfMark;
+  /** 渡したときだけ記事面を出す。0件なら空の枠ではなく文言と入口 */
+  faces?: { face: FaceData; index: number }[];
+  pager?: { base: string; page: number; total: number };
+  shelfInfo?: ShelfInfo;
+  terms?: TermLink[];
+  empty?: EmptyTarget;
+  page?: PageKind;
+  noindex?: boolean;
+  /** ページ全体を Pagefind の対象外にする */
+  pagefindIgnore?: boolean;
+  /** 見出しとリードだけを Pagefind の索引範囲にする。記事カードは含めない */
+  pagefindBody?: boolean;
+}
+const {
+  title,
+  description,
+  frame,
+  tab,
+  crumbs,
+  heading,
+  lead,
+  shelf,
+  faces,
+  pager,
+  shelfInfo,
+  terms = [],
+  empty,
+  page = "list",
+  noindex = false,
+  pagefindIgnore = false,
+  pagefindBody = false,
+} = Astro.props;
+const listing = faces !== undefined;
+const faceItems = faces ?? [];
+// slots.has("check") は中身が無くても true になることがあり、空の aside が出る
+const extraCheck = ((await Astro.slots.render("check")) ?? "").trim();
+const showCheck = Boolean(shelfInfo) || terms.length > 0 || extraCheck.length > 0;
+---
+
+<BaseLayout title={title} description={description} page={page} noindex={noindex} pagefindIgnore={pagefindIgnore}>
+  <Frame {...frame}>
+    {shelf && <CategoryMark context="sheet" shelf={shelf} />}
+    {!shelf && tab && (
+      <p class="dd-page-mark" style="--slot:1" data-sig="s2">
+        {tab}
+      </p>
+    )}
+    <Breadcrumbs items={crumbs} />
+    {
+      pagefindBody ? (
+        <div data-pagefind-body>
+          {heading && (
+            <h1 class="dd-title" data-pagefind-meta="title">
+              {heading}
+            </h1>
+          )}
+          {lead && <p class="dd-lead">{lead}</p>}
+        </div>
+      ) : (
+        <>
+          {heading && <h1 class="dd-title">{heading}</h1>}
+          {lead && <p class="dd-lead">{lead}</p>}
+        </>
+      )
+    }
+    <slot />
+    {listing && faceItems.length > 0 && (
+      <FaceGrid layout="list">
+        {faceItems.map(({ face, index }) => (
+          <ArticleFace face={face} emphasis="default" headingLevel={2} index={index} />
+        ))}
+      </FaceGrid>
+    )}
+    {listing && faceItems.length === 0 && (
+      <div class="dd-empty">
+        <p>まだ記事がありません</p>
+        {empty && (
+          <nav aria-label="ほかの入口">
+            {empty.shelves.length > 0 && (
+              <>
+                <p>ほかのカテゴリから探す</p>
+                <ul>
+                  {empty.shelves.map((item) => (
+                    <li>
+                      <a href={item.href}>{item.label}</a>（{item.count}件）
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            <p>
+              <a href={empty.searchHref}>検索する</a>
+            </p>
+          </nav>
+        )}
+      </div>
+    )}
+    {pager && <Pager base={pager.base} page={pager.page} total={pager.total} />}
+    {showCheck && (
+      <Fragment slot="check">
+        {shelfInfo && (
+          <CheckPanel kind="shelf" title="このカテゴリ">
+            <div class="dd-shelf-notes">
+              <p>{shelfInfo.description}</p>
+              {shelfInfo.ownerName && (
+                <p>
+                  確認担当　
+                  {shelfInfo.ownerHref ? (
+                    <a href={shelfInfo.ownerHref}>{shelfInfo.ownerName}</a>
+                  ) : (
+                    shelfInfo.ownerName
+                  )}
+                </p>
+              )}
+              {shelfInfo.updatePolicy && <p>更新方針　{shelfInfo.updatePolicy}</p>}
+            </div>
+          </CheckPanel>
+        )}
+        {/* eslint-disable-next-line astro/no-set-html-directive -- Astro.slots.render の結果（Astro がエスケープ済みの HTML） */}
+        {extraCheck.length > 0 && <Fragment set:html={extraCheck} />}
+        {terms.length > 0 && (
+          <CheckPanel
+            kind="terms"
+            title="関連する用語"
+            count={terms.length}
+            items={terms.map((term, i) => ({ label: term.label, href: term.href, index: i + 1 }))}
+          />
+        )}
+      </Fragment>
+    )}
+  </Frame>
+</BaseLayout>

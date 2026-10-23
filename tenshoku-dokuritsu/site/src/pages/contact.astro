@@ -1,0 +1,50 @@
+---
+import ListLayout from "@/layouts/ListLayout.astro";
+import { site } from "@/site.config";
+import { listCrumbs } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+
+const frame = await frameProps("page");
+const lead = "訂正、取材、広告の連絡先です。";
+const channels = [
+  site.contact.email
+    ? { label: "メール", href: `mailto:${site.contact.email}`, text: site.contact.email }
+    : undefined,
+  site.contact.formUrl
+    ? { label: "フォーム", href: site.contact.formUrl, text: site.contact.formUrl }
+    : undefined,
+].flatMap((item) => (item ? [item] : []));
+---
+
+<ListLayout
+  title="お問い合わせ"
+  description={lead}
+  frame={frame}
+  page="page"
+  tab="連絡"
+  crumbs={listCrumbs([{ label: "お問い合わせ" }])}
+  heading="お問い合わせ"
+  lead={lead}
+>
+  <div class="dd-prose">
+    {
+      channels.length === 0 ? (
+        <p>連絡先は公開前に設定する。</p>
+      ) : (
+        <ul>
+          {channels.map((channel) => (
+            <li>
+              {channel.label}　<a href={channel.href}>{channel.text}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    <h2>用件</h2>
+    <ul>
+      <li>訂正: 記事の誤りと、その箇所。</li>
+      <li>取材: 実施条件、対象、実施日が分かる内容。</li>
+      <li>広告: 掲載の対象と、広告であることの明示。</li>
+    </ul>
+  </div>
+</ListLayout>

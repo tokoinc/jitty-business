@@ -1,0 +1,41 @@
+---
+import ListLayout from "@/layouts/ListLayout.astro";
+import { listCrumbs } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+
+const frame = await frameProps("page");
+const lead = "広告の有無、掲載の順序、扱わないものを分けます。";
+---
+
+<ListLayout
+  title="広告と編集方針"
+  description={lead}
+  frame={frame}
+  page="page"
+  tab="方針"
+  crumbs={listCrumbs([{ label: "広告と編集方針" }])}
+  heading="広告と編集方針"
+  lead={lead}
+>
+  <div class="dd-prose">
+    <h2>広告の有無</h2>
+    <p>広告が無い記事と、広告を含む記事を分けます。</p>
+    <h2>掲載の順序</h2>
+    <p>掲載順は、読者の条件との適合と、比較の基準で決めます。報酬の多い順にはしません。</p>
+    <p>
+      提携が無い間は、公式サイトへの通常のリンクと、記事の中の確認事項で記事を成立させます。
+    </p>
+    <h2>扱わないもの</h2>
+    <ul>
+      <li>退職代行</li>
+      <li>退職給付金サポート</li>
+      <li>無在庫物販</li>
+      <li>情報商材</li>
+      <li>個別の投資商品の推奨</li>
+      <li>保険販売につながる相談</li>
+      <li>法律家への有償の直接紹介</li>
+    </ul>
+    <h2>退職金の見分け方</h2>
+    <p>退職金の見分け方は、広告なしで書きます。</p>
+  </div>
+</ListLayout>

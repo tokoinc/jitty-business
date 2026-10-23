@@ -1,0 +1,77 @@
+- id: compare
+  hub: independence-or-career-change
+  nextLabel: 市場価値を確かめるところから、独立または転職の準備へ進む
+  groups:
+    - label: 働き方を比べる
+      articles:
+        - independence-or-career-change
+        - check-market-value
+        - ways-to-work-independently
+        - combine-independent-work-and-employment
+    - label: 退職金を守る
+      articles:
+        - protect-retirement-money
+    - label: 選んだ理由
+      articles:
+        - survey-after-early-retirement
+- id: independence
+  hub: independence-roadmap
+  nextLabel: 経験の棚卸し、契約、登録サービスの条件を確認する
+  groups:
+    - label: 経験を仕事にする
+      articles:
+        - former-employer-contract
+        - advisory-work-services
+    - label: 在職中に試す
+      articles:
+        - try-spot-consulting
+        - freelance-consulting-in-your-50s
+    - label: 別の独立方法を確認する
+      articles:
+        - franchise-contract-checklist
+        - small-business-acquisition
+    - label: 開業の実務
+      articles:
+        - sole-proprietor-registration
+- id: career-change
+  hub: career-change-roadmap
+  nextLabel: 職務経歴を整理し、サービスの違いを確認する
+  groups:
+    - label: 動き始める
+      articles:
+        - career-change-roadmap
+        - income-after-career-change
+    - label: サービスを選ぶ
+      articles:
+        - midlife-career-services
+        - use-scout-services
+    - label: 経験と条件を伝える
+      articles:
+        - resume-for-managers
+- id: before-leaving
+  hub: before-leaving-checklist
+  nextLabel: 確認リストを使い、窓口で条件を確認する
+  groups:
+    - label: 退職前
+      articles:
+        - before-leaving-checklist
+        - early-retirement-unemployment-status
+        - starting-business-and-unemployment-benefits
+        - housing-loan-after-early-retirement
+        - cards-and-business-accounts
+        - living-costs-and-retirement-money
+- id: after-leaving
+  hub: after-leaving-procedures
+  nextLabel: 公式の手続き窓口で、自分の条件を確認する
+  groups:
+    - label: 退職の直後
+      articles:
+        - after-leaving-procedures
+        - health-insurance-after-leaving
+        - pension-and-spouse-procedures
+    - label: 入社・開業
+      articles:
+        - corporate-dc-transfer
+    - label: 翌年度
+      articles:
+        - resident-tax-and-retirement-income

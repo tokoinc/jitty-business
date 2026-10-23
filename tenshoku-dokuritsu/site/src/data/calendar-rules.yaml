@@ -1,0 +1,252 @@
+# 設計書 §7 の行。日付を出すのは、開いた国税庁のページと一致した開業届と青色申告だけ。
+- id: separation-reason
+  order: 1
+  title: 離職理由と給付の事前確認
+  anchor: none
+  rule: unverified
+  holiday: none
+  articles:
+    - slug: early-retirement-unemployment-status
+      title: 早期退職の離職理由と失業給付：会社都合になる条件と給付日数を確認する
+    - slug: starting-business-and-unemployment-benefits
+      title: 独立する人の失業給付：再就職手当と起業時の受給期間の特例を確認する
+  status: unverified
+  kind: confirm
+  office: 勤務先の人事と、ハローワーク
+  audience: 共通。会社の書類と、ハローワークへ確認する。
+- id: market-value
+  order: 2
+  title: 市場価値・顧問登録
+  anchor: none
+  rule: unverified
+  holiday: none
+  articles:
+    - slug: check-market-value
+      title: 独立か転職かを決める前に、自分の市場価値を確かめる方法
+    - slug: advisory-work-services
+      title: 顧問として独立する：登録サービスの違いと仕事の始め方
+    - slug: midlife-career-services
+      title: 50代向け転職サービス比較：スカウト型とエージェント型の違い
+  status: unverified
+  kind: recommended
+  office: 登録するサービスの公式案内
+  audience: 退職前の推奨。法的期限とは別。
+- id: loan-card-account
+  order: 3
+  title: ローン・カード・口座
+  applies:
+    work:
+      show: [independence, career-change, undecided]
+      required: []
+  anchor: none
+  rule: unverified
+  holiday: none
+  articles:
+    - slug: housing-loan-after-early-retirement
+      title: 住宅ローンが残る人の早期退職：繰上返済と借り換えの判断材料
+    - slug: cards-and-business-accounts
+      title: 退職前にカードと事業用口座を確認する：審査・開業時期・使い分け
+  status: unverified
+  kind: confirm
+  office: 契約がある金融機関、または勤務先
+  audience: 確認が必要な人だけ。申込条件と、開業前に申し込めるかは、契約先へ確認する。
+- id: health-voluntary
+  order: 4
+  title: 健康保険（任意継続）
+  applies:
+    insurance:
+      show: [voluntary, undecided]
+      required: [voluntary]
+  anchor: none
+  rule: unverified
+  holiday: none
+  articles:
+    - slug: health-insurance-after-leaving
+      title: 退職後の健康保険：任意継続・国保・家族の扶養を条件で比べる
+  status: unverified
+  kind: confirm
+  office: 加入している健康保険の保険者
+  audience: 任意継続を選んだ人。手続きの期限は、保険者へ確認する。
+- id: health-national
+  order: 5
+  title: 健康保険（国民健康保険）
+  applies:
+    insurance:
+      show: [national, undecided]
+      required: [national]
+  anchor: none
+  rule: unverified
+  holiday: none
+  articles:
+    - slug: health-insurance-after-leaving
+      title: 退職後の健康保険：任意継続・国保・家族の扶養を条件で比べる
+  status: unverified
+  kind: confirm
+  office: 住んでいる市区町村
+  audience: 国民健康保険を選んだ人。手続きの期限は、市区町村へ確認する。
+- id: health-dependent
+  order: 6
+  title: 健康保険（家族の扶養）
+  applies:
+    insurance:
+      show: [dependent, undecided]
+      required: [dependent]
+  anchor: none
+  rule: unverified
+  holiday: none
+  articles:
+    - slug: health-insurance-after-leaving
+      title: 退職後の健康保険：任意継続・国保・家族の扶養を条件で比べる
+  status: unverified
+  kind: confirm
+  office: 家族が加入する健康保険の保険者
+  audience: 家族の扶養を選んだ人。入れる条件は、その保険者へ確認する。
+- id: health-employer
+  order: 7
+  title: 健康保険（転職先の保険）
+  applies:
+    insurance:
+      show: [employer]
+      required: [employer]
+  anchor: none
+  rule: unverified
+  holiday: none
+  articles:
+    - slug: health-insurance-after-leaving
+      title: 退職後の健康保険：任意継続・国保・家族の扶養を条件で比べる
+  status: unverified
+  kind: confirm
+  office: 転職先
+  audience: 転職先の保険を選んだ人。入社までの空白は、転職先へ確認する。
+- id: pension-spouse
+  order: 8
+  title: 年金・配偶者
+  anchor: none
+  rule: unverified
+  holiday: none
+  articles:
+    - slug: pension-and-spouse-procedures
+      title: 退職後の国民年金と配偶者の手続き：入社までの空白期間も確認する
+  status: unverified
+  kind: confirm
+  office: 年金事務所、または勤務先
+  audience: 本人の加入区分と、入社までの空白期間を確認する。
+  spouseAudience:
+    yes: 本人の加入区分と空白期間に加え、配偶者の年金も確認する。
+    unknown: 本人の加入区分と空白期間を確認する。配偶者の確認が必要か分からないときは、年金事務所へ確認する。
+- id: corporate-dc
+  order: 9
+  title: 企業型DC
+  applies:
+    dc:
+      show: [yes]
+      required: [yes]
+  anchor: loss
+  rule: unverified
+  holiday: none
+  articles:
+    - slug: corporate-dc-transfer
+      title: 退職したら企業型DCはどうする？移換先と手続きの期限を確認する
+  status: unverified
+  kind: confirm
+  office: 勤務先、または移換先
+  audience: 企業型DCに加入していた人。資格喪失日は分かっている。移換の期限は未確認なので、日付は出さない。
+  lossUnknown:
+    office: 勤務先
+    audience: 企業型DCに加入していた人。資格喪失日が分からない。勤務先へ確認する。退職日からは期限を作らない。
+- id: employment-startup
+  order: 10
+  title: 雇用保険・起業時の特例
+  applies:
+    benefit:
+      show: [consider, undecided]
+      required: [consider]
+  anchor: none
+  rule: unverified
+  holiday: none
+  articles:
+    - slug: early-retirement-unemployment-status
+      title: 早期退職の離職理由と失業給付：会社都合になる条件と給付日数を確認する
+    - slug: starting-business-and-unemployment-benefits
+      title: 独立する人の失業給付：再就職手当と起業時の受給期間の特例を確認する
+  status: unverified
+  kind: confirm
+  office: ハローワーク
+  audience: 失業給付の利用を検討する人。離職後に事業を開始等した場合の受給期間の特例は、給付を受けながら事業を続ける仕組みとは別。日数は書かない。条件と時点は、ハローワークで確認する。
+- id: opening-notification
+  order: 11
+  title: 個人事業の開業・廃業等届出書
+  applies:
+    work:
+      show: [independence, undecided]
+      required: [independence]
+  anchor: opening
+  rule: next-year-march-15
+  holiday: confirm-at-counter
+  sources: [nta-new-business-filings, nta-income-tax-return]
+  checkedAt: "2026-10-12"
+  reviewDueAt: "2027-01-31"
+  articles:
+    - slug: sole-proprietor-registration
+      title: 50代で個人事業主になる：開業届・青色申告・会計ソフトの準備
+  status: verified
+  kind: statutory
+  office: 納税地の所轄税務署
+  audience: 独立して事業を始める人。開業した年分の所得税の確定申告期限まで。
+- id: blue-return-march-15
+  order: 12
+  title: 所得税の青色申告承認申請書（1月15日までの開業）
+  applies:
+    work:
+      show: [independence, undecided]
+      required: [independence]
+  anchor: opening
+  rule: same-year-march-15
+  openingWindow: jan-1-to-15
+  holiday: confirm-at-counter
+  sources: [nta-new-business-filings, nta-start-business]
+  checkedAt: "2026-10-12"
+  reviewDueAt: "2027-01-31"
+  articles:
+    - slug: sole-proprietor-registration
+      title: 50代で個人事業主になる：開業届・青色申告・会計ソフトの準備
+  status: verified
+  kind: statutory
+  office: 納税地の所轄税務署
+  audience: 青色申告の承認を受けようとする人で、開業日が1月1日から1月15日まで。
+- id: blue-return-two-months
+  order: 13
+  title: 所得税の青色申告承認申請書（1月16日以後の開業）
+  applies:
+    work:
+      show: [independence, undecided]
+      required: [independence]
+  anchor: opening
+  rule: within-two-months
+  openingWindow: on-or-after-jan-16
+  holiday: confirm-at-counter
+  sources: [nta-new-business-filings, nta-start-business]
+  checkedAt: "2026-10-12"
+  reviewDueAt: "2027-01-31"
+  articles:
+    - slug: sole-proprietor-registration
+      title: 50代で個人事業主になる：開業届・青色申告・会計ソフトの準備
+  status: verified
+  kind: statutory
+  office: 納税地の所轄税務署
+  audience: 青色申告の承認を受けようとする人で、開業日が1月16日以後。事業開始の日から2月以内。
+- id: tax-and-resident-tax
+  order: 14
+  title: 確定申告・住民税
+  anchor: none
+  rule: unverified
+  holiday: none
+  articles:
+    - slug: sole-proprietor-registration
+      title: 50代で個人事業主になる：開業届・青色申告・会計ソフトの準備
+    - slug: resident-tax-and-retirement-income
+      title: 退職前後の住民税と退職金の税務：会社に確認する書類と納付方法
+  status: unverified
+  kind: confirm
+  office: 市区町村、または所轄税務署
+  audience: 対象年、就業状況、納付方法を確認する。住民税は、一律の法定期限にしない。

@@ -1,0 +1,70 @@
+---
+import { CheckPanel } from "@/generated/ui";
+import ListLayout from "@/layouts/ListLayout.astro";
+import { getSiteData } from "@/utils/content";
+import {
+  articlesOnShelf,
+  emptyTargets,
+  listCrumbs,
+  relatedTermLinks,
+  shelvesWithArticles,
+  shelfCheck,
+} from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { categoryHref } from "@/utils/url";
+
+const d = await getSiteData();
+const shelves = shelvesWithArticles(d);
+const frame = await frameProps("list");
+const lead = "記事のカテゴリです。説明と件数から入れます。";
+---
+
+<ListLayout
+  title="カテゴリ"
+  description={lead}
+  frame={frame}
+  tab="カテゴリ"
+  crumbs={listCrumbs([{ label: "カテゴリ" }])}
+  heading="カテゴリ"
+  lead={lead}
+  faces={shelves.length === 0 ? [] : undefined}
+  terms={relatedTermLinks(
+    d,
+    d.articles,
+    shelves.map((shelf) => shelf.id),
+  )}
+  empty={emptyTargets(d)}
+>
+  {shelves.length > 0 && (
+    <ul class="dd-index">
+      {shelves.map((shelf) => (
+        <li>
+          <a href={categoryHref(shelf.id)}>{shelf.data.label}</a>
+          <p>{shelf.data.description}</p>
+          <p>{articlesOnShelf(d, shelf.id).length}件</p>
+        </li>
+      ))}
+    </ul>
+  )}
+  {shelves.length > 0 && (
+    <CheckPanel slot="check" kind="shelf" title="確認担当と更新方針">
+      <div class="dd-shelf-notes">
+        {shelves.map((shelf) => {
+          const info = shelfCheck(d, shelf);
+          return (
+            <p>
+              <a href={categoryHref(shelf.id)}>{shelf.data.label}</a>
+              {info.ownerName && (
+                <>
+                  　確認担当　
+                  {info.ownerHref ? <a href={info.ownerHref}>{info.ownerName}</a> : info.ownerName}
+                </>
+              )}
+              {info.updatePolicy && <>　更新方針　{info.updatePolicy}</>}
+            </p>
+          );
+        })}
+      </div>
+    </CheckPanel>
+  )}
+</ListLayout>

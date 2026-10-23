@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3セット比較</title>
+<style>
+:root{--ink:#22262c;--soft:#5b626c;--bg:#ecebe8;--card:#ffffff;--line:#c9c6c0;
+  font-family:system-ui,"Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink)}
+header{position:sticky;top:0;z-index:5;background:#22262c;color:#f4f2ee;padding:12px 16px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+header h1{font-size:16px;margin:0;font-weight:700}
+.group{display:flex;gap:6px;align-items:center;font-size:13px}
+.group b{font-weight:600;margin-right:2px}
+header button{font:inherit;font-size:13px;color:inherit;background:#3a4049;border:1px solid #5b626c;padding:4px 10px;border-radius:3px;cursor:pointer}
+header button[aria-pressed="true"]{background:#f4f2ee;color:#22262c}
+main{padding:20px 16px 60px;max-width:1500px;margin:0 auto}
+.intro{font-size:14px;line-height:1.8;margin:0 0 20px;max-width:60em}
+.intro small{display:block;color:var(--soft);font-size:12px}
+h2{font-size:15px;margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.grid.narrow{grid-template-columns:repeat(3,minmax(0,300px))}
+figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:10px}
+figcaption{font-size:13px;font-weight:700;margin:0 0 8px;display:flex;justify-content:space-between}
+figcaption span{font-weight:400;color:var(--soft);font-size:12px}
+.box{position:relative;overflow:hidden;background:#f6f6f6;min-height:120px}
+.box iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;background:#fff}
+.err{font-size:12px;color:#8a2b1e;padding:8px}
+@media (max-width:900px){.grid,.grid.narrow{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>3セット比較（識別検査C）</h1>
+  <div class="group" role="group" aria-label="表示モード"><b>表示</b>
+    <button type="button" data-mode="" aria-pressed="false">通常</button>
+    <button type="button" data-mode="L1" aria-pressed="false">L1</button>
+    <button type="button" data-mode="L2" aria-pressed="false">L2</button>
+    <button type="button" data-mode="L3" aria-pressed="true">L3 輪郭だけ</button>
+  </div>
+  <div class="group" role="group" aria-label="質感"><b>質感</b>
+    <button type="button" data-finish="flat" aria-pressed="true">フラット</button>
+    <button type="button" data-finish="real" aria-pressed="false">リアル（立体）</button>
+  </div>
+  <div class="group" role="group" aria-label="Spreadの案"><b>Spread</b>
+    <button type="button" data-spread="a" aria-pressed="false">原案</button>
+    <button type="button" data-spread="b" aria-pressed="true">別案</button>
+  </div>
+</header>
+<main>
+  <p class="intro">同じ記事・データを、Binder（タブと台紙）・Board（固定盤と差し替えパネル）・Spread（曲面と見開き）で並べています。判定者には、3つの違いを色ではなく「位置・境界・張り出し」などの形の言葉で説明してもらい、手順書v3.2の2.16（検査C）に従って記録します。
+  <small>このページは同じフォルダにある試作ファイルを読み込みます。フォルダごと開いてください。Spreadは上部の切り替えで原案（曲面と見開き）と別案（大円弧の扉・のどの柱・切符）を入れ替えられます。判定者による検査は未実施。記事・数値はすべて架空です。</small></p>
+
+  <h2>記事 — 1280px</h2>
+  <div class="grid" data-screen="article" data-w="1280"></div>
+  <h2>ホーム — 1280px</h2>
+  <div class="grid" data-screen="home" data-w="1280"></div>
+  <h2>検索 — 1280px</h2>
+  <div class="grid" data-screen="search" data-w="1280"></div>
+  <h2>記事 — 375px</h2>
+  <div class="grid narrow" data-screen="narrow" data-w="375"></div>
+</main>
+<script>
+(function(){
+  var sets = [
+    {id:'binder', name:'Binder', sub:'タブと台紙（標準）', file:'v3.1 Binderシルエット試作.html'},
+    {id:'board',  name:'Board',  sub:'固定盤と差し替えパネル', file:'v3.1 Boardシルエット試作.html'},
+    {id:'spread', name:'Spread', sub:'曲面と見開き', file:'v3.1 Spreadシルエット試作.html',
+      alt:{b:{sub:'大円弧の扉・のどの柱・切符（別案）', file:'v3.1 Spread別案シルエット試作.html'}}}
+  ];
+  var mode = 'L3', finish = 'flat', spreadVariant = 'b';
+  var frames = [];
+  function variant(s){ return (s.alt && s.alt[spreadVariant]) || s; }
+  function srcFor(s, screen){
+    return encodeURI(variant(s).file) + '?embed=1&screen=' + screen + '&inspect=' + mode + '&finish=' + finish;
+  }
+  document.querySelectorAll('.grid').forEach(function(grid){
+    var screen = grid.dataset.screen, w = Number(grid.dataset.w);
+    sets.forEach(function(s){
+      var fig = document.createElement('figure');
+      fig.innerHTML = '<figcaption>' + s.name + '<span>' + variant(s).sub + '</span></figcaption><div class="box"></div>';
+      var box = fig.querySelector('.box');
+      var ifr = document.createElement('iframe');
+      ifr.title = s.name + '：' + screen;
+      ifr.setAttribute('scrolling', 'no');
+      ifr.src = srcFor(s, screen);
+      box.appendChild(ifr);
+      grid.appendChild(fig);
+      frames.push({ifr:ifr, box:box, w:w, h:0, set:s, screen:screen, cap:fig.querySelector('figcaption span')});
+    });
+  });
+  function layout(f){
+    if(!f.h) return;
+    var s = Math.min(1, f.box.clientWidth / f.w);
+    f.ifr.style.width = f.w + 'px';
+    f.ifr.style.height = f.h + 'px';
+    f.ifr.style.transform = 'scale(' + s + ')';
+    f.box.style.height = Math.ceil(f.h * s) + 'px';
+  }
+  addEventListener('message', function(e){
+    if(!e.data || e.data.type !== 'sketch-size') return;
+    frames.forEach(function(f){ if(f.ifr.contentWindow === e.source){ f.h = e.data.h; layout(f); } });
+  });
+  addEventListener('resize', function(){ frames.forEach(layout); });
+  var btns = document.querySelectorAll('header button[data-mode]');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      mode = b.dataset.mode;
+      btns.forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+      frames.forEach(function(f){ if(f.ifr.contentWindow) f.ifr.contentWindow.postMessage({type:'sketch-mode', mode:mode}, '*'); });
+    });
+  });
+  var fBtns = document.querySelectorAll('header button[data-finish]');
+  fBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      finish = b.dataset.finish;
+      fBtns.forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+      frames.forEach(function(f){ if(f.ifr.contentWindow) f.ifr.contentWindow.postMessage({type:'sketch-finish', finish:finish}, '*'); });
+    });
+  });
+  // Spreadの原案／別案を入れ替える（他の2セットは読み込み直さない）
+  var vBtns = document.querySelectorAll('header button[data-spread]');
+  vBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      if(spreadVariant === b.dataset.spread) return;
+      spreadVariant = b.dataset.spread;
+      vBtns.forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+      frames.forEach(function(f){
+        if(!f.set.alt) return;
+        f.h = 0;
+        f.cap.textContent = variant(f.set).sub;
+        f.ifr.src = srcFor(f.set, f.screen);
+      });
+    });
+  });
+  setTimeout(function(){
+    frames.forEach(function(f){
+      if(!f.h){ var p = document.createElement('p'); p.className = 'err'; p.textContent = '読み込めませんでした。3つの試作ファイルと同じフォルダで開いてください。'; f.box.appendChild(p); f.box.style.height = 'auto'; }
+    });
+  }, 6000);
+})();
+</script>
+</body>
+</html>

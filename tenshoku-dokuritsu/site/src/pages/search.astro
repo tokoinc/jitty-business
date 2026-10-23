@@ -1,0 +1,120 @@
+---
+import FaceTemplates from "@/components/common/FaceTemplates.astro";
+import { FaceGrid, Frame, SearchSurface } from "@/generated/ui";
+import type { FilterGroup } from "@/design-sets/contract";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/site.config";
+import { getSiteData } from "@/utils/content";
+import { FORMAT_LABELS, INTENT_LABELS, NAV_INTENTS } from "@/utils/labels";
+import { shelvesWithArticles } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { categoryHref, href, purposeHref } from "@/utils/url";
+
+const d = await getSiteData();
+const nav = await frameProps("search", { search: true });
+const purposes = NAV_INTENTS.map((intent) => ({
+  value: INTENT_LABELS[intent].short,
+  label: INTENT_LABELS[intent].nav,
+  href: purposeHref(intent),
+}));
+const groups: FilterGroup[] = [
+  {
+    id: "shelf",
+    label: "カテゴリ",
+    options: d.shelves.map((shelf) => ({
+      value: shelf.data.label,
+      label: shelf.data.label,
+      selected: false,
+    })),
+  },
+  {
+    id: "format",
+    label: "記事型",
+    options: (Object.keys(FORMAT_LABELS) as (keyof typeof FORMAT_LABELS)[]).map((id) => ({
+      value: FORMAT_LABELS[id],
+      label: FORMAT_LABELS[id],
+      selected: false,
+    })),
+  },
+  {
+    id: "checked",
+    label: "確認日",
+    options: (["30日以内", "90日以内", "それ以前"] as const).map((value) => ({
+      value,
+      label: value,
+      selected: false,
+    })),
+  },
+];
+const surface = {
+  action: href("search/"),
+  query: "",
+  purposes,
+  groups,
+  questions: nav.questions ?? [],
+};
+const shelves = shelvesWithArticles(d);
+---
+
+<BaseLayout title="検索" description={site.description} page="search" noindex>
+  <Frame {...nav}>
+    <h1 class="dd-visually-hidden">検索</h1>
+    <p class="dd-page-mark" style="--slot:2" data-sig="s2">
+      検索
+    </p>
+    <SearchSurface part="main" {...surface}>
+      <div data-search-root data-base={import.meta.env.BASE_URL}>
+        <p data-status role="status" aria-live="polite"></p>
+        <FaceGrid layout="results" />
+        <div class="dd-empty" data-empty hidden>
+          <p>言い換えるか、目的・カテゴリから探してください。</p>
+          <p>目的から探す</p>
+          <ul>
+            {purposes.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+          <p>カテゴリから探す</p>
+          <ul>
+            {shelves.map((shelf) => (
+              <li>
+                <a href={categoryHref(shelf.id)}>{shelf.data.label}</a>
+              </li>
+            ))}
+          </ul>
+          <p>
+            <a href={href("glossary/")}>用語集</a>
+          </p>
+        </div>
+      </div>
+      <noscript>
+        <div class="dd-empty">
+          <p>検索はJavaScriptを使います。カテゴリ・目的・用語集から探せます。</p>
+          <ul>
+            {purposes.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
+            {shelves.map((shelf) => (
+              <li>
+                <a href={categoryHref(shelf.id)}>{shelf.data.label}</a>
+              </li>
+            ))}
+            <li>
+              <a href={href("glossary/")}>用語集</a>
+            </li>
+          </ul>
+        </div>
+      </noscript>
+    </SearchSurface>
+    <SearchSurface part="aside" slot="check" {...surface} />
+  </Frame>
+  <FaceTemplates />
+</BaseLayout>
+
+<script>
+  import "@/scripts/search";
+</script>

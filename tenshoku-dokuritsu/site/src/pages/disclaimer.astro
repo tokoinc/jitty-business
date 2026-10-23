@@ -1,0 +1,33 @@
+---
+import ListLayout from "@/layouts/ListLayout.astro";
+import { listCrumbs } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+
+const frame = await frameProps("page");
+const lead = "一般的な整理であり、個別の判断はしません。";
+---
+
+<ListLayout
+  title="免責事項"
+  description={lead}
+  frame={frame}
+  page="page"
+  tab="免責"
+  crumbs={listCrumbs([{ label: "免責事項" }])}
+  heading="免責事項"
+  lead={lead}
+>
+  <div class="dd-prose">
+    <p>
+      このサイトの情報は、一般的な整理です。個別の税額、給付額、採算、契約の判断はしません。
+    </p>
+    <p>条件は変わります。手続きの前に、公式の窓口で確認してください。</p>
+    <h2>初期の対象外</h2>
+    <ul>
+      <li>退職そのものの是非</li>
+      <li>公務員</li>
+      <li>完全引退だけを望む人</li>
+      <li>許認可業種の開業</li>
+    </ul>
+  </div>
+</ListLayout>

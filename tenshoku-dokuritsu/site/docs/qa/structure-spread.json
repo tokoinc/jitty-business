@@ -1,0 +1,2277 @@
+{
+  "set": "spread",
+  "pages": {
+    "/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "会社の外で働くか、次の会社で働くか。"
+        },
+        {
+          "level": 2,
+          "text": "3つの入口"
+        },
+        {
+          "level": 2,
+          "text": "移る前後の確認"
+        },
+        {
+          "level": 3,
+          "text": "次の働き方に移る前に済ませておくこと：ローン・カード・口座・確認リスト"
+        },
+        {
+          "level": 2,
+          "text": "はじめに読む"
+        },
+        {
+          "level": 3,
+          "text": "50代の次の働き方：独立と転職を収入・安定・始め方で比べる"
+        },
+        {
+          "level": 3,
+          "text": "次の働き方に移る前に済ませておくこと：ローン・カード・口座・確認リスト"
+        },
+        {
+          "level": 2,
+          "text": "メディアの立場"
+        },
+        {
+          "level": 3,
+          "text": "比べる基準"
+        },
+        {
+          "level": 3,
+          "text": "退職金を守る立場"
+        },
+        {
+          "level": 3,
+          "text": "編集者として調べて整理すること"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "header|role=|label=|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/articles/before-leaving-checklist/",
+        "/articles/independence-or-career-change/",
+        "/articles/independence-or-career-change/",
+        "/articles/before-leaving-checklist/",
+        "/articles/independence-or-career-change/",
+        "/articles/before-leaving-checklist/",
+        "/about/",
+        "/editorial-policy/"
+      ],
+      "pagefind": ""
+    },
+    "/404.html": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "ページが見つかりません"
+        },
+        {
+          "level": 2,
+          "text": "カテゴリから探す"
+        },
+        {
+          "level": 2,
+          "text": "入口"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "form|role=search|label=キーワードで検索|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/",
+        "/search/",
+        "/category/"
+      ],
+      "pagefind": ""
+    },
+    "/about/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "このサイトについて"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/editorial-policy/",
+        "/disclaimer/",
+        "/disclosure/",
+        "/privacy/",
+        "/contact/"
+      ],
+      "pagefind": ""
+    },
+    "/articles/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "記事"
+        },
+        {
+          "level": 2,
+          "text": "次の働き方に移る前に済ませておくこと：ローン・カード・口座・確認リスト"
+        },
+        {
+          "level": 2,
+          "text": "50代の次の働き方：独立と転職を収入・安定・始め方で比べる"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/articles/before-leaving-checklist/",
+        "/articles/independence-or-career-change/"
+      ],
+      "pagefind": ""
+    },
+    "/articles/before-leaving-checklist/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "次の働き方に移る前に済ませておくこと：ローン・カード・口座・確認リスト"
+        },
+        {
+          "level": 2,
+          "text": "この記事で分かること"
+        },
+        {
+          "level": 2,
+          "text": "人事と確認すること"
+        },
+        {
+          "level": 3,
+          "text": "条件：協会けんぽの任意継続の申出"
+        },
+        {
+          "level": 2,
+          "text": "金融と生活の確認"
+        },
+        {
+          "level": 2,
+          "text": "次の働き方別の準備"
+        },
+        {
+          "level": 3,
+          "text": "独立する人"
+        },
+        {
+          "level": 3,
+          "text": "条件：個人事業の開業・廃業等届出書"
+        },
+        {
+          "level": 3,
+          "text": "条件：所得税の青色申告承認申請書"
+        },
+        {
+          "level": 3,
+          "text": "条件：給与支払事務所等の開設・移転・廃止届出書"
+        },
+        {
+          "level": 3,
+          "text": "転職する人"
+        },
+        {
+          "level": 3,
+          "text": "まだ決めていない人"
+        },
+        {
+          "level": 3,
+          "text": "根拠：条件表にした期限は、2026年10月12日に開いたページに、対象、条件、起算日、窓口があるものだけ"
+        },
+        {
+          "level": 2,
+          "text": "次に確かめる"
+        },
+        {
+          "level": 3,
+          "text": "50代の次の働き方：独立と転職を収入・安定・始め方で比べる"
+        },
+        {
+          "level": 2,
+          "text": "根拠・出典"
+        },
+        {
+          "level": 2,
+          "text": "著者と確認担当"
+        },
+        {
+          "level": 2,
+          "text": "タグ"
+        },
+        {
+          "level": 2,
+          "text": "目次"
+        },
+        {
+          "level": 2,
+          "text": "条件 4件"
+        },
+        {
+          "level": 2,
+          "text": "根拠 4件"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "header|role=|label=|by=",
+        "section|role=|label=|by=brief-t",
+        "nav|role=|label=この記事で確かめる|by=",
+        "nav|role=|label=目次|by=",
+        "section|role=|label=|by=cond-kenpo-voluntary-slip-t",
+        "section|role=|label=|by=cond-sole-proprietor-slip-t",
+        "section|role=|label=|by=cond-blue-return-slip-t",
+        "section|role=|label=|by=cond-payroll-office-slip-t",
+        "section|role=|label=|by=ev-deadlines-slip-t",
+        "section|role=|label=|by=next-steps",
+        "section|role=|label=|by=sources-heading",
+        "section|role=|label=|by=review-heading",
+        "section|role=|label=|by=tags-heading",
+        "aside|role=|label=確かめる|by=",
+        "section|role=|label=|by=flag-toc",
+        "section|role=|label=|by=flag-conditions",
+        "section|role=|label=|by=flag-evidence",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/category/before-leaving/",
+        "/authors/editorial-team/",
+        "/articles/before-leaving-checklist/#toc",
+        "/articles/before-leaving-checklist/#cond-kenpo-voluntary",
+        "/articles/before-leaving-checklist/#sources",
+        "/articles/before-leaving-checklist/#%E4%BA%BA%E4%BA%8B%E3%81%A8%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8",
+        "/articles/before-leaving-checklist/#%E9%87%91%E8%9E%8D%E3%81%A8%E7%94%9F%E6%B4%BB%E3%81%AE%E7%A2%BA%E8%AA%8D",
+        "/articles/before-leaving-checklist/#%E6%AC%A1%E3%81%AE%E5%83%8D%E3%81%8D%E6%96%B9%E5%88%A5%E3%81%AE%E6%BA%96%E5%82%99",
+        "/articles/before-leaving-checklist/#src-kenpo-voluntary-continuation",
+        "/articles/before-leaving-checklist/#src-kenpo-voluntary-continuation",
+        "/articles/before-leaving-checklist/#src-kenpo-voluntary-continuation",
+        "/articles/before-leaving-checklist/#src-kenpo-voluntary-continuation",
+        "/articles/before-leaving-checklist/#src-kenpo-voluntary-continuation",
+        "/articles/before-leaving-checklist/#src-nta-new-business-filings",
+        "/articles/before-leaving-checklist/#src-nta-start-business",
+        "/articles/before-leaving-checklist/#src-nta-new-business-filings",
+        "/articles/before-leaving-checklist/#src-nta-new-business-filings",
+        "/articles/before-leaving-checklist/#src-nta-start-business",
+        "/articles/before-leaving-checklist/#src-nta-new-business-filings",
+        "/articles/before-leaving-checklist/#src-nta-start-business",
+        "/articles/before-leaving-checklist/#src-nta-new-business-filings",
+        "/articles/before-leaving-checklist/#src-nta-new-business-filings",
+        "/articles/before-leaving-checklist/#src-nta-start-business",
+        "/articles/before-leaving-checklist/#src-nta-new-business-filings",
+        "/articles/before-leaving-checklist/#src-nta-start-business",
+        "/articles/before-leaving-checklist/#src-nta-new-business-filings",
+        "/articles/before-leaving-checklist/#src-nta-new-business-filings",
+        "/articles/before-leaving-checklist/#src-nta-start-business",
+        "/articles/before-leaving-checklist/#src-nta-new-business-filings",
+        "/articles/before-leaving-checklist/#src-nta-start-business",
+        "/articles/before-leaving-checklist/#src-mhlw-benefit-period-special",
+        "/articles/before-leaving-checklist/#src-kenpo-voluntary-continuation",
+        "/articles/before-leaving-checklist/#src-nta-new-business-filings",
+        "/articles/before-leaving-checklist/#src-nta-start-business",
+        "/articles/before-leaving-checklist/#src-mhlw-benefit-period-special",
+        "/articles/independence-or-career-change/",
+        "/benefit/voluntary_continuation/index.html",
+        "/taxes/shiraberu/taxanswer/shotoku/2090.htm",
+        "/publication/pamph/koho/kurashi/html/07_3.htm",
+        "/stf/seisakunitsuite/bunya/koyou_roudou/koyou/newpage_26400.html",
+        "/authors/editorial-team/",
+        "/authors/editorial-team/",
+        "/tags/early-retirement/",
+        "/tags/housing-loan/",
+        "/tags/credit-card/",
+        "/tags/business-account/"
+      ],
+      "pagefind": "次の働き方に移る前に済ませておくこと：ローン・カード・口座・確認リスト 退職日が近い人が、人事、ローン、カード、口座、生活を、独立・転職・未定に分けて確認するリスト。期限は開いたページにある項目だけ。\nこの記事で分かること 分かること 人事へ聞くことと、ページに期限がある手続きを分けて確認するローン、カード、口座は、必要な人だけが契約先へ確認する独立、転職、未定で、共通の確認とその働き方だけの確認を分ける 対象 退職日が視野に入り、独立・転職・未定のどれかで次を考えている人 範囲 人事、ローン、カード、口座、生活の確認リスト\n退職日が視野に入ったときに、何を先に確認するかを分けます。在職中に聞く順番は、推奨する時期です。条件表に書いたものだけが、この作業で開いたページにある期限です。ローンの借り換え、カードの作成、口座の開設は勧めません。 人事と確認すること 退職日が決まる前後に、勤務先の人事へ聞く項目です。これは推奨する時期であり、下の条件表の期限ではありません。書類の交付日は勤務先に確認します。 退職日 退職日と、最終出社日が同じかを人事に確認する。 受け取る書類 離職票、源泉徴収票、雇用保険被保険者証を、いつ受け取るかを人事に確認する。 有給と退職金 有給の残の扱いと、退職金がある場合の支給時期を、勤務先の規定で確認する。金額はこの記事では置かない。 秘密保持と競業 退職後に話せる仕事の範囲と、競業の約束があるかを、自分の契約で確認する。 健康保険は、次の働き方が決まっていなくても、退職日の翌日から関係します。全国健康保険協会のページは、退職後の健康保険に、協会けんぽの任意継続、国民健康保険、家族の健康保険の3つがあると書いています。どれにするかは、手続き先に条件を確認して選びます。3つすべてに入る必要はありません。保険料の額は、この記事では書きません [1] 。 協会けんぽの任意継続だけ、同じページに対象、期限、窓口があります。退職日までに被保険者期間が継続して2か月以上あること、退職日の翌日から20日以内に手続すること、です。申出書は、住んでいる都道府県の協会けんぽ支部へ出します。20日目が土曜、日曜、祝日の場合は翌営業日です。郵送は、20日以内の必着です。 条件：協会けんぽの任意継続の申出 対象 退職日までに、協会けんぽの被保険者期間が継続して2か月以上ある人 [1] 条件 退職日の翌日から20日以内に手続する。20日目が土曜、日曜、祝日の場合は翌営業日。郵送は期間内に必着 [1] 起算日 退職日の翌日 [1] 窓口 住んでいる都道府県の協会けんぽ支部 [1] この条件表は、協会けんぽに加入していた人の申出です。健康保険組合の任意継続は、加入していた組合に確認します。国民健康保険の手続き先は、住んでいる市区町村の国民健康保険担当課です。家族の健康保険は、家族の勤務先です。この2つは、開いたページが期限を書いていないので、期限としては書きません。 在職中に、自分が協会けんぽかを保険証または資格情報で確認するのは、推奨する時期です。20日は、退職日の翌日から数える期限です。 金融と生活の確認 ローン、カード、口座は、契約がある人、または仕事で分ける必要がある人の確認事項です。申し込み先の一覧は置きません。 住宅ローンが残っている人は、退職後の収入の変化を、契約中の金融機関へ伝える必要があるかを確認します。繰上返済や借り換えを、この記事は勧めません。金利や手数料は、契約と金融機関の案内で確認します。 クレジットカードを仕事と生活で分けたい人は、申込できる時期と必要書類を、使おうとするカード会社に確認します。在職中に作れるとは書きません。カードの作成は勧めません。 事業の入出金を生活の口座と分ける必要がある人は、口座を開く条件を金融機関に確認します。開設は勧めません。必要が無い人は、この項目を空欄にして構いません。 生活は、住居、食費、保険、税の項目が、退職後も続くかを自分の家計で洗い出します。円の金額、退職金の使い道、採算は置きません。項目が分からない支出は、契約書か請求元に確認します。 注記 金融の確認先 ローン、カード、口座に、この作業で期限を断定できるページはありません。契約がある人は、勤務先または金融機関に確認します。 次の働き方別の準備 共通の確認は、人事の書類と、協会けんぽの任意継続の要否です。ここから先は、独立、転職、未定で分けます。 独立する人 事業を始める人だけが、税務署への届出を確認します。開業の日を、この記事は決めません。 国税庁「No.2090 新たに事業を始めたときの届出など」（令和8年4月1日現在法令等）では、個人事業の開廃業等届出書の提出期限は、事業の開始等の事実があった日の属する年分の確定申告期限までです。申告先は、所轄税務署です。この記事が使う期限は、このページの期限です [2] 。 同じ期限は、国税庁「個人で事業を始めたとき」にもあります。開業した年分の所得税の確定申告期限までに、納税地の所轄税務署へ出します。このパンフレットの注では、掲載の提出期限（適格請求書発行事業者の登録申請書を除く）が土曜、日曜、祝日等のときは、その翌日が期限です [3] 。 条件：個人事業の開業・廃業等届出書 対象 新たに事業を開始した人 [2] 条件 事業の開始等の事実があった日の属する年分の所得税の確定申告期限まで [2] 休日 この提出期限が土曜、日曜、祝日等のときは、その翌日 [3] 起算日 事業を開始した日の属する年 [2] 窓口 納税地の所轄税務署 [3] 青色申告の承認を受けようとする人の期限は、開業届とは別です。No.2090では、所得税の青色申告承認申請書は、原則として、青色申告書による申告をしようとする年の3月15日までです。その年の1月16日以後に新たに事業を開始した場合は、その事業開始等の日から2月以内です。パンフレットでは、開業の日が1月1日から1月15日までの場合は3月15日まで、1月16日以降の場合は開業の日から2か月以内、と書いてあります。青色申告をしない人には、この期限は当てはまりません。 条件：所得税の青色申告承認申請書 対象 青色申告の承認を受けようとする人。受けない人は対象外 [2] 条件 原則は、申告をしようとする年の3月15日まで。その年の1月16日以後の事業開始は、事業開始等の日から2月以内 [2] 休日 この提出期限が土曜、日曜、祝日等のときは、その翌日 [3] 起算日 原則は申告しようとする年。1月16日以後の開業は、事業を開始した日 [2] 窓口 納税地の所轄税務署 [3] 従業員に給与を払うため、給与支払事務所等を設けた人には、別の期限があります。No.2090とパンフレットでは、給与支払事務所等の開設・移転・廃止届出書を、開設等の事実があった日から1か月以内に、その事務所等の所在地の所轄税務署へ出します。給与を払わない人には当てはまりません。開業届の期限と、この1か月は別です。 条件：給与支払事務所等の開設・移転・廃止届出書 対象 給与等の支払を行う事務所等を開設、移転または廃止した人 [2] 条件 開設、移転または廃止の事実があった日から1か月以内 [2] 休日 この提出期限が土曜、日曜、祝日等のときは、その翌日 [3] 起算日 給与支払事務所等を開設、移転または廃止した日 [2] 窓口 給与支払事務所等の所在地の所轄税務署 [3] 開業届、青色申告承認申請、給与支払事務所等の届出は、パンフレットにあるとおり e-Tax で提出できます。提出の手段であり、期限そのものではありません。 事業用の口座は、入出金を分ける必要がある人だけが、金融機関の条件を確認します。開設の案内はしません。 雇用保険については、厚生労働省のページが、2022年7月1日から、離職後に事業を開始等した方は受給期間の特例を申請できる、と書いています。事業を行っている期間等は、最大3年間、受給期間に算入しない、としています。詳細は、そのページが示すリーフレットです。申請の起算日と窓口は、開いたページには無いので、条件表にはしません。給付を受けながら事業を続ける仕組みとは別の案内です。給付日数は書きません [4] 。 転職する人 入社日と、入社までの健康保険の空白を、今の勤務先と次の会社に確認します。これは推奨する時期です。協会けんぽの任意継続を使う場合だけ、上の20日が期限になります。次の会社の健康保険に入る日は、その会社に確認します。 住宅ローンやカードの契約がある人は、収入の変化を伝える必要があるかを、契約中の金融機関に確認します。転職を理由に、借り換えや新しいカードを勧める文章は置きません。 まだ決めていない人 次の働き方が未定でも、人事の書類と、協会けんぽなら任意継続の20日は共通です。任意継続、国民健康保険、家族の健康保険を、三つとも必須にはしません。 開業届と青色申告承認申請は、事業を始めると決めた人の届出です。未定の間は、事業開始の日が無いので、この記事では期限の起算をしません。事業用口座も、分ける必要が決まってから金融機関に確認します。 根拠：条件表にした期限は、2026年10月12日に開いたページに、対象、条件、起算日、窓口があるものだけ [1] 任意継続 全国健康保険協会 2026.10.12 [2] No.2090 新たに事業を始めたときの届出など 国税庁 2026.10.12 [3] 個人で事業を始めたとき 国税庁 2026.10.12 [4] 離職後に事業を開始等した場合の雇用保険受給期間の特例について 厚生労働省 2026.10.12 確認方法：協会けんぽの任意継続、国税庁の届出案内2件、厚生労働省の受給期間の特例のページを開いた 注意 期限として書かなかったもの 人事の書類、住宅ローン、カード、事業用口座、国民健康保険、家族の健康保険は、勤務先または金融機関、市区町村、家族の勤務先に確認します。雇用保険の特例は、リーフレットで詳細を確認し、この記事では期限を断定しません。"
+    },
+    "/articles/independence-or-career-change/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "50代の次の働き方：独立と転職を収入・安定・始め方で比べる"
+        },
+        {
+          "level": 2,
+          "text": "この記事で分かること"
+        },
+        {
+          "level": 2,
+          "text": "比較する5つの軸"
+        },
+        {
+          "level": 2,
+          "text": "同じ経験を独立と転職で使う"
+        },
+        {
+          "level": 3,
+          "text": "よい点"
+        },
+        {
+          "level": 3,
+          "text": "注意する点"
+        },
+        {
+          "level": 2,
+          "text": "決める前に確認すること"
+        },
+        {
+          "level": 3,
+          "text": "根拠：60歳以降の欄は、厚生労働省のページに書かれた事業主の措置の範囲だけを根拠にする"
+        },
+        {
+          "level": 2,
+          "text": "次に確かめる"
+        },
+        {
+          "level": 3,
+          "text": "次の働き方に移る前に済ませておくこと：ローン・カード・口座・確認リスト"
+        },
+        {
+          "level": 2,
+          "text": "根拠・出典"
+        },
+        {
+          "level": 2,
+          "text": "著者と確認担当"
+        },
+        {
+          "level": 2,
+          "text": "タグ"
+        },
+        {
+          "level": 2,
+          "text": "目次"
+        },
+        {
+          "level": 2,
+          "text": "根拠 2件"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "header|role=|label=|by=",
+        "section|role=|label=|by=brief-t",
+        "nav|role=|label=この記事で確かめる|by=",
+        "nav|role=|label=目次|by=",
+        "div|role=region|label=独立と転職で確認する5つの軸|by=",
+        "section|role=|label=|by=proscons-independence-or-career-change-pros",
+        "section|role=|label=|by=proscons-independence-or-career-change-cons",
+        "section|role=|label=|by=ev-older-employment-slip-t",
+        "section|role=|label=|by=next-steps",
+        "section|role=|label=|by=sources-heading",
+        "section|role=|label=|by=review-heading",
+        "section|role=|label=|by=tags-heading",
+        "aside|role=|label=確かめる|by=",
+        "section|role=|label=|by=flag-toc",
+        "section|role=|label=|by=flag-evidence",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/category/compare/",
+        "/authors/editorial-team/",
+        "/articles/independence-or-career-change/#toc",
+        "/articles/independence-or-career-change/#sources",
+        "/articles/independence-or-career-change/#%E6%AF%94%E8%BC%83%E3%81%99%E3%82%8B5%E3%81%A4%E3%81%AE%E8%BB%B8",
+        "/articles/independence-or-career-change/#%E5%90%8C%E3%81%98%E7%B5%8C%E9%A8%93%E3%82%92%E7%8B%AC%E7%AB%8B%E3%81%A8%E8%BB%A2%E8%81%B7%E3%81%A7%E4%BD%BF%E3%81%86",
+        "/articles/independence-or-career-change/#%E6%B1%BA%E3%82%81%E3%82%8B%E5%89%8D%E3%81%AB%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8",
+        "/articles/independence-or-career-change/#src-mhlw-older-worker-employment",
+        "/articles/independence-or-career-change/#src-mhlw-older-worker-qa",
+        "/articles/independence-or-career-change/#src-mhlw-older-worker-employment",
+        "/articles/independence-or-career-change/#src-mhlw-older-worker-qa",
+        "/articles/before-leaving-checklist/",
+        "/stf/seisakunitsuite/bunya/koyou_roudou/koyou/jigyounushi/page09_00001.html",
+        "/stf/seisakunitsuite/bunya/koyou_roudou/koyou/koureisha/topics/newpage_55003.html",
+        "/authors/editorial-team/",
+        "/authors/editorial-team/",
+        "/tags/early-retirement/",
+        "/tags/role-retirement/",
+        "/tags/income/"
+      ],
+      "pagefind": "50代の次の働き方：独立と転職を収入・安定・始め方で比べる 会社を離れたあと、独立と転職を、1年目の収入の見方、安定、準備期間、必要資金、60歳以降の5つの軸で確認する。\nこの記事で分かること 分かること 1年目の収入の見方、安定、準備期間、必要資金、60歳以降を、同じ軸で確認する同じ経験でも、独立は契約の相手、転職は雇用の条件を確認する退職するかどうか、向いている仕事、収入の保証は、この記事では決めない 対象 早期退職・役職定年を前に、独立と転職のどちらで次の仕事をするか比べている会社員 範囲 1年目の収入の見方、安定、準備期間、必要資金、60歳以降の5つの確認軸\n会社を離れたあと、独立と転職をどう比べるかを、確認する項目に分けます。どちらが正しい働き方かは、この記事では決めません。金額、成功率、年収の例は置きません。 比較する5つの軸 比べる軸は5つです。1年目の収入の見方、安定、準備期間、必要資金、60歳以降です。表の各欄は、読者が何を確認するかを書いています。編集部の整理であり、将来の収入や採用を保証しません。 独立と転職で確認する5つの軸 項目 独立転職 根拠の種類 収入の見込み 最初の取引先と、報酬の単位（時間、月、成果）を確認する提示された条件の単位と、いつから支払われるかを確認する 編集の判断 安定 取引先が一人に偏っていないか、契約の期間と終了条件を確認する雇用の期間と、更新や終了の条件を確認する 編集の判断 準備期間 在職中に、話せる経験の範囲と、最初の仕事の相手を確認する在職中に、職務の整理と、応募から入社までの期間を確認する 編集の判断 必要資金 仕事を始める前に、自分で払う費用の項目があるかを確認する入社までの空白で、生活の支出が続く期間を確認する 編集の判断 60歳以降 雇用ではない働き方が、勤務先の継続雇用の対象になるかを勤務先に確認する次の会社の定年と、65歳までの雇用確保措置の有無を確認する 編集の判断 基準日 2026.10.12 項目の列は固定です。狭い画面では表を横にスクロールできます。 注意 表で決めないこと 表は確認項目です。円の金額、成功率、年収の例は入れていません。どちらの働き方でも、条件は相手との合意で決まります。 収入の見込みは、1年目に何を見るかです。独立では、最初の取引先と、報酬が時間・月・成果のどれで決まるかを見ます。転職では、提示された条件の単位と、支払いが始まる時期を見ます。どちらも、見た数字をこの記事の結論にはしません。 安定は、仕事が続く条件です。独立では、取引先の数、契約期間、終了の条件を見ます。転職では、雇用期間と、更新や終了の条件を見ます。 準備期間は、在職中に何を確かめるかです。独立では、外に話してよい経験の範囲と、最初の仕事の相手です。転職では、職務の整理と、応募から入社までの期間です。 必要資金は、項目の有無と、支出が続く期間です。独立では、自分で払う費用の項目があるかを見ます。転職では、入社までの空白で生活の支出が続く期間を見ます。円の金額は、家計と契約で確認します。 60歳以降は、次の節と「決める前に確認すること」で、勤務先と次の会社に聞く内容を分けます。 同じ経験を独立と転職で使う 会社で積んだ経験は、独立でも転職でも材料になります。確認する相手が違います。 独立では、誰に、どの範囲の仕事を、どの契約で提供するかを見ます。経験の名前だけでは、仕事の依頼にはなりません。話してよい情報の範囲は、在職中の約束で確認します。 転職では、同じ経験を、職務と雇用条件に分けて伝えます。役職の名前だけでは、次の会社の条件にはなりません。期間、勤務地、更新の有無を、提示された条件で確認します。 早期退職を前にしている人も、役職定年を前にしている人も、軸は同じ5つです。募集の有無や役職の期限は、勤務先に確認する事実として扱い、独立と転職のどちらが上かは決めません。 よい点 同じ5つの軸で、独立と転職の確認項目を並べられる経験の中身と、確認する相手を分けて考えられる 注意する点 軸を並べても、自分に合う働き方は決まらない相手が提示する条件が無い段階では、収入の見込みは空欄のままになる 決める前に確認すること 退職するかどうかは、この記事の範囲外です。向いている仕事の判定もしません。収入が続く保証もしません。 60歳以降を転職側で見るときは、厚生労働省の「高年齢者の雇用」に書かれた事業主のルールを、勤務先または次の会社の制度と突き合わせます [1] 。 従業員の定年を定める場合、その定年年齢は60歳以上とする必要があります。定年年齢を65歳未満に定めている事業主は、雇用する高年齢者の65歳までの安定した雇用を確保するため、65歳までの定年の引上げ、65歳までの継続雇用制度の導入、定年の廃止のいずれかを実施する必要があります。継続雇用制度は、雇用している高年齢者が希望すれば、定年後も引き続いて雇用する再雇用などの制度です。平成25年度以降、対象は希望者全員とすることが必要です。継続雇用先は、自社に限らずグループ会社も認められています。 定年年齢を65歳以上70歳未満に定めている事業主、または70歳以上まで引き続き雇用する制度を除く継続雇用制度を導入している事業主は、70歳までの措置を講ずるよう努める必要があります。ここは「努める」であり、65歳までの雇用確保措置と同じ書き方ではありません。 この義務は、事業主が制度を講ずることです。厚生労働省のQ&A（令和7年3月31日改訂、令和7年4月1日適用）は、高年齢者雇用安定法は事業主に措置を義務付けており、個別の労働者の65歳までの雇用義務を課すものではない、と答えています。同じQ&Aは、求めているのは制度の導入であり、定年退職者の希望に合致した労働条件での雇用を義務付けるものではない、とも答えています。賃金と労働時間で合意できず、労働者が継続雇用を拒否しても、それだけでは法違反にはならない、としています [2] 。 転職で60歳以降を確認するときは、次の会社の定年と、65歳までの三つの措置のどれがあるかを見ます。70歳までは、努める措置として別の欄にします。自分がその会社で65歳まで雇われる、とは書きません。 独立で60歳以降を確認するときは、雇用ではない働き方が、今の勤務先の継続雇用の対象になるかを勤務先に聞きます。継続雇用は、希望した高年齢者を定年後も引き続いて雇用する制度です。業務の委託は、65歳までの三つの措置には入っていません。70歳までの努める措置には、継続的な業務委託契約の制度が含まれます。自分の独立が、どちらの対象になるかは、この記事では判定しません。 根拠：60歳以降の欄は、厚生労働省のページに書かれた事業主の措置の範囲だけを根拠にする [1] 高年齢者の雇用 厚生労働省 2026.10.12 [2] 高年齢者雇用安定法Q&A（高年齢者雇用確保措置関係） 厚生労働省 2026.10.12 確認方法：2026年10月12日に、高年齢者の雇用のページと、高年齢者雇用確保措置のQ&Aを開いた 公的統計の人数や割合は、この記事では出していません。5つの軸に使える、対象・時点・表の名前が揃った統計を、この作業では本文に使っていません。 退職金を狙う話の見分け方は、別に確認する。 決める前に手元へ戻すのは、5つの軸の空欄です。取引先または次の会社の条件、勤務先の継続雇用の対象、自分で払う費用の項目が空のままなら、独立と転職のどちらが上かはまだ比べられません。"
+    },
+    "/authors/editorial-team/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "独立か、転職か。編集部"
+        },
+        {
+          "level": 2,
+          "text": "記事一覧"
+        },
+        {
+          "level": 2,
+          "text": "次の働き方に移る前に済ませておくこと：ローン・カード・口座・確認リスト"
+        },
+        {
+          "level": 2,
+          "text": "50代の次の働き方：独立と転職を収入・安定・始め方で比べる"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/articles/before-leaving-checklist/",
+        "/articles/independence-or-career-change/"
+      ],
+      "pagefind": ""
+    },
+    "/bookmarks/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "保存した記事"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/"
+      ],
+      "pagefind": ""
+    },
+    "/category/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "カテゴリ"
+        },
+        {
+          "level": 2,
+          "text": "確認担当と更新方針"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "aside|role=|label=確かめる|by=",
+        "section|role=|label=|by=flag-shelf",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/category/compare/",
+        "/category/before-leaving/"
+      ],
+      "pagefind": ""
+    },
+    "/category/before-leaving/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "移る前の準備"
+        },
+        {
+          "level": 2,
+          "text": "最初に読む"
+        },
+        {
+          "level": 2,
+          "text": "退職前"
+        },
+        {
+          "level": 2,
+          "text": "次のカテゴリ"
+        },
+        {
+          "level": 2,
+          "text": "このカテゴリ"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "aside|role=|label=確かめる|by=",
+        "section|role=|label=|by=flag-shelf",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/category/",
+        "/articles/before-leaving-checklist/",
+        "/articles/before-leaving-checklist/",
+        "/category/compare/"
+      ],
+      "pagefind": ""
+    },
+    "/category/compare/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "独立と転職を比べる"
+        },
+        {
+          "level": 2,
+          "text": "最初に読む"
+        },
+        {
+          "level": 2,
+          "text": "働き方を比べる"
+        },
+        {
+          "level": 2,
+          "text": "次のカテゴリ"
+        },
+        {
+          "level": 2,
+          "text": "このカテゴリ"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "aside|role=|label=確かめる|by=",
+        "section|role=|label=|by=flag-shelf",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/category/",
+        "/articles/independence-or-career-change/",
+        "/articles/independence-or-career-change/",
+        "/category/before-leaving/"
+      ],
+      "pagefind": ""
+    },
+    "/contact/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "お問い合わせ"
+        },
+        {
+          "level": 2,
+          "text": "用件"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/"
+      ],
+      "pagefind": ""
+    },
+    "/disclaimer/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "免責事項"
+        },
+        {
+          "level": 2,
+          "text": "初期の対象外"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/"
+      ],
+      "pagefind": ""
+    },
+    "/disclosure/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "広告と編集方針"
+        },
+        {
+          "level": 2,
+          "text": "広告の有無"
+        },
+        {
+          "level": 2,
+          "text": "掲載の順序"
+        },
+        {
+          "level": 2,
+          "text": "扱わないもの"
+        },
+        {
+          "level": 2,
+          "text": "退職金の見分け方"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/"
+      ],
+      "pagefind": ""
+    },
+    "/editorial-policy/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "編集方針"
+        },
+        {
+          "level": 2,
+          "text": "根拠"
+        },
+        {
+          "level": 2,
+          "text": "比べ方"
+        },
+        {
+          "level": 2,
+          "text": "更新と訂正"
+        },
+        {
+          "level": 2,
+          "text": "取材とアンケート"
+        },
+        {
+          "level": 2,
+          "text": "確認"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/"
+      ],
+      "pagefind": ""
+    },
+    "/glossary/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "用語集"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/privacy/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "プライバシー"
+        },
+        {
+          "level": 2,
+          "text": "問い合わせ"
+        },
+        {
+          "level": 2,
+          "text": "ブラウザに残すデータ"
+        },
+        {
+          "level": 2,
+          "text": "移行カレンダー"
+        },
+        {
+          "level": 2,
+          "text": "アクセス解析"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/"
+      ],
+      "pagefind": ""
+    },
+    "/purpose/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "目的"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/purpose/learn/",
+        "/purpose/compare/",
+        "/purpose/choose/",
+        "/purpose/do/",
+        "/purpose/solve/"
+      ],
+      "pagefind": ""
+    },
+    "/purpose/choose/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "選びたい"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/purpose/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/purpose/compare/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "比べたい"
+        },
+        {
+          "level": 2,
+          "text": "50代の次の働き方：独立と転職を収入・安定・始め方で比べる"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/purpose/",
+        "/articles/independence-or-career-change/"
+      ],
+      "pagefind": ""
+    },
+    "/purpose/do/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "手順を調べたい"
+        },
+        {
+          "level": 2,
+          "text": "次の働き方に移る前に済ませておくこと：ローン・カード・口座・確認リスト"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/purpose/",
+        "/articles/before-leaving-checklist/"
+      ],
+      "pagefind": ""
+    },
+    "/purpose/learn/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "知りたい"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/purpose/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/purpose/solve/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "困りごとを解きたい"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/purpose/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/search/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "検索"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "form|role=search|label=記事を検索|by=",
+        "aside|role=|label=確かめる|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/search/?q=%E7%8B%AC%E7%AB%8B",
+        "/search/?q=%E9%80%80%E8%81%B7%E5%89%8D",
+        "/search/?q=%E9%80%80%E8%81%B7%E9%87%91",
+        "/purpose/learn/",
+        "/purpose/compare/",
+        "/purpose/do/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/glossary/"
+      ],
+      "pagefind": ""
+    },
+    "/styleguide/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "スタイルガイド"
+        },
+        {
+          "level": 2,
+          "text": "分類の印"
+        },
+        {
+          "level": 2,
+          "text": "記事面"
+        },
+        {
+          "level": 2,
+          "text": "新しい記事"
+        },
+        {
+          "level": 3,
+          "text": "働き方の条件を整理する"
+        },
+        {
+          "level": 3,
+          "text": "働き方の条件を整理する"
+        },
+        {
+          "level": 3,
+          "text": "働き方の条件を整理する"
+        },
+        {
+          "level": 3,
+          "text": "働き方の条件を整理する"
+        },
+        {
+          "level": 3,
+          "text": "退職から独立までの手続き"
+        },
+        {
+          "level": 3,
+          "text": "退職から独立までの手続き"
+        },
+        {
+          "level": 3,
+          "text": "退職から独立までの手続き"
+        },
+        {
+          "level": 3,
+          "text": "退職から独立までの手続き"
+        },
+        {
+          "level": 3,
+          "text": "請求書サービスを比べる"
+        },
+        {
+          "level": 3,
+          "text": "請求書サービスを比べる"
+        },
+        {
+          "level": 3,
+          "text": "請求書サービスを比べる"
+        },
+        {
+          "level": 3,
+          "text": "請求書サービスを比べる"
+        },
+        {
+          "level": 3,
+          "text": "電子取引の案内が更新"
+        },
+        {
+          "level": 3,
+          "text": "電子取引の案内が更新"
+        },
+        {
+          "level": 3,
+          "text": "電子取引の案内が更新"
+        },
+        {
+          "level": 3,
+          "text": "電子取引の案内が更新"
+        },
+        {
+          "level": 3,
+          "text": "値上げを伝えた日"
+        },
+        {
+          "level": 3,
+          "text": "値上げを伝えた日"
+        },
+        {
+          "level": 3,
+          "text": "値上げを伝えた日"
+        },
+        {
+          "level": 3,
+          "text": "値上げを伝えた日"
+        },
+        {
+          "level": 3,
+          "text": "ひとり経営の10年"
+        },
+        {
+          "level": 3,
+          "text": "ひとり経営の10年"
+        },
+        {
+          "level": 3,
+          "text": "ひとり経営の10年"
+        },
+        {
+          "level": 3,
+          "text": "ひとり経営の10年"
+        },
+        {
+          "level": 3,
+          "text": "値上げを伝えた日"
+        },
+        {
+          "level": 3,
+          "text": "値上げを伝えた日"
+        },
+        {
+          "level": 3,
+          "text": "値上げを伝えた日"
+        },
+        {
+          "level": 3,
+          "text": "値上げを伝えた日"
+        },
+        {
+          "level": 3,
+          "text": "ひとり経営の10年"
+        },
+        {
+          "level": 3,
+          "text": "ひとり経営の10年"
+        },
+        {
+          "level": 3,
+          "text": "ひとり経営の10年"
+        },
+        {
+          "level": 3,
+          "text": "ひとり経営の10年"
+        },
+        {
+          "level": 3,
+          "text": "架空の請求書サービスを選ぶ前に、月額と年額、税込と税別、初期費用のゼロ円、未確認の追加費用、確認期限を過ぎた再確認中の金額を、同じ表の中で取り違えないための長い題"
+        },
+        {
+          "level": 3,
+          "text": "架空の請求書サービスを選ぶ前に、月額と年額、税込と税別、初期費用のゼロ円、未確認の追加費用、確認期限を過ぎた再確認中の金額を、同じ表の中で取り違えないための長い題"
+        },
+        {
+          "level": 3,
+          "text": "架空の請求書サービスを選ぶ前に、月額と年額、税込と税別、初期費用のゼロ円、未確認の追加費用、確認期限を過ぎた再確認中の金額を、同じ表の中で取り違えないための長い題"
+        },
+        {
+          "level": 3,
+          "text": "架空の請求書サービスを選ぶ前に、月額と年額、税込と税別、初期費用のゼロ円、未確認の追加費用、確認期限を過ぎた再確認中の金額を、同じ表の中で取り違えないための長い題"
+        },
+        {
+          "level": 3,
+          "text": "架空の請求書サービスを選ぶ前に、月額と年額、税込と税別、初期費用のゼロ円、未確認の追加費用、確認期限を過ぎた再確認中の金額を、同じ表の中で取り違えないための長い題"
+        },
+        {
+          "level": 3,
+          "text": "架空の請求書サービスを選ぶ前に、月額と年額、税込と税別、初期費用のゼロ円、未確認の追加費用、確認期限を過ぎた再確認中の金額を、同じ表の中で取り違えないための長い題"
+        },
+        {
+          "level": 3,
+          "text": "働き方の条件を整理する"
+        },
+        {
+          "level": 3,
+          "text": "退職から独立までの手続き"
+        },
+        {
+          "level": 3,
+          "text": "請求書サービスを比べる"
+        },
+        {
+          "level": 3,
+          "text": "値上げを伝えた日"
+        },
+        {
+          "level": 3,
+          "text": "働き方の条件を整理する"
+        },
+        {
+          "level": 3,
+          "text": "電子取引の案内が更新"
+        },
+        {
+          "level": 3,
+          "text": "ひとり経営の10年"
+        },
+        {
+          "level": 3,
+          "text": "電子取引の案内が更新"
+        },
+        {
+          "level": 3,
+          "text": "働き方の条件を整理する"
+        },
+        {
+          "level": 3,
+          "text": "請求書サービスを比べる"
+        },
+        {
+          "level": 3,
+          "text": "請求書サービスを比べる"
+        },
+        {
+          "level": 3,
+          "text": "電子取引の案内が更新"
+        },
+        {
+          "level": 3,
+          "text": "値上げを伝えた日"
+        },
+        {
+          "level": 2,
+          "text": "検索と確認"
+        },
+        {
+          "level": 2,
+          "text": "短い確認票"
+        },
+        {
+          "level": 3,
+          "text": "条件：1行の条件"
+        },
+        {
+          "level": 3,
+          "text": "条件：20行の条件"
+        },
+        {
+          "level": 3,
+          "text": "根拠：料金表を確認した"
+        },
+        {
+          "level": 2,
+          "text": "ブロック"
+        },
+        {
+          "level": 2,
+          "text": "この記事で分かること"
+        },
+        {
+          "level": 2,
+          "text": "要点"
+        },
+        {
+          "level": 3,
+          "text": "よい点"
+        },
+        {
+          "level": 3,
+          "text": "注意する点"
+        },
+        {
+          "level": 2,
+          "text": "共通部品"
+        },
+        {
+          "level": 2,
+          "text": "色とコントラスト"
+        },
+        {
+          "level": 2,
+          "text": "目次"
+        },
+        {
+          "level": 2,
+          "text": "条件 2件"
+        },
+        {
+          "level": 2,
+          "text": "根拠 1件"
+        },
+        {
+          "level": 2,
+          "text": "読みかけ"
+        },
+        {
+          "level": 2,
+          "text": "連載"
+        },
+        {
+          "level": 2,
+          "text": "最近確認した記事"
+        },
+        {
+          "level": 2,
+          "text": "選んだ条件 2件"
+        },
+        {
+          "level": 2,
+          "text": "この棚"
+        },
+        {
+          "level": 2,
+          "text": "関連する用語 0件"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=目次|by=",
+        "form|role=search|label=記事を検索|by=",
+        "section|role=|label=|by=sg-slip-brief-t",
+        "section|role=|label=|by=sg-cond-1-t",
+        "section|role=|label=|by=sg-cond-20-t",
+        "section|role=|label=|by=sg-slip-evidence-t",
+        "nav|role=|label=この記事で確かめる|by=",
+        "section|role=|label=|by=sg-brief-t",
+        "section|role=|label=|by=proscons-unknown-pros",
+        "section|role=|label=|by=proscons-unknown-cons",
+        "div|role=region|label=請求書サービス3つの比較（架空）|by=",
+        "nav|role=|label=ページ送り|by=",
+        "div|role=region|label=コントラスト比|by=",
+        "aside|role=|label=確かめる|by=",
+        "section|role=|label=|by=flag-toc",
+        "section|role=|label=|by=flag-conditions",
+        "section|role=|label=|by=flag-evidence",
+        "section|role=|label=|by=flag-reading",
+        "section|role=|label=|by=flag-series",
+        "section|role=|label=|by=flag-recent",
+        "section|role=|label=|by=flag-selected",
+        "section|role=|label=|by=flag-shelf",
+        "section|role=|label=|by=flag-terms",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/styleguide/#sg-s1",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s3",
+        "/styleguide/#sg-s4",
+        "/styleguide/#sg-s5",
+        "/styleguide/#sg-s6",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/styleguide/#sg-s2",
+        "/search/?q=%E7%8B%AC%E7%AB%8B",
+        "/search/?q=%E9%80%80%E8%81%B7%E5%89%8D",
+        "/search/?q=%E9%80%80%E8%81%B7%E9%87%91",
+        "/styleguide/#sg-toc",
+        "/styleguide/#sg-cond-1",
+        "/styleguide/#sg-slip-evidence",
+        "/articles/",
+        "/articles/",
+        "/articles/",
+        "/articles/",
+        "/articles/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "タグ"
+        },
+        {
+          "level": 2,
+          "text": "か行"
+        },
+        {
+          "level": 2,
+          "text": "さ行"
+        },
+        {
+          "level": 2,
+          "text": "た行"
+        },
+        {
+          "level": 2,
+          "text": "な行"
+        },
+        {
+          "level": 2,
+          "text": "は行"
+        },
+        {
+          "level": 2,
+          "text": "や行"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "section|role=|label=|by=kana-か",
+        "section|role=|label=|by=kana-さ",
+        "section|role=|label=|by=kana-た",
+        "section|role=|label=|by=kana-な",
+        "section|role=|label=|by=kana-は",
+        "section|role=|label=|by=kana-や",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/corporate-dc/",
+        "/tags/outsourcing/",
+        "/tags/credit-card/",
+        "/tags/health-insurance/",
+        "/tags/sole-proprietor/",
+        "/tags/advisory/",
+        "/tags/market-value/",
+        "/tags/unemployment-benefit/",
+        "/tags/income/",
+        "/tags/resume/",
+        "/tags/business-account/",
+        "/tags/housing-loan/",
+        "/tags/spot-consulting/",
+        "/tags/small-ma/",
+        "/tags/tax/",
+        "/tags/early-retirement/",
+        "/tags/retirement-money/",
+        "/tags/career-service/",
+        "/tags/pension/",
+        "/tags/side-work/",
+        "/tags/franchise/",
+        "/tags/freelance-consulting/",
+        "/tags/role-retirement/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/advisory/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "顧問"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/business-account/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "事業用口座"
+        },
+        {
+          "level": 2,
+          "text": "次の働き方に移る前に済ませておくこと：ローン・カード・口座・確認リスト"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/articles/before-leaving-checklist/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/career-service/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "転職サービス"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/corporate-dc/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "企業型DC・iDeCo"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/credit-card/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "クレジットカード"
+        },
+        {
+          "level": 2,
+          "text": "次の働き方に移る前に済ませておくこと：ローン・カード・口座・確認リスト"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/articles/before-leaving-checklist/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/early-retirement/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "早期退職"
+        },
+        {
+          "level": 2,
+          "text": "次の働き方に移る前に済ませておくこと：ローン・カード・口座・確認リスト"
+        },
+        {
+          "level": 2,
+          "text": "50代の次の働き方：独立と転職を収入・安定・始め方で比べる"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/articles/before-leaving-checklist/",
+        "/articles/independence-or-career-change/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/franchise/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "フランチャイズ"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/freelance-consulting/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "フリーコンサル"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/health-insurance/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "健康保険"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/housing-loan/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "住宅ローン"
+        },
+        {
+          "level": 2,
+          "text": "次の働き方に移る前に済ませておくこと：ローン・カード・口座・確認リスト"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/articles/before-leaving-checklist/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/income/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "収入・年収"
+        },
+        {
+          "level": 2,
+          "text": "50代の次の働き方：独立と転職を収入・安定・始め方で比べる"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/articles/independence-or-career-change/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/market-value/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "市場価値"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/outsourcing/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "業務委託"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/pension/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "年金"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/resume/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "職務経歴書"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/retirement-money/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "退職金"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/role-retirement/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "役職定年"
+        },
+        {
+          "level": 2,
+          "text": "50代の次の働き方：独立と転職を収入・安定・始め方で比べる"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/articles/independence-or-career-change/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/side-work/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "副業"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/small-ma/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "スモールM&A"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/sole-proprietor/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "個人事業主"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/spot-consulting/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "スポットコンサル"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/tax/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "税金・申告"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    },
+    "/tags/unemployment-benefit/": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "失業給付"
+        },
+        {
+          "level": 2,
+          "text": "表示設定"
+        }
+      ],
+      "landmarks": [
+        "header|role=|label=|by=",
+        "nav|role=|label=カテゴリ|by=",
+        "nav|role=|label=索引|by=",
+        "form|role=search|label=索引の検索|by=",
+        "main|role=|label=|by=",
+        "nav|role=|label=パンくず|by=",
+        "nav|role=|label=ほかの入口|by=",
+        "footer|role=|label=|by="
+      ],
+      "mainLinks": [
+        "/",
+        "/tags/",
+        "/category/compare/",
+        "/category/before-leaving/",
+        "/search/"
+      ],
+      "pagefind": ""
+    }
+  }
+}

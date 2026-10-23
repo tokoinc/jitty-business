@@ -1,0 +1,20 @@
+---
+import type { CategoryMarkProps } from "../../contract";
+type Props = CategoryMarkProps;
+const { shelf, format, context } = Astro.props;
+---
+
+<p class={`sp-stamp sp-stamp--${context}`} style={`--slot:${shelf.slot}`} data-sig="s2">
+  <b class="sp-stamp__num" aria-hidden="true">
+    {shelf.number}
+  </b>
+  <span class="sp-stamp__name">
+    <span class="dd-visually-hidden">カテゴリ：</span>
+    <span data-field="shelf">{shelf.label}</span>
+  </span>
+  {format && (
+    <span class="sp-stamp__format" aria-hidden="true" data-pagefind-ignore>
+      {format.label}
+    </span>
+  )}
+</p>

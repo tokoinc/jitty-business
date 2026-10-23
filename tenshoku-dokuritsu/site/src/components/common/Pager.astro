@@ -1,0 +1,28 @@
+---
+import { pageHref } from "@/utils/paginate";
+import { href } from "@/utils/url";
+
+interface Props {
+  /** 末尾スラッシュ付き。例: articles/ や category/finance/ */
+  base: string;
+  page: number;
+  total: number;
+  /** 見本用。番号の見た目は残し、リンク先は実在するこのURLにする */
+  sampleHref?: string;
+}
+const { base, page, total, sampleHref } = Astro.props;
+const pages = Array.from({ length: total }, (_, i) => i + 1);
+const pageLink = (n: number) => sampleHref ?? href(pageHref(base, n));
+---
+
+{total > 1 && (
+  <nav class="dd-pager" aria-label="ページ送り">
+    {page > 1 && <a href={pageLink(page - 1)}>前へ</a>}
+    {pages.map((n) => (
+      <a href={pageLink(n)} aria-current={n === page ? "page" : undefined}>
+        {n}
+      </a>
+    ))}
+    {page < total && <a href={pageLink(page + 1)}>次へ</a>}
+  </nav>
+)}

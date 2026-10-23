@@ -1,0 +1,41 @@
+- id: home
+  hero:
+    title: 会社の外で働くか、次の会社で働くか。
+    lead: 早期退職・役職定年のあと、50代からの次の働き方を比べて準備するメディア
+    primaryArticle: before-leaving-checklist
+    primaryLabel: 移る前の確認リストを読む
+    secondaryArticle: independence-or-career-change
+    secondaryLabel: 独立と転職を比べる
+  calendar:
+    href: /tools/transition-calendar/
+  entrances:
+    - label: 独立を考えている
+      article: independence-roadmap
+    - label: 転職を考えている
+      article: career-change-roadmap
+    - label: まだ決めていない
+      article: independence-or-career-change
+  prepare:
+    independence:
+      - former-employer-contract
+      - advisory-work-services
+      - try-spot-consulting
+    career:
+      - resume-for-managers
+      - midlife-career-services
+      - income-after-career-change
+  around:
+    - before-leaving-checklist
+    - after-leaving-procedures
+  protect:
+    - protect-retirement-money
+    - living-costs-and-retirement-money
+  stories:
+    enabled: false
+    articles: []
+  starter:
+    - independence-or-career-change
+    - before-leaving-checklist
+    - independence-roadmap
+    - career-change-roadmap
+    - after-leaving-procedures

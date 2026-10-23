@@ -1,0 +1,147 @@
+---
+import { getCollection } from "astro:content";
+import ListLayout from "@/layouts/ListLayout.astro";
+import type { CalendarRule } from "@/utils/calendar";
+import { getSiteData } from "@/utils/content";
+import { listCrumbs } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { articleHref } from "@/utils/url";
+
+const d = await getSiteData();
+const entries = await getCollection("calendarRules");
+const rules: CalendarRule[] = entries.map((entry) => ({
+  id: entry.id,
+  order: entry.data.order,
+  title: entry.data.title,
+  applies: entry.data.applies,
+  anchor: entry.data.anchor,
+  rule: entry.data.rule,
+  openingWindow: entry.data.openingWindow,
+  holiday: entry.data.holiday,
+  sources: entry.data.sources,
+  checkedAt: entry.data.checkedAt,
+  reviewDueAt: entry.data.reviewDueAt,
+  articles: entry.data.articles.map((article) => {
+    const published = d.byId.get(article.slug);
+    return {
+      slug: article.slug,
+      title: published?.data.title ?? article.title,
+      href: published ? articleHref(article.slug) : null,
+    };
+  }),
+  status: entry.data.status,
+  kind: entry.data.kind,
+  office: entry.data.office,
+  audience: entry.data.audience,
+  spouseAudience: entry.data.spouseAudience,
+  lossUnknown: entry.data.lossUnknown,
+}));
+const frame = await frameProps("page", { current: "calendar" });
+const lead =
+  "退職予定日から、ブラウザの中だけで手続きの確認リストを作ります。入力は保存せず、サーバーへ送りません。";
+const proceduresTitle = "退職後の手続きと期限の一覧：独立・転職・未定で確認すること";
+---
+
+<ListLayout
+  title="移行カレンダー"
+  description={lead}
+  frame={frame}
+  page="page"
+  tab="カレンダー"
+  crumbs={listCrumbs([{ label: "移行カレンダー" }])}
+  heading="移行カレンダー"
+  lead={lead}
+>
+  <div class="dd-prose">
+    <p>
+      日付を出すのは、国税庁のページで確認できた開業届と青色申告承認申請だけです。それ以外は、確認先だけを出します。個別の保険料、税額、給付額は計算しません。
+    </p>
+    <form id="calendar-form" autocomplete="off" data-rules={JSON.stringify(rules)}>
+      <p>
+        <label for="retirement">退職予定日</label>
+        <input id="retirement" name="retirement" type="date" autocomplete="off" required />
+      </p>
+      <fieldset>
+        <legend>次の働き方</legend>
+        <label><input type="radio" name="work" value="independence" required /> 独立</label>
+        <label><input type="radio" name="work" value="career-change" /> 転職</label>
+        <label><input type="radio" name="work" value="undecided" /> 未定</label>
+      </fieldset>
+      <p>
+        <label for="opening">開業日</label>
+        <input id="opening" name="opening" type="date" autocomplete="off" />
+      </p>
+      <p>
+        <label for="joining">入社日</label>
+        <input id="joining" name="joining" type="date" autocomplete="off" />
+      </p>
+      <p>
+        <label><input type="checkbox" name="joining-undecided" /> 入社日未定</label>
+      </p>
+      <fieldset>
+        <legend>退職後の健康保険</legend>
+        <label><input type="radio" name="insurance" value="voluntary" required /> 任意継続</label>
+        <label><input type="radio" name="insurance" value="national" /> 国民健康保険</label>
+        <label><input type="radio" name="insurance" value="dependent" /> 家族の扶養</label>
+        <label><input type="radio" name="insurance" value="employer" /> 転職先の保険</label>
+        <label><input type="radio" name="insurance" value="undecided" /> 未定</label>
+      </fieldset>
+      <fieldset>
+        <legend>失業給付の利用意向</legend>
+        <label><input type="radio" name="benefit" value="consider" required /> 利用を検討する</label>
+        <label><input type="radio" name="benefit" value="decline" /> 利用しない</label>
+        <label><input type="radio" name="benefit" value="undecided" /> 未定</label>
+      </fieldset>
+      <fieldset>
+        <legend>企業型DCに加入していたか</legend>
+        <label><input type="radio" name="dc" value="yes" required /> はい</label>
+        <label><input type="radio" name="dc" value="no" /> いいえ</label>
+        <label><input type="radio" name="dc" value="unknown" /> 分からない</label>
+      </fieldset>
+      <fieldset>
+        <legend>資格喪失日が分かるか</legend>
+        <label><input type="radio" name="loss" value="known" required /> 分かる</label>
+        <label><input type="radio" name="loss" value="unknown" /> 分からない</label>
+      </fieldset>
+      <fieldset>
+        <legend>配偶者の年金の確認が必要か</legend>
+        <label><input type="radio" name="spouse" value="yes" required /> はい</label>
+        <label><input type="radio" name="spouse" value="no" /> いいえ</label>
+        <label><input type="radio" name="spouse" value="unknown" /> 分からない</label>
+      </fieldset>
+      <p>
+        <button type="submit">確認リストを出す</button>
+      </p>
+    </form>
+    <p id="calendar-status" role="status" aria-live="polite"></p>
+    <noscript>
+      <p>
+        結果の計算には JavaScript を使う。手続きの一覧は、退職後の手続きの記事「{proceduresTitle}」で確認する。
+      </p>
+    </noscript>
+    <div id="calendar-results" hidden>
+      <p>
+        .ics は、このブラウザから自分の端末へダウンロードするファイルです。Googleカレンダーに追加すると、手続き名と日付がGoogleへ渡ります。退職日、開業日、入社日、健康保険の選択は、予定の文面に入れません。
+      </p>
+      <div class="dd-table">
+        <table>
+          <caption>手続きの確認リスト</caption>
+          <thead>
+            <tr>
+              <th scope="col">手続き名</th>
+              <th scope="col">対象条件</th>
+              <th scope="col">期限または推奨時期</th>
+              <th scope="col">確認先</th>
+              <th scope="col">解説記事</th>
+              <th scope="col">カレンダーへ追加</th>
+            </tr>
+          </thead>
+          <tbody id="calendar-rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ListLayout>
+<script>
+  import "@/scripts/calendar";
+</script>

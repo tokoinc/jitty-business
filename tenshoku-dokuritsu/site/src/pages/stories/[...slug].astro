@@ -1,0 +1,154 @@
+---
+import { SectionHeading } from "@/generated/ui";
+import ListLayout from "@/layouts/ListLayout.astro";
+import { getSiteData, type Article } from "@/utils/content";
+import { listCrumbs } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { storiesOpen, storyGroups, toThemeArticles } from "@/utils/themes";
+import { articleHref } from "@/utils/url";
+
+// 静的な index は条件に関係なく出る。未公開のときはパスを作らない。
+export async function getStaticPaths() {
+  const d = await getSiteData();
+  if (!storiesOpen(toThemeArticles(d.articles))) return [];
+  return [{ params: { slug: undefined } }];
+}
+
+const d = await getSiteData();
+const groups = storyGroups(toThemeArticles(d.articles));
+const survey = groups.survey ? d.byId.get(groups.survey.id) : undefined;
+const independence = groups.independence.flatMap((item) => {
+  const article = d.byId.get(item.id);
+  return article ? [article] : [];
+});
+const career = groups.career.flatMap((item) => {
+  const article = d.byId.get(item.id);
+  return article ? [article] : [];
+});
+const other = groups.other.flatMap((item) => {
+  const article = d.byId.get(item.id);
+  return article ? [article] : [];
+});
+const frame = await frameProps("list");
+const lead = "公開しているアンケートと取材を、独立と転職に分けて並べます。";
+const sections = [
+  survey ? "survey" : "",
+  independence.length > 0 || career.length > 0 ? "voices" : "",
+  other.length > 0 ? "other" : "",
+].filter((id) => id.length > 0);
+const sectionIndex = (id: string) => sections.indexOf(id) + 1;
+const categoryLabel = (article: Article) =>
+  d.categories.find((item) => item.id === article.data.category.id)?.data.label ?? "";
+
+function notes(article: Article): { label: string; text: string }[] {
+  const lines: { label: string; text: string }[] = [];
+  if (article.data.brief?.audience) lines.push({ label: "対象", text: article.data.brief.audience });
+  if (article.data.brief?.scope) lines.push({ label: "範囲", text: article.data.brief.scope });
+  if (article.data.review?.method) lines.push({ label: "調査方法", text: article.data.review.method });
+  return lines;
+}
+---
+
+<ListLayout
+  title="体験談"
+  description={lead}
+  frame={frame}
+  tab="体験談"
+  crumbs={listCrumbs([{ label: "体験談" }])}
+  heading="体験談"
+  lead={lead}
+>
+  {
+    survey && (
+      <>
+        <SectionHeading id="survey" index={sectionIndex("survey")} context="section">
+          調査
+        </SectionHeading>
+        <ul class="dd-index">
+          <li>
+            <a href={articleHref(survey.id)}>{survey.data.title}</a>
+            <p>{survey.data.description}</p>
+            {notes(survey).map((line) => (
+              <p>
+                {line.label}　{line.text}
+              </p>
+            ))}
+            <p>{categoryLabel(survey)}</p>
+          </li>
+        </ul>
+      </>
+    )
+  }
+  {
+    (independence.length > 0 || career.length > 0) && (
+      <>
+        <SectionHeading id="voices" index={sectionIndex("voices")} context="section">
+          取材
+        </SectionHeading>
+        <div class:list={[{ "dd-pair": independence.length > 0 && career.length > 0 }]}>
+          {independence.length > 0 && (
+            <section aria-labelledby="stories-independence">
+              <h3 id="stories-independence">独立</h3>
+              <ul class="dd-index">
+                {independence.map((article) => (
+                  <li>
+                    <a href={articleHref(article.id)}>{article.data.title}</a>
+                    <p>{article.data.description}</p>
+                    {notes(article).map((line) => (
+                      <p>
+                        {line.label}　{line.text}
+                      </p>
+                    ))}
+                    <p>{categoryLabel(article)}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+          {career.length > 0 && (
+            <section aria-labelledby="stories-career">
+              <h3 id="stories-career">転職</h3>
+              <ul class="dd-index">
+                {career.map((article) => (
+                  <li>
+                    <a href={articleHref(article.id)}>{article.data.title}</a>
+                    <p>{article.data.description}</p>
+                    {notes(article).map((line) => (
+                      <p>
+                        {line.label}　{line.text}
+                      </p>
+                    ))}
+                    <p>{categoryLabel(article)}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
+      </>
+    )
+  }
+  {
+    other.length > 0 && (
+      <>
+        <SectionHeading id="other" index={sectionIndex("other")} context="section">
+          ほかの取材
+        </SectionHeading>
+        <ul class="dd-index">
+          {other.map((article) => (
+            <li>
+              <a href={articleHref(article.id)}>{article.data.title}</a>
+              <p>{article.data.description}</p>
+              {notes(article).map((line) => (
+                <p>
+                  {line.label}　{line.text}
+                </p>
+              ))}
+              <p>{categoryLabel(article)}</p>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+</ListLayout>

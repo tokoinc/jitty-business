@@ -1,0 +1,67 @@
+---
+import { SectionHeading } from "@/generated/ui";
+import ListLayout from "@/layouts/ListLayout.astro";
+import { getSiteData, type Article } from "@/utils/content";
+import { listCrumbs } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { PROTECT_ARTICLE_ID, protectGuideOpen, protectReading, toThemeArticles } from "@/utils/themes";
+import { articleHref } from "@/utils/url";
+
+export async function getStaticPaths() {
+  const d = await getSiteData();
+  if (!protectGuideOpen(toThemeArticles(d.articles))) return [];
+  return [{ params: { slug: PROTECT_ARTICLE_ID } }];
+}
+
+const d = await getSiteData();
+const articles = protectReading(toThemeArticles(d.articles)).flatMap((id) => {
+  const article = d.byId.get(id);
+  return article ? [article] : [];
+});
+const first = articles[0];
+if (!first || first.id !== PROTECT_ARTICLE_ID) throw new Error("退職金案内の最初の記事がない");
+const rest = articles.slice(1);
+const frame = await frameProps("list");
+const lead = "勧誘、総費用、契約、生活の見通しを確認する。";
+const categoryLabel = (article: Article) =>
+  d.categories.find((item) => item.id === article.data.category.id)?.data.label ?? "";
+---
+
+<ListLayout
+  title="退職金を守る"
+  description={lead}
+  frame={frame}
+  tab="案内"
+  crumbs={listCrumbs([{ label: "退職金を守る" }])}
+  heading="退職金を守る"
+  lead={lead}
+>
+  <SectionHeading id="first" index={1} context="section">
+    最初に読む
+  </SectionHeading>
+  <ul class="dd-index">
+    <li>
+      <a href={articleHref(first.id)}>{first.data.title}</a>
+      <p>{first.data.description}</p>
+      <p>{categoryLabel(first)}</p>
+    </li>
+  </ul>
+  {
+    rest.length > 0 && (
+      <>
+        <SectionHeading id="order" index={2} context="section">
+          読む順番
+        </SectionHeading>
+        <ul class="dd-index">
+          {rest.map((article) => (
+            <li>
+              <a href={articleHref(article.id)}>{article.data.title}</a>
+              <p>{article.data.description}</p>
+              <p>{categoryLabel(article)}</p>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+</ListLayout>

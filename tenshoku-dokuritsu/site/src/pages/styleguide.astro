@@ -1,0 +1,701 @@
+---
+import photo from "../assets/styleguide/photo.png";
+import SampleCopy from "@/components/common/SampleCopy.astro";
+import Breadcrumbs from "@/components/common/Breadcrumbs.astro";
+import Pager from "@/components/common/Pager.astro";
+import Callout from "@/components/blocks/Callout.astro";
+import CompareTable from "@/components/blocks/CompareTable.astro";
+import Faq from "@/components/blocks/Faq.astro";
+import ProsCons from "@/components/blocks/ProsCons.astro";
+import Steps from "@/components/blocks/Steps.astro";
+import Summary from "@/components/blocks/Summary.astro";
+import { QUESTIONS } from "@/data/questions";
+import type { FaceData, FilterGroup, Format, ShelfMark } from "@/design-sets/contract";
+import {
+  ArticleFace,
+  CategoryMark,
+  CheckPanel,
+  CheckRow,
+  CheckSlip,
+  EndMark,
+  FaceGrid,
+  Frame,
+  Popover,
+  SearchSurface,
+  SectionHeading,
+} from "@/generated/ui";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/site.config";
+import { getSiteData } from "@/utils/content";
+import { formatDate } from "@/utils/dates";
+import { FORMAT_LABELS, INTENT_LABELS, NAV_INTENTS } from "@/utils/labels";
+import { frameProps } from "@/utils/nav";
+import { categoryHref, href, purposeHref } from "@/utils/url";
+
+const d = await getSiteData();
+const frame = await frameProps("page");
+
+const marks: ShelfMark[] = d.shelves.map((c) => {
+  if (c.data.tabSlot == null) throw new Error(`棚 ${c.id} に tabSlot がない`);
+  return {
+    id: c.id,
+    label: c.data.label,
+    slot: c.data.tabSlot,
+    number: String(c.data.order).padStart(2, "0"),
+  };
+});
+if (marks.length === 0) throw new Error("棚がない");
+const shelfAt = (index: number) => marks[index % marks.length]!;
+const compare = marks.find((shelf) => shelf.id === "compare") ?? marks[0]!;
+const compareHref = d.articles.some((article) => article.data.category.id === compare.id)
+  ? categoryHref(compare.id)
+  : href("category/");
+
+const formats = ["guide", "tutorial", "comparison", "news", "opinion", "interview"] as const;
+const emphases = ["lead", "primary", "default", "compact"] as const;
+const photoFormats = ["opinion", "interview"] as const;
+
+const shelfOf: Record<Format, ShelfMark> = {
+  guide: shelfAt(0),
+  tutorial: shelfAt(1),
+  comparison: shelfAt(2),
+  news: shelfAt(3),
+  opinion: shelfAt(4),
+  interview: shelfAt(0),
+};
+const hrefOf: Record<Format, string> = {
+  guide: "#sg-s2",
+  tutorial: "#sg-s2",
+  comparison: "#sg-s2",
+  news: "#sg-s2",
+  opinion: "#sg-s2",
+  interview: "#sg-s2",
+};
+const shortTitle: Record<Format, string> = {
+  guide: "働き方の条件を整理する",
+  tutorial: "退職から独立までの手続き",
+  comparison: "請求書サービスを比べる",
+  news: "電子取引の案内が更新",
+  opinion: "値上げを伝えた日",
+  interview: "ひとり経営の10年",
+};
+const longTitle =
+  "架空の請求書サービスを選ぶ前に、月額と年額、税込と税別、初期費用のゼロ円、未確認の追加費用、確認期限を過ぎた再確認中の金額を、同じ表の中で取り違えないための長い題";
+const longSentence =
+  "確認期限を過ぎた金額は、いまの条件として使わず、料金表に残っている周期と税の扱いだけを示したうえで再確認中と書く。未確認の追加費用は、料金表に金額が無いことであって、0円ではない。";
+
+function makeFace(format: Format, opts: { long?: boolean; photo?: boolean } = {}): FaceData {
+  return {
+    id: `sg-${format}`,
+    href: hrefOf[format],
+    title: opts.long ? longTitle : shortTitle[format],
+    description: "見本の要旨です。料金と条件は、確認した日の範囲だけを書きます。",
+    format,
+    formatLabel: FORMAT_LABELS[format],
+    shelf: shelfOf[format],
+    date: "2026-09-28T09:00:00+09:00",
+    dateLabel: formatDate("2026-09-28"),
+    steps: format === "tutorial" ? 5 : undefined,
+    compare: format === "comparison" ? { items: 3, axes: 5 } : undefined,
+    cover: opts.photo ? { src: photo, alt: "スタイルガイドの仮の写真" } : undefined,
+    speaker: format === "opinion" || format === "interview" ? "架空の話者" : undefined,
+  };
+}
+
+const nextPrimary: FaceData = {
+  ...makeFace("comparison"),
+  purposeLabel: "知るために",
+  reason: "電子取引の保存の案内を先に確かめる",
+};
+const nextSide: FaceData[] = [
+  {
+    ...makeFace("news"),
+    purposeLabel: "知るために",
+    reason: "確認時点の事実だけを読む",
+  },
+  {
+    ...makeFace("opinion"),
+    purposeLabel: "解くために",
+    reason: "別の見解を読む",
+  },
+];
+
+const groups: FilterGroup[] = [
+  {
+    id: "shelf",
+    label: "棚",
+    options: marks.map((shelf, index) => ({
+      value: shelf.label,
+      label: shelf.label,
+      selected: index === 1,
+    })),
+  },
+  {
+    id: "format",
+    label: "記事型",
+    options: formats.map((id) => ({
+      value: FORMAT_LABELS[id],
+      label: FORMAT_LABELS[id],
+      selected: id === "comparison",
+    })),
+  },
+  {
+    id: "checked",
+    label: "確認日",
+    options: (["30日以内", "90日以内", "それ以前"] as const).map((value) => ({
+      value,
+      label: value,
+      selected: false,
+    })),
+  },
+];
+const surface = {
+  action: href("search/"),
+  query: "",
+  purposes: NAV_INTENTS.map((intent) => ({
+    value: INTENT_LABELS[intent].short,
+    label: INTENT_LABELS[intent].nav,
+    href: purposeHref(intent),
+  })),
+  groups,
+  questions: QUESTIONS.map((item) => ({
+    label: item.label,
+    href: `${href("search/")}?q=${encodeURIComponent(item.query)}`,
+  })),
+};
+const condMany = Array.from({ length: 20 }, (_, i) => ({
+  label: `項目${String(i + 1).padStart(2, "0")}`,
+  value: "見本",
+}));
+
+const tokens = [
+  "bg",
+  "surface",
+  "fill",
+  "ink",
+  "ink-soft",
+  "line",
+  "hair",
+  "accent",
+  "on-accent",
+  "focus",
+  "panel",
+  "on-panel",
+  "band",
+  "on-band",
+  "face",
+  "accent-ink",
+] as const;
+const toc = [
+  { id: "sg-s1", label: "分類の印" },
+  { id: "sg-s2", label: "記事面" },
+  { id: "sg-s3", label: "検索と確認" },
+  { id: "sg-s4", label: "ブロック" },
+  { id: "sg-s5", label: "共通部品" },
+  { id: "sg-s6", label: "色とコントラスト" },
+];
+---
+
+<BaseLayout
+  title="スタイルガイド"
+  description="部品、ブロック、共通の表示、色の見本を一つのページに並べます。"
+  page="page"
+  noindex
+  pagefindIgnore
+>
+  <Frame {...frame}>
+    <div data-pagefind-ignore>
+      <Breadcrumbs items={[{ label: "ホーム", href: href("") }, { label: "スタイルガイド" }]} />
+      <h1 class="dd-title">スタイルガイド</h1>
+      <p class="dd-lead">選んでいるセットの部品と、崩れやすい状態を並べています。</p>
+      <nav id="sg-toc" class="dd-toc" aria-label="目次">
+        <ol>
+          {toc.map((item) => (
+            <li>
+              <a href={`#${item.id}`}>{item.label}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <SectionHeading id="sg-s1" index={1} context="article">
+        分類の印
+      </SectionHeading>
+      <p class="sg-label">棚{marks.length}つ × sheet</p>
+      <div class="sg-stage">
+        {marks.map((shelf) => (
+          <CategoryMark shelf={shelf} context="sheet" />
+        ))}
+      </div>
+      <p class="sg-label">棚{marks.length}つ × card</p>
+      <div class="sg-cards">
+        {marks.map((shelf) => (
+          <div class="sg-cardmark">
+            <CategoryMark shelf={shelf} context="card" />
+            <p>{shelf.label}</p>
+          </div>
+        ))}
+      </div>
+
+      <SectionHeading id="sg-s2" index={2} context="article">
+        記事面
+      </SectionHeading>
+      <p class="sg-label">区画見出し</p>
+      <SectionHeading id="sg-section-latest" index={1} context="section" label="新着">
+        新しい記事
+      </SectionHeading>
+      <p class="sg-label">6記事型 × lead / primary / default / compact（写真なし）</p>
+      {formats.map((format) => (
+        <div>
+          <p class="sg-label">{FORMAT_LABELS[format]}</p>
+          {emphases.map((emphasis) => (
+            <ArticleFace face={makeFace(format)} emphasis={emphasis} />
+          ))}
+        </div>
+      ))}
+      <p class="sg-label">写真あり（論考・人物）</p>
+      {photoFormats.map((format) => (
+        <div>
+          <p class="sg-label">{FORMAT_LABELS[format]}・写真あり</p>
+          {emphases.map((emphasis) => (
+            <ArticleFace face={makeFace(format, { photo: true })} emphasis={emphasis} />
+          ))}
+        </div>
+      ))}
+      <p class="sg-label">長い題</p>
+      {formats.map((format) => (
+        <div>
+          <p class="sg-label">{FORMAT_LABELS[format]}・長い題</p>
+          <ArticleFace face={makeFace(format, { long: true })} emphasis="default" />
+        </div>
+      ))}
+      <p class="sg-label">FaceGrid latest</p>
+      <FaceGrid layout="latest">
+        <ArticleFace face={makeFace("guide")} emphasis="default" index={1} />
+        <ArticleFace face={makeFace("tutorial")} emphasis="default" index={2} />
+        <ArticleFace face={makeFace("comparison")} emphasis="default" index={3} />
+        <ArticleFace face={makeFace("opinion")} emphasis="default" index={4} />
+      </FaceGrid>
+      <p class="sg-label">FaceGrid list</p>
+      <FaceGrid layout="list">
+        <ArticleFace face={makeFace("guide")} emphasis="default" index={1} />
+        <ArticleFace face={makeFace("news")} emphasis="default" index={2} />
+        <ArticleFace face={makeFace("interview", { photo: true })} emphasis="default" index={3} />
+      </FaceGrid>
+      <p class="sg-label">FaceGrid results</p>
+      <FaceGrid layout="results">
+        <ArticleFace face={makeFace("news")} emphasis="compact" index={1} />
+        <ArticleFace face={makeFace("guide")} emphasis="compact" index={2} />
+        <ArticleFace face={makeFace("comparison")} emphasis="compact" index={3} />
+      </FaceGrid>
+      <p class="sg-label">FaceGrid next</p>
+      <FaceGrid layout="next">
+        <ArticleFace face={nextPrimary} emphasis="primary" />
+        <div class="dd-next__side">
+          {nextSide.map((face) => (
+            <ArticleFace face={face} emphasis="default" />
+          ))}
+        </div>
+      </FaceGrid>
+
+      <SectionHeading id="sg-s3" index={3} context="article">
+        検索と確認
+      </SectionHeading>
+      <p class="sg-label">検索（目的は未選択。条件の一部は選択）</p>
+      <SearchSurface part="main" {...surface}>
+        <p>結果の見本です。このページでは検索しません。</p>
+      </SearchSurface>
+      <p class="sg-label">確認票 3種。条件は1行と20行</p>
+      <CheckSlip kind="brief" id="sg-slip-brief" title="短い確認票">
+        <p>論点帯の短い見本です。</p>
+      </CheckSlip>
+      <CheckSlip kind="conditions" id="sg-cond-1" title="1行の条件">
+        <table class="dd-cond">
+          <tbody>
+            <tr>
+              <th scope="row">初期費用</th>
+              <td>0円</td>
+            </tr>
+          </tbody>
+        </table>
+      </CheckSlip>
+      <CheckSlip kind="conditions" id="sg-cond-20" title="20行の条件">
+        <table class="dd-cond">
+          <tbody>
+            {condMany.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td>{row.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </CheckSlip>
+      <CheckSlip kind="evidence" id="sg-slip-evidence" title="料金表を確認した">
+        <ul>
+          <li>請求書サービスAの料金表（架空）</li>
+        </ul>
+      </CheckSlip>
+      <CheckRow
+        items={[
+          { label: "目次", href: "#sg-toc" },
+          { label: "条件", href: "#sg-cond-1", count: 2 },
+          { label: "根拠", href: "#sg-slip-evidence", count: 1 },
+        ]}
+      />
+      <p class="sg-label">補足面</p>
+      <p>
+        <button class="sg-btn" type="button" popovertarget="sg-popover">
+          補足を開く
+        </button>
+      </p>
+      <Popover id="sg-popover" heading="用語の見本">
+        <p>短い定義の見本です。閉じると、この面は隠れます。</p>
+      </Popover>
+      <p class="sg-label">終了地点</p>
+      <EndMark />
+
+      <SectionHeading id="sg-s4" index={4} context="article">
+        ブロック
+      </SectionHeading>
+      <p class="sg-label">論点帯（本文の DecisionBrief は置きません）</p>
+      <CheckSlip kind="brief" id="sg-brief" title="この記事で分かること">
+        <dl>
+          <dt>分かること</dt>
+          <dd>
+            <ul>
+              <li>月額と年額を、同じ周期に換算しない</li>
+              <li>{longSentence}</li>
+            </ul>
+          </dd>
+          <dt>対象</dt>
+          <dd>請求書サービスを比べる人</dd>
+          <dt>範囲</dt>
+          <dd>架空の料金表</dd>
+        </dl>
+      </CheckSlip>
+      <Summary points={["月額と年額は換算しない", longSentence]} />
+      <Callout kind="note" title="注記">
+        税込と税別は換算しない。
+      </Callout>
+      <Callout kind="warning" title="注意">
+        確認期限を過ぎた金額は、いまの条件として使えない。
+      </Callout>
+      <Callout kind="tip" title="補足">
+        {longSentence}
+      </Callout>
+      <Steps
+        items={[
+          { title: "周期を確認する", body: "月額か年額かを、料金表の表記のまま読む。" },
+          { title: "期限を確認する", body: longSentence },
+        ]}
+      />
+      <Faq
+        items={[
+          { q: "0円と未確認は同じ？", a: "同じではない。0円は金額がある。未確認は金額が無い。" },
+          { q: "期限を過ぎた金額は使える？", a: longSentence },
+        ]}
+      />
+      <ProsCons
+        pros={["月額と税込を料金表のまま並べられる", longSentence]}
+        cons={["確認期限を過ぎた金額は、いまの条件として使えない", "未確認を0円と書かない"]}
+      />
+      <CompareTable
+        caption="請求書サービス3つの比較（架空）"
+        asOf="2026-09-28"
+        columns={["サービスA", "サービスB", "サービスC"]}
+        rows={[
+          { label: "料金の周期", cells: ["月額", "年額", "月額"], basis: "provider" },
+          { label: "税の扱い", cells: ["税込", "税別", "税込"], basis: "provider" },
+          { label: "表示する金額", cells: ["1,078円／月", "再確認中", "980円／月"], basis: "provider" },
+          { label: "初期費用", cells: ["0円", "再確認中", "料金表に記載なし"], basis: "provider" },
+          {
+            label: "追加費用",
+            cells: ["無料プランは月5件まで", "追加ユーザーは未確認", "カード決済手数料 3.25〜3.6%"],
+            basis: "provider",
+          },
+          {
+            label: "契約の条件",
+            cells: ["無料プランは月5件まで", "最低契約期間1年", "初年度半額（新規契約のみ）"],
+            basis: "provider",
+          },
+          {
+            label: "年額を12で割った参考",
+            cells: ["対象外（はじめから月額）", "再確認中のため計算しない", "対象外（はじめから月額）"],
+            basis: "estimate",
+          },
+          { label: "料金表に金額がある項目数", cells: ["2", "2", "2"], basis: "measured" },
+        ]}
+        notes={[
+          "サービスBは確認期限（2026-09-30）を過ぎています。料金と条件の票では、金額を「再確認中」と表示します。",
+          "追加ユーザーの金額は、確認できた料金表でも未確認です。0円ではありません。",
+          "カード決済手数料は 3.25〜3.6% の範囲です（架空）。",
+        ]}
+      />
+
+      <SectionHeading id="sg-s5" index={5} context="article">
+        共通部品
+      </SectionHeading>
+      <p class="sg-label">広告関係</p>
+      <p class="dd-ad">
+        {[site.disclosure.sponsored, site.disclosure.affiliate, site.disclosure.provided].join(" ")}
+      </p>
+      {
+        site.mode !== "production" && (
+          <>
+            <p class="sg-label">サンプルの表示</p>
+            <p class="dd-sample">サンプル記事です。人物・数値・サービスは架空で、実際の条件ではありません。</p>
+            <p class="dd-sample">サンプルの用語です。説明は簡略化してあり、実際の制度の案内ではありません。</p>
+            <SampleCopy />
+          </>
+        )
+      }
+      <p class="sg-label">再確認中</p>
+      <p class="dd-stale" role="note">
+        この記事の条件は再確認中です。金額・金利は表示を控えています。最新の条件は公式の案内で確認してください。
+      </p>
+      <p class="sg-label">保存失敗の通知</p>
+      <div class="dd-notice sg-notice">この端末に保存できませんでした。ページを閉じると元に戻ります。</div>
+      <p class="sg-label">表示設定</p>
+      <p>
+        <button class="sg-btn" type="button" popovertarget="dd-settings">
+          表示設定
+        </button>
+      </p>
+      <p class="sg-label">ページ送り</p>
+      <Pager base="articles/" page={2} total={3} sampleHref={href("articles/")} />
+
+      <SectionHeading id="sg-s6" index={6} context="article">
+        色とコントラスト
+      </SectionHeading>
+      <p class="sg-label">色トークン（light / dark）。値はこのセットの CSS 変数です。</p>
+      <p>このセットに無いトークンは、地の色のままです。</p>
+      <ul class="sg-tokens">
+        {tokens.map((name) => (
+          <li class="sg-token">
+            <p>{name}</p>
+            <div class="sg-schemes">
+              <div class="sg-scheme" style="color-scheme: light">
+                <div class="sg-swatch" style={`background: var(--c-${name})`}></div>
+                <span>light</span>
+              </div>
+              <div class="sg-scheme" style="color-scheme: dark">
+                <div class="sg-swatch" style={`background: var(--c-${name})`}></div>
+                <span>dark</span>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="sg-label">主な組み合わせのコントラスト比（2.12）</p>
+      <div class="dd-table" tabindex="0" role="region" aria-label="コントラスト比">
+        <table>
+          <caption>計算したコントラスト比</caption>
+          <thead>
+            <tr>
+              <th scope="col">セット</th>
+              <th scope="col">明暗</th>
+              <th scope="col">本文（ink）</th>
+              <th scope="col">補助（ink-soft）</th>
+              <th scope="col">主操作の文字</th>
+              <th scope="col">フォーカス／面</th>
+              <th scope="col">その他</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Binder</th>
+              <td>light</td>
+              <td>surface 15.16、bg 13.05</td>
+              <td>surface 6.49、bg 5.59</td>
+              <td>6.05</td>
+              <td>5.80</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <th scope="row">Binder</th>
+              <td>dark</td>
+              <td>surface 13.71、bg 15.30</td>
+              <td>surface 7.56、bg 8.43</td>
+              <td>7.77</td>
+              <td>6.91</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <th scope="row">Board</th>
+              <td>light</td>
+              <td>surface 16.38、bg 13.46</td>
+              <td>surface 6.56、bg 5.39</td>
+              <td>5.62</td>
+              <td>5.62</td>
+              <td>on-panel 12.33、on-band 11.84</td>
+            </tr>
+            <tr>
+              <th scope="row">Board</th>
+              <td>dark</td>
+              <td>surface 13.99、bg 15.56</td>
+              <td>surface 7.39、bg 8.22</td>
+              <td>6.92</td>
+              <td>6.23</td>
+              <td>on-panel 15.89、on-band 9.00</td>
+            </tr>
+            <tr>
+              <th scope="row">Spread</th>
+              <td>light</td>
+              <td>surface 14.55、face 10.92</td>
+              <td>surface 7.55、face 5.67</td>
+              <td>4.90</td>
+              <td>6.73</td>
+              <td>accent-ink／face 5.05</td>
+            </tr>
+            <tr>
+              <th scope="row">Spread</th>
+              <td>dark</td>
+              <td>surface 13.79、face 12.68</td>
+              <td>surface 8.77、face 8.06</td>
+              <td>7.53</td>
+              <td>8.31</td>
+              <td>accent-ink／face 7.64</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>hair は 1.4〜1.7:1 しかないため、装飾の区切り線だけに使います。</p>
+    </div>
+    <Fragment slot="check">
+      <SearchSurface part="aside" {...surface} />
+      <CheckPanel
+        kind="toc"
+        title="目次"
+        items={toc.map((item, i) => ({
+          label: `${String(i + 1).padStart(2, "0")} ${item.label}`,
+          href: `#${item.id}`,
+          index: i + 1,
+          current: i === 0,
+        }))}
+      />
+      <CheckPanel
+        kind="conditions"
+        title="条件"
+        count={2}
+        items={[
+          { label: "1行の条件", href: "#sg-cond-1" },
+          { label: "20行の条件", href: "#sg-cond-20" },
+        ]}
+      />
+      <CheckPanel kind="evidence" title="根拠" count={1} href="#sg-slip-evidence" />
+      <CheckPanel kind="reading" title="読みかけ">
+        <p>公開中の記事が無いときの見本です。</p>
+      </CheckPanel>
+      <CheckPanel kind="series" title="連載">
+        <p>連載が無いときの見本です。</p>
+      </CheckPanel>
+      <CheckPanel kind="recent" title="最近確認した記事" />
+      <CheckPanel
+        kind="selected"
+        title="選んだ条件"
+        count={2}
+        items={[
+          { label: compare.label, href: compareHref },
+          { label: "比較", href: purposeHref("compare") },
+        ]}
+      />
+      <CheckPanel kind="shelf" title="この棚">
+        <div class="dd-shelf-notes">
+          <p>{compare.label}の説明を、確かめる領域に置く見本です。</p>
+        </div>
+      </CheckPanel>
+      <CheckPanel kind="terms" title="関連する用語" count={0} />
+    </Fragment>
+  </Frame>
+  <script>
+    import "@/scripts/popover";
+  </script>
+</BaseLayout>
+
+<style>
+  .sg-label {
+    margin: 1.25rem 0 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+  }
+  .sg-stage {
+    position: relative;
+    min-height: 3rem;
+    margin: 1.75rem 0 1rem;
+    border: var(--g-line) solid var(--c-line);
+  }
+  .sg-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem 0.75rem;
+  }
+  .sg-cardmark {
+    position: relative;
+    min-width: 0;
+    margin-top: var(--g-tab-h);
+    border: var(--g-line) solid var(--c-line);
+    padding: 1rem 0.75rem;
+  }
+  .sg-cardmark p {
+    margin: 0;
+  }
+  .sg-tokens {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .sg-token {
+    display: grid;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+  .sg-token p {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .sg-schemes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    min-width: 0;
+  }
+  .sg-scheme {
+    min-width: 0;
+    padding: 0.375rem;
+    background: var(--c-bg);
+    color: var(--c-ink);
+  }
+  .sg-swatch {
+    min-height: 2.5rem;
+    border: var(--g-line) solid var(--c-line);
+  }
+  .sg-scheme span {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+  }
+  .sg-notice {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    max-width: 40em;
+    margin: 0 0 1em;
+  }
+  .sg-btn {
+    font: inherit;
+    color: var(--c-ink);
+    background: var(--c-surface);
+    border: var(--g-line) solid var(--c-line);
+    min-height: 44px;
+    padding: 0.25rem 0.875rem;
+    cursor: pointer;
+  }
+  @container dd-page (max-width: 839px) {
+    .sg-cards {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

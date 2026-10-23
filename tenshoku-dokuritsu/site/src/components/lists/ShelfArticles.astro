@@ -1,0 +1,164 @@
+---
+import { getEntry } from "astro:content";
+import { SectionHeading } from "@/generated/ui";
+import ListLayout from "@/layouts/ListLayout.astro";
+import { getSiteData, type Article } from "@/utils/content";
+import {
+  articlesOnShelf,
+  assertListPage,
+  emptyTargets,
+  listCrumbs,
+  neighborShelves,
+  pagedFaces,
+  readingGroups,
+  relatedTermLinks,
+  shelfCheck,
+  shelfMark,
+} from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import {
+  PROTECT_GUIDE_PATH,
+  STORIES_PATH,
+  protectGuideOpen,
+  storiesOpen,
+  themeShelf,
+  toThemeArticles,
+} from "@/utils/themes";
+import { articleHref, categoryHref, href } from "@/utils/url";
+
+interface Props {
+  id: string;
+  page: number;
+}
+const { id, page } = Astro.props;
+const d = await getSiteData();
+const shelf = d.shelves.find((item) => item.id === id);
+if (!shelf) throw new Error(`棚がない: ${id}`);
+const articles = articlesOnShelf(d, id);
+const { faces, total } = pagedFaces(articles, d, page);
+assertListPage(page, total, shelf.data.label);
+const frame = await frameProps("list", { shelf: id });
+const crumbs =
+  page === 1
+    ? listCrumbs([{ label: "カテゴリ", href: href("category/") }, { label: shelf.data.label }])
+    : listCrumbs([
+        { label: "カテゴリ", href: href("category/") },
+        { label: shelf.data.label, href: categoryHref(id) },
+        { label: `${page}ページ目` },
+      ]);
+const reading = page === 1 ? (await getEntry("readingOrder", id))?.data : undefined;
+if (page === 1 && !reading) throw new Error(`読む順番がない: ${id}`);
+const hub = reading ? d.byId.get(reading.hub) : undefined;
+const groups = reading ? readingGroups(reading.groups, d.byId) : [];
+const neighbors = page === 1 ? neighborShelves(d, id) : [];
+const theme = toThemeArticles(d.articles);
+const showStoriesLink = page === 1 && themeShelf(id) && storiesOpen(theme);
+const showProtectLink = page === 1 && themeShelf(id) && protectGuideOpen(theme);
+const showThemes = showStoriesLink || showProtectLink;
+const sections = [
+  hub ? "first" : "",
+  ...groups.map((_, index) => `theme-${index + 1}`),
+  page === 1 ? "next" : "",
+  showThemes ? "themes" : "",
+].filter((item) => item.length > 0);
+const sectionIndex = (sectionId: string) => sections.indexOf(sectionId) + 1;
+const categoryLabel = (article: Article) =>
+  d.categories.find((item) => item.id === article.data.category.id)?.data.label ?? "";
+---
+
+<ListLayout
+  title={page === 1 ? shelf.data.label : `${shelf.data.label}（${page}ページ目）`}
+  description={shelf.data.description}
+  frame={frame}
+  crumbs={crumbs}
+  heading={shelf.data.label}
+  lead={shelf.data.description}
+  shelf={shelfMark(shelf)}
+  faces={page === 1 ? undefined : faces}
+  pager={{ base: `category/${id}/`, page, total }}
+  shelfInfo={shelfCheck(d, shelf)}
+  terms={relatedTermLinks(d, articles, [id])}
+  empty={emptyTargets(d, id)}
+>
+  {
+    page === 1 && hub && (
+      <>
+        <SectionHeading id="first" index={sectionIndex("first")} context="section">
+          最初に読む
+        </SectionHeading>
+        <ul class="dd-index">
+          <li>
+            <a href={articleHref(hub.id)}>{hub.data.title}</a>
+            <p>{hub.data.description}</p>
+            <p>{categoryLabel(hub)}</p>
+          </li>
+        </ul>
+      </>
+    )
+  }
+  {
+    page === 1 &&
+      groups.map((group, index) => {
+        const sectionId = `theme-${index + 1}`;
+        return (
+          <>
+            <SectionHeading id={sectionId} index={sectionIndex(sectionId)} context="section">
+              {group.label}
+            </SectionHeading>
+            <ul class="dd-index">
+              {group.articles.map((article) => (
+                <li>
+                  <a href={articleHref(article.id)}>{article.data.title}</a>
+                  <p>{article.data.description}</p>
+                  <p>{categoryLabel(article)}</p>
+                </li>
+              ))}
+            </ul>
+          </>
+        );
+      })
+  }
+  {
+    page === 1 && reading && (
+      <>
+        <SectionHeading id="next" index={sectionIndex("next")} context="section">
+          次のカテゴリ
+        </SectionHeading>
+        <p class="dd-lead">{reading.nextLabel}</p>
+        {neighbors.length > 0 && (
+          <ul class="dd-index">
+            {neighbors.map((item) => (
+              <li>
+                <a href={categoryHref(item.id)}>{item.data.label}</a>
+                <p>{item.data.description}</p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </>
+    )
+  }
+  {
+    showThemes && (
+      <>
+        <SectionHeading id="themes" index={sectionIndex("themes")} context="section">
+          案内
+        </SectionHeading>
+        <ul class="dd-index">
+          {showStoriesLink && (
+            <li>
+              <a href={href(STORIES_PATH)}>体験談</a>
+              <p>公開しているアンケートと取材</p>
+            </li>
+          )}
+          {showProtectLink && (
+            <li>
+              <a href={href(PROTECT_GUIDE_PATH)}>退職金を守る</a>
+              <p>勧誘、総費用、契約、生活の見通しを確認する</p>
+            </li>
+          )}
+        </ul>
+      </>
+    )
+  }
+</ListLayout>
