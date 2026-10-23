@@ -1,0 +1,33 @@
+---
+import ListLayout from "@/layouts/ListLayout.astro";
+import { getSiteData } from "@/utils/content";
+import { ALL_INTENTS, INTENT_LABELS } from "@/utils/labels";
+import { articlesForIntent, listCrumbs, relatedTermLinks } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { purposeHref } from "@/utils/url";
+
+const d = await getSiteData();
+const frame = await frameProps("list");
+const lead = "記事を、読者の目的ごとにまとめています。";
+---
+
+<ListLayout
+  title="目的"
+  description={lead}
+  frame={frame}
+  tab="目的"
+  crumbs={listCrumbs([{ label: "目的" }])}
+  heading="目的"
+  lead={lead}
+  terms={relatedTermLinks(d, d.articles)}
+>
+  <ul class="dd-index">
+    {ALL_INTENTS.map((intent) => (
+      <li>
+        <a href={purposeHref(intent)}>{INTENT_LABELS[intent].nav}</a>
+        <p>{INTENT_LABELS[intent].lead}</p>
+        <p>{articlesForIntent(d, intent).length}件</p>
+      </li>
+    ))}
+  </ul>
+</ListLayout>

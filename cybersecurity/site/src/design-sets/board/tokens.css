@@ -1,0 +1,30 @@
+/* src/design-sets/board/tokens.css */
+:root {
+  color-scheme: light dark;
+  /* 意味トークン：light-dark(light, dark) */
+  --c-bg: light-dark(#E6E9EE, #0E131B);
+  --c-surface: light-dark(#FFFFFF, #171E29);
+  --c-fill: light-dark(#F3F5F8, #1E2633);
+  --c-ink: light-dark(#18202C, #E6EBF3);
+  --c-ink-soft: light-dark(#545E6E, #A3ADBD);
+  --c-line: light-dark(#18202C, #C3CBD8);
+  --c-hair: light-dark(#CDD3DB, #2C3646);
+  --c-accent: light-dark(#5B4CF0, #9A90FF);
+  --c-on-accent: light-dark(#FFFFFF, #0E131B);
+  --c-focus: light-dark(#5B4CF0, #9A90FF);
+  --c-panel: light-dark(#1E2C46, #0A101C);
+  --c-on-panel: light-dark(#EEF1F6, #E6EBF3);
+  --c-band: light-dark(#FFD84D, #D9B53A);
+  --c-on-band: light-dark(#18202C, #14181F);
+  /* ずらした二重輪郭の外側の面。値は --c-hair と同じ（ADR-0006） */
+  --c-shade: light-dark(#CDD3DB, #2C3646);
+  --shelf-hue-1: 40; --shelf-hue-2: 150; --shelf-hue-3: 260; --shelf-hue-4: 330; --shelf-hue-5: 200;
+  /* 幾何トークン（manifest.geometry と一致。protrude は --g-off） */
+  --g-line: 2px;
+  --g-off: 0.375rem;
+  --g-radius: 0.5rem;
+  /* 書体 */
+  --f-sans: system-ui, -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, "Noto Sans JP", sans-serif;
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }

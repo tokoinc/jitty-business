@@ -1,0 +1,40 @@
+---
+import type { CheckPanelProps } from "../../contract";
+type Props = CheckPanelProps;
+const { kind, title, href, count, items, hidden = false } = Astro.props;
+const label = count !== undefined ? `${title} ${count}件` : title;
+---
+
+<section
+  class={`bo-meter bo-meter--${kind}`}
+  aria-labelledby={`flag-${kind}`}
+  data-sig="s6-panel"
+  hidden={hidden}
+>
+  <div class="bo-meter__head">
+    <h2 class="bo-meter__h" id={`flag-${kind}`}>
+      {href ? <a href={href}>{label}</a> : label}
+    </h2>
+    <i class="bo-meter__scale" aria-hidden="true" />
+  </div>
+  {
+    items && (
+      <ol class="bo-keys">
+        {items.map((it) => (
+          <li>
+            <a class="bo-key" href={it.href} aria-current={it.current ? "location" : undefined}>
+              {it.label}
+            </a>
+          </li>
+        ))}
+      </ol>
+    )
+  }
+  {
+    Astro.slots.has("default") && (
+      <div class="bo-meter__body">
+        <slot />
+      </div>
+    )
+  }
+</section>

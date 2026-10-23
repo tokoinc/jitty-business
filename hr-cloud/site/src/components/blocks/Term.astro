@@ -1,0 +1,21 @@
+---
+import { glossaryHref } from "@/utils/url";
+import { site } from "@/site.config";
+const { id } = Astro.props as { id: string };
+const ctx = Astro.locals.dd!;
+if (!ctx.article.data.terms.some((t) => t.id === id)) {
+  throw new Error(`articles/${ctx.article.id} の <Term id="${id}">: frontmatter の terms に宣言する`);
+}
+const pid = `term-${ctx.article.id}-${id}`;
+---
+
+<span class="dd-term">
+  <a href={glossaryHref(id)}>
+    <slot />
+  </a>
+  {site.features.glossaryPopovers && (
+    <button class="dd-term__btn" type="button" popovertarget={pid} aria-label="用語の補足を開く">
+      ?
+    </button>
+  )}
+</span>

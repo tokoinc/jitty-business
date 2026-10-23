@@ -1,0 +1,11 @@
+---
+// Markdown の ## を見出し枠（S3）にする
+import { SectionHeading } from "@/generated/ui";
+const { id } = Astro.props as { id: string };
+const list = Astro.locals.dd?.h2 ?? [];
+const index = Math.max(1, list.findIndex((h) => h.id === id) + 1);
+---
+
+<SectionHeading id={id} index={index} context="article">
+  <slot />
+</SectionHeading>

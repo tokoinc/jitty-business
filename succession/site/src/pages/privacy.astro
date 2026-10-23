@@ -1,0 +1,37 @@
+---
+import SampleCopy from "@/components/common/SampleCopy.astro";
+import ListLayout from "@/layouts/ListLayout.astro";
+import { site } from "@/site.config";
+import { listCrumbs } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+
+const frame = await frameProps("page");
+const analyticsLine = site.analytics.enabled
+  ? "アクセス解析を使います。計測の範囲は、運営者が実態に合わせて書きます。"
+  : "アクセス解析は使っていません。";
+const lead = "ブラウザに残すデータと、アクセス解析の有無です。";
+---
+
+<ListLayout
+  title="プライバシー"
+  description={lead}
+  frame={frame}
+  page="page"
+  tab="プライバシー"
+  crumbs={listCrumbs([{ label: "プライバシー" }])}
+  heading="プライバシー"
+  lead={lead}
+>
+  <SampleCopy />
+  <div class="dd-prose">
+    <h2>ブラウザに保存するデータ</h2>
+    <ul>
+      <li>表示設定（画面の明暗と、文字の大きさ）</li>
+      <li>保存した記事</li>
+      <li>続きから読む位置</li>
+    </ul>
+    <p>これらはこの端末のブラウザの中だけに残り、サーバへは送りません。記事の本文や、読者の連絡先は保存しません。</p>
+    <h2>アクセス解析</h2>
+    <p>{analyticsLine}</p>
+  </div>
+</ListLayout>

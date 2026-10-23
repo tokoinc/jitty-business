@@ -1,0 +1,7 @@
+# 改行は LF に揃える（Prettier と同じ。Windows の core.autocrlf でも CRLF にしない）
+* text=auto eol=lf
+
+*.png binary
+*.ico binary
+*.webp binary
+*.jpg binary

@@ -1,0 +1,64 @@
+---
+import ListLayout from "@/layouts/ListLayout.astro";
+import { getSiteData } from "@/utils/content";
+import { articlesOnShelf, listCrumbs, shelvesWithArticles } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { categoryHref, href } from "@/utils/url";
+
+const d = await getSiteData();
+const shelves = shelvesWithArticles(d);
+const frame = await frameProps("page");
+const lead = "アドレスを確認するか、検索と棚から探せます。";
+// 入口は読む領域に置く。付箋は確かめる情報だけに使う（ADR-0005）
+const entrances = [
+  { label: "棚の一覧", href: href("category/") },
+  { label: "記事一覧", href: href("articles/") },
+  { label: "目的", href: href("purpose/") },
+  { label: "用語集", href: href("glossary/") },
+];
+---
+
+<ListLayout
+  title="ページが見つかりません"
+  description={lead}
+  frame={frame}
+  page="page"
+  noindex
+  tab="見つかりません"
+  crumbs={listCrumbs([{ label: "ページが見つかりません" }])}
+  heading="ページが見つかりません"
+  lead={lead}
+>
+  <form class="dd-search" role="search" aria-label="キーワードで検索" action={href("search/")} method="get">
+    <label class="dd-visually-hidden" for="dd-404-q">
+      キーワードで検索
+    </label>
+    <input id="dd-404-q" name="q" type="search" placeholder="キーワードで検索" />
+    <button type="submit">検索</button>
+  </form>
+  <div class="dd-prose">
+    <h2>棚から探す</h2>
+  </div>
+  {shelves.length > 0 ? (
+    <ul class="dd-index">
+      {shelves.map((shelf) => (
+        <li>
+          <a href={categoryHref(shelf.id)}>{shelf.data.label}</a>
+          <p>{articlesOnShelf(d, shelf.id).length}件</p>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>公開中の記事がある棚は、まだありません。</p>
+  )}
+  <div class="dd-prose">
+    <h2>ほかの入口</h2>
+  </div>
+  <ul class="dd-index">
+    {entrances.map((item) => (
+      <li>
+        <a href={item.href}>{item.label}</a>
+      </li>
+    ))}
+  </ul>
+</ListLayout>

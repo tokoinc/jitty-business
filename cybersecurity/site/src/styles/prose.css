@@ -1,0 +1,15 @@
+/* 本文の組版。字の大きさはセットの parts.css */
+.dd-prose {
+  max-width: 40em;
+  line-height: 1.95;
+}
+.dd-prose p {
+  margin: 0 0 1em;
+}
+.dd-prose :is(table, .dd-table, .dd-compare) {
+  font-variant-numeric: tabular-nums;
+}
+.dd-prose :is(ul, ol):not(.dd-steps) {
+  margin: 0 0 1em;
+  padding-left: 1.5em;
+}

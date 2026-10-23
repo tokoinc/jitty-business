@@ -1,0 +1,82 @@
+---
+import { formatDate } from "@/utils/dates";
+
+const BASIS = {
+  measured: "実測",
+  provider: "提供者の公表",
+  editorial: "編集の判断",
+  estimate: "仮定の試算",
+} as const;
+
+interface Row {
+  label: string;
+  cells: string[];
+  basis: keyof typeof BASIS;
+}
+interface Props {
+  caption: string;
+  asOf: string;
+  columns: string[];
+  rows: Row[];
+  notes?: string[];
+}
+const { caption, asOf, columns, rows, notes = [] } = Astro.props;
+const articleId = Astro.locals.dd?.article.id ?? "unknown";
+const fail = (message: string): never => {
+  throw new Error(`articles/${articleId} の <CompareTable>: ${message}`);
+};
+if (!caption?.trim()) fail("caption が必要");
+if (!/^\d{4}-\d{2}-\d{2}$/.test(asOf ?? "")) fail('asOf は "YYYY-MM-DD"');
+if (!columns?.length) fail("columns が必要");
+if (!rows?.length) fail("rows が必要");
+rows.forEach((row, i) => {
+  if (!row?.label?.trim()) fail(`rows[${i}] に label が必要`);
+  if (row.cells?.length !== columns.length) fail(`rows[${i}] の cells は columns と同じ数`);
+  if (!(row.basis in BASIS)) fail(`rows[${i}] の basis が不明`);
+});
+const estimate = rows.some((row) => row.basis === "estimate");
+---
+
+<figure class="dd-compare">
+  <div class="dd-table" tabindex="0" role="region" aria-label={caption}>
+    <table>
+      <caption>{caption}</caption>
+      <thead>
+        <tr>
+          <th scope="col">項目</th>
+          {columns.map((column) => (
+            <th scope="col">{column}</th>
+          ))}
+          <th scope="col">根拠の種類</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr>
+            <th scope="row">{row.label}</th>
+            {row.cells.map((cell) => (
+              <td>{cell}</td>
+            ))}
+            <td>{BASIS[row.basis]}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="dd-compare__asof">
+    基準日 <time datetime={asOf}>{formatDate(asOf)}</time>
+  </p>
+  <p class="dd-compare__scroll">項目の列は固定です。狭い画面では表を横にスクロールできます。</p>
+  {notes.length > 0 && (
+    <ul class="dd-compare__notes">
+      {notes.map((note) => (
+        <li>{note}</li>
+      ))}
+    </ul>
+  )}
+  {estimate && (
+    <p class="dd-compare__estimate">
+      試算は前提が変わると結果も変わります。将来の金額や条件を保証するものではありません。
+    </p>
+  )}
+</figure>

@@ -1,0 +1,20 @@
+---
+import { render } from "astro:content";
+import ArticleLayout from "@/layouts/ArticleLayout.astro";
+import { mdxComponents } from "@/components/blocks/mdx-components";
+import { getSiteData } from "@/utils/content";
+
+export async function getStaticPaths() {
+  const d = await getSiteData();
+  return d.articles.map((article) => ({ params: { slug: article.id }, props: { id: article.id } }));
+}
+const d = await getSiteData();
+const article = d.byId.get(Astro.props.id)!;
+const { Content, headings } = await render(article);
+const h2 = headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, text: h.text }));
+Astro.locals.dd = { article, data: d, h2 };
+---
+
+<ArticleLayout article={article} data={d} h2={h2}>
+  <Content components={mdxComponents} />
+</ArticleLayout>

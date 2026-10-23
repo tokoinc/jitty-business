@@ -1,0 +1,164 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Popover } from "@/generated/ui";
+import { site } from "@/site.config";
+import { dateTimeAttr, formatDate, formatDateTime } from "@/utils/dates";
+import { compareReading } from "@/utils/text";
+import { authorHref, glossaryHref, tagHref } from "@/utils/url";
+import type { Article, SiteData } from "@/utils/content";
+
+interface Props {
+  article: Article;
+  data: SiteData;
+}
+const { article, data } = Astro.props;
+const a = article.data;
+
+const sources = a.sources.map((ref, index) => {
+  const entry = data.sources.find((item) => item.id === ref.id);
+  if (!entry) throw new Error(`articles/${article.id}: 情報源 ${ref.id} が sources にない`);
+  return { n: index + 1, id: ref.id, entry };
+});
+
+const author = data.authors.find((item) => item.id === a.author.id);
+if (!author) throw new Error(`articles/${article.id}: 著者 ${a.author.id} がない`);
+
+const review = a.review;
+const reviewer = review ? data.authors.find((item) => item.id === review.by.id) : undefined;
+if (review && !reviewer) throw new Error(`articles/${article.id}: 確認担当 ${review.by.id} がない`);
+
+const tags = a.tags.map((ref) => {
+  const entry = data.tags.find((item) => item.id === ref.id);
+  if (!entry) throw new Error(`articles/${article.id}: タグ ${ref.id} がない`);
+  return entry;
+});
+
+const HISTORY_LABEL = {
+  update: "更新",
+  correction: "訂正",
+  "follow-up": "続報",
+} as const;
+
+const seenTerms = new Set<string>();
+const terms: {
+  id: string;
+  entry: CollectionEntry<"glossary">;
+  related: CollectionEntry<"glossary">[];
+}[] = [];
+for (const ref of a.terms) {
+  if (seenTerms.has(ref.id)) continue;
+  seenTerms.add(ref.id);
+  const entry = data.glossary.find((item) => item.id === ref.id);
+  if (!entry) throw new Error(`articles/${article.id}: 用語 ${ref.id} が glossary にない`);
+  const related = entry.data.related
+    .map((rel) => {
+      const item = data.glossary.find((term) => term.id === rel.id);
+      if (!item) throw new Error(`articles/${article.id}: 用語 ${ref.id} の関連用語 ${rel.id} がない`);
+      return item;
+    })
+    .sort((x, y) => compareReading(x.data.reading, y.data.reading) || x.id.localeCompare(y.id));
+  terms.push({ id: ref.id, entry, related });
+}
+const showTerms = site.features.glossaryPopovers && terms.length > 0;
+---
+
+<div class="dd-foot">
+  {sources.length > 0 && (
+    <section id="sources" aria-labelledby="sources-heading">
+      <h2 id="sources-heading">根拠・出典</h2>
+      <ol>
+        {sources.map((source) => (
+          <li id={`src-${source.id}`}>
+            {source.entry.data.title}
+            <span>{source.entry.data.publisher}</span>
+            <time datetime={source.entry.data.checkedAt}>
+              確認日 {formatDate(source.entry.data.checkedAt)}
+            </time>
+            <a href={source.entry.data.url}>{source.entry.data.url}</a>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+  <section aria-labelledby="review-heading">
+    <h2 id="review-heading">{review ? "著者と確認担当" : "著者"}</h2>
+    <dl>
+      <dt>著者</dt>
+      <dd>
+        <a href={authorHref(author.id)}>{author.data.name}</a>（{author.data.role}）
+      </dd>
+      {review && reviewer && (
+        <>
+          <dt>確認担当</dt>
+          <dd>
+            <a href={authorHref(reviewer.id)}>{reviewer.data.name}</a>（{reviewer.data.role}）
+            <br />
+            確認日 <time datetime={review.checkedAt}>{formatDate(review.checkedAt)}</time>
+            <br />
+            確認範囲：{review.scope}
+            {review.method && (
+              <>
+                <br />
+                確認方法：{review.method}
+              </>
+            )}
+          </dd>
+        </>
+      )}
+    </dl>
+  </section>
+  {a.history.length > 0 && (
+    <section aria-labelledby="history-heading">
+      <h2 id="history-heading">更新・訂正の履歴</h2>
+      <ol>
+        {a.history.map((entry) => (
+          <li>
+            <time datetime={dateTimeAttr(entry.at)}>{formatDateTime(entry.at)}</time>
+            {HISTORY_LABEL[entry.type]}
+            {entry.note}
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+  {tags.length > 0 && (
+    <section aria-labelledby="tags-heading">
+      <h2 id="tags-heading">タグ</h2>
+      <ul>
+        {tags.map((tag) => (
+          <li>
+            <a href={tagHref(tag.id)}>{tag.data.label}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+  {showTerms && (
+    <section class="dd-terms" aria-labelledby="terms-supplement">
+      <h2 id="terms-supplement">用語の補足</h2>
+      {terms.map((term) => (
+        <Popover id={`term-${article.id}-${term.id}`} heading={term.entry.data.term}>
+          <p>{term.entry.data.short}</p>
+          <p>
+            <a href={glossaryHref(term.id)}>{term.entry.data.term}のページ</a>
+          </p>
+          {term.related.length > 0 && (
+            <>
+              <p>関連する用語</p>
+              <ul>
+                {term.related.map((rel) => (
+                  <li>
+                    <a href={glossaryHref(rel.id)}>{rel.data.term}</a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </Popover>
+      ))}
+    </section>
+  )}
+</div>
+{showTerms && <script>
+  import "@/scripts/popover";
+</script>}

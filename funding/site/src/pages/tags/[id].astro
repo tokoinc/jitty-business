@@ -1,0 +1,34 @@
+---
+import ListLayout from "@/layouts/ListLayout.astro";
+import { getSiteData } from "@/utils/content";
+import { articlesForTag, emptyTargets, faceItems, listCrumbs, relatedTermLinks } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { href } from "@/utils/url";
+
+export async function getStaticPaths() {
+  const d = await getSiteData();
+  return d.tags.map((tag) => ({ params: { id: tag.id } }));
+}
+
+const id = Astro.params.id;
+if (!id) throw new Error("id がない");
+const d = await getSiteData();
+const tag = d.tags.find((item) => item.id === id);
+if (!tag) throw new Error(`タグがない: ${id}`);
+const articles = articlesForTag(d, id);
+const lead = `よみは${tag.data.reading}です。このタグの付いた記事を、新しい順に並べています。`;
+const frame = await frameProps("list");
+---
+
+<ListLayout
+  title={tag.data.label}
+  description={lead}
+  frame={frame}
+  tab={tag.data.label}
+  crumbs={listCrumbs([{ label: "タグ", href: href("tags/") }, { label: tag.data.label }])}
+  heading={tag.data.label}
+  lead={lead}
+  faces={faceItems(articles, d)}
+  terms={relatedTermLinks(d, articles)}
+  empty={emptyTargets(d)}
+/>

@@ -1,0 +1,140 @@
+{
+  "set": "binder",
+  "finish": "flat",
+  "measuredAt": "2026-10-08T13:49:54.577Z",
+  "node": "v24.19.0",
+  "lighthouse": "13.5.0",
+  "chrome": "C:\\Users\\espee\\AppData\\Local\\ms-playwright\\chromium-1243\\chrome-win64\\chrome.exe",
+  "formFactor": "mobile",
+  "throttling": "simulate",
+  "runs": 3,
+  "budgets": {
+    "css": 8921,
+    "maxJs": 3924
+  },
+  "pages": [
+    {
+      "id": "home",
+      "scores": [
+        {
+          "performance": 1,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1220.8798,
+          "cls": 0,
+          "tbt": 0
+        },
+        {
+          "performance": 1,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1209.1048,
+          "cls": 0,
+          "tbt": 0
+        },
+        {
+          "performance": 1,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1210.7174,
+          "cls": 0,
+          "tbt": 0
+        }
+      ],
+      "median": {
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 0.66,
+        "lcp": 1210.7174,
+        "cls": 0,
+        "tbt": 0
+      }
+    },
+    {
+      "id": "article",
+      "scores": [
+        {
+          "performance": 1,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1061.08515,
+          "cls": 0.02220956797364267,
+          "tbt": 0
+        },
+        {
+          "performance": 1,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1061.48115,
+          "cls": 0.02220956797364267,
+          "tbt": 0
+        },
+        {
+          "performance": 1,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1065.5805,
+          "cls": 0.02220956797364267,
+          "tbt": 0
+        }
+      ],
+      "median": {
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 0.66,
+        "lcp": 1061.48115,
+        "cls": 0.02220956797364267,
+        "tbt": 0
+      }
+    },
+    {
+      "id": "search",
+      "scores": [
+        {
+          "performance": 0.81,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1211.13105,
+          "cls": 0.41282636811086637,
+          "tbt": 0
+        },
+        {
+          "performance": 0.81,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1208.559,
+          "cls": 0.41282636811086637,
+          "tbt": 0
+        },
+        {
+          "performance": 0.81,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1211.1639,
+          "cls": 0.41282636811086637,
+          "tbt": 0
+        }
+      ],
+      "median": {
+        "performance": 0.81,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 0.66,
+        "lcp": 1211.13105,
+        "cls": 0.41282636811086637,
+        "tbt": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+---
+import ShelfArticles from "@/components/lists/ShelfArticles.astro";
+import { getSiteData } from "@/utils/content";
+import { shelvesWithArticles } from "@/utils/lists";
+
+export async function getStaticPaths() {
+  const d = await getSiteData();
+  return shelvesWithArticles(d).map((shelf) => ({ params: { id: shelf.id } }));
+}
+
+const id = Astro.params.id;
+if (!id) throw new Error("id がない");
+---
+
+<ShelfArticles id={id} page={1} />

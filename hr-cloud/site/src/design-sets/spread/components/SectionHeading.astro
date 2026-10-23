@@ -1,0 +1,15 @@
+---
+import type { SectionHeadingProps } from "../../contract";
+type Props = SectionHeadingProps;
+const { id, index, context, label } = Astro.props;
+const deco = label ?? String(index).padStart(2, "0");
+---
+
+<div class={`sp-ch sp-ch--${context}`} data-sig="s3">
+  <span class:list={["sp-ch__num", { "sp-vlabel": context === "section" && !!label }]} aria-hidden="true">
+    {deco}
+  </span>
+  <h2 id={id}>
+    <slot />
+  </h2>
+</div>

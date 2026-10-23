@@ -1,0 +1,49 @@
+/* 12ブロックの共通の土台。セットごとの形は parts.css */
+.dd-callout,
+.dd-steps,
+.dd-faq,
+.dd-product,
+.dd-compare,
+.dd-proscons,
+.dd-summary,
+.dd-linkcard {
+  margin: 0 0 1em;
+  max-width: 40em;
+}
+.dd-steps {
+  list-style: none;
+  padding-left: 0;
+}
+.dd-table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.dd-compare table,
+.dd-table table,
+.dd-cond {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.dd-prose .dd-product__links {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding-left: 0;
+}
+.dd-proscons {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem 1.5rem;
+}
+.dd-proscons h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.dd-proscons ul {
+  margin: 0;
+}
+@container dd-page (max-width: 839px) {
+  .dd-proscons {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

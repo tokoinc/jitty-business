@@ -1,0 +1,9 @@
+---
+import type { FaceGridProps } from "../../contract";
+type Props = FaceGridProps;
+const { layout } = Astro.props;
+---
+
+<div class={`sp-grid sp-grid--${layout}`} data-sig="s4-grid">
+  <slot />
+</div>

@@ -1,0 +1,100 @@
+- id: sample-invoice-a
+  kind: service
+  name: 請求書サービスA
+  provider: 架空株式会社A
+  description: 架空の請求書作成サービス。サンプルの比較に使うもので、実在のサービスではない。
+  links:
+    - url: https://example.org/sample/sample-invoice-a
+      use: official
+      relation: none
+  prices:
+    - label: 月額（スタンダード）
+      amount: 1078
+      currency: JPY
+      tax: included
+      period: month
+      asOf: "2026-09-28"
+      source: sample-invoice-a-pricing
+    - label: 初期費用
+      amount: 0
+      currency: JPY
+      tax: not-applicable
+      period: once
+      asOf: "2026-09-28"
+      source: sample-invoice-a-pricing
+  conditions:
+    - label: 無料プラン
+      value: 月5件まで
+      source: sample-invoice-a-pricing
+  lastVerifiedAt: "2026-09-28"
+  reviewDueAt: "2026-12-31"
+  reviewer: editorial-team
+  sample: true
+- id: sample-invoice-b
+  kind: service
+  name: 請求書サービスB
+  provider: 架空株式会社B
+  description: 架空の請求書作成サービス。年額の料金と、未確認の追加費用を比べる例示に使う。実在のサービスではない。
+  links:
+    - url: https://example.org/sample/sample-invoice-b
+      use: official
+      relation: none
+  prices:
+    - label: 年額
+      amount: 11880
+      currency: JPY
+      tax: excluded
+      period: year
+      asOf: "2026-06-30"
+      source: sample-invoice-b-pricing
+    - label: 追加ユーザー
+      amount: null
+      currency: JPY
+      tax: excluded
+      period: year
+      note: 金額は未確認（架空）
+      asOf: "2026-06-30"
+      source: sample-invoice-b-pricing
+  conditions:
+    - label: 最低契約期間
+      value: 1年
+      period: 1年
+      source: sample-invoice-b-pricing
+  lastVerifiedAt: "2026-06-30"
+  reviewDueAt: "2026-09-30"
+  reviewer: editorial-team
+  sample: true
+- id: sample-invoice-c
+  kind: service
+  name: 請求書サービスC
+  provider: 架空株式会社C
+  description: 架空の請求書作成サービス。広告リンクの表示を確かめる例示で、実在のサービスではない。
+  links:
+    - url: https://example.org/sample/sample-invoice-c
+      use: official
+      relation: affiliate
+  prices:
+    - label: 月額
+      amount: 980
+      currency: JPY
+      tax: included
+      period: month
+      asOf: "2026-09-28"
+      source: sample-invoice-c-pricing
+  rates:
+    - label: カード決済手数料
+      min: 3.25
+      max: 3.6
+      unit: percent
+      asOf: "2026-09-28"
+      source: sample-invoice-c-pricing
+  conditions:
+    - label: 初年度半額
+      value: 初年度の料金が半額
+      audience: 新規契約のみ
+      period: 2026-12-31まで
+      source: sample-invoice-c-pricing
+  lastVerifiedAt: "2026-09-28"
+  reviewDueAt: "2026-12-31"
+  reviewer: editorial-team
+  sample: true

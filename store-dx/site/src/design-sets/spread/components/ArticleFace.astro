@@ -1,0 +1,97 @@
+---
+import { Image } from "astro:assets";
+import type { ArticleFaceProps } from "../../contract";
+import CategoryMark from "./CategoryMark.astro";
+type Props = ArticleFaceProps;
+const { face: f, emphasis, headingLevel = 3, index } = Astro.props;
+const H = headingLevel === 2 ? "h2" : "h3";
+const kind = f.format === "interview" ? "opinion" : f.format;
+const variant = kind === "comparison" ? "table" : kind;
+const num = index !== undefined ? String(index).padStart(2, "0") : "";
+---
+
+{kind === "news" ? (
+  <article class={`sp-card sp-card--news sp-card--${emphasis}`} data-sig="s4" data-format={f.format}>
+    <p class="sp-date">
+      <time datetime={f.date} data-field="date">
+        {f.dateLabel}
+      </time>
+    </p>
+    <div class="sp-card__news-body">
+      {f.purposeLabel && <p class="sp-card__type">{f.purposeLabel}</p>}
+      <H class="sp-card__title">
+        <a href={f.href} data-field="title" data-field-href>
+          {f.title}
+        </a>
+      </H>
+      <p class="dd-visually-hidden">
+        <span data-field="shelf">{f.shelf.label}</span>・<span data-field="format">{f.formatLabel}</span>
+      </p>
+      {f.reason && <p class="sp-card__reason">{f.reason}</p>}
+    </div>
+  </article>
+) : (
+  <article
+    class={`sp-card sp-card--${variant} sp-card--${emphasis}`}
+    data-sig="s4"
+    data-format={f.format}
+    style={`--slot:${f.shelf.slot}`}
+  >
+    {(kind === "guide" || kind === "tutorial") && (
+      <span class="sp-card__num" data-field="index" aria-hidden="true">
+        {num}
+      </span>
+    )}
+    <CategoryMark shelf={f.shelf} format={{ id: f.format, label: f.formatLabel }} context="card" />
+    {kind === "opinion" && (
+      <div class="sp-lens" data-photo>
+        {f.cover && (
+          <Image
+            src={f.cover.src}
+            alt={f.cover.alt}
+            widths={[480, 800]}
+            sizes="(max-width: 839px) 100vw, 40vw"
+          />
+        )}
+      </div>
+    )}
+    {kind !== "opinion" && (
+      <p class="sp-card__type">
+        <span data-field="format">{f.formatLabel}</span>
+        {f.purposeLabel && `｜${f.purposeLabel}`}
+      </p>
+    )}
+    <H class={kind === "opinion" ? "sp-proj" : "sp-card__title"}>
+      <a href={f.href} data-field="title" data-field-href>
+        {f.title}
+      </a>
+    </H>
+    {kind === "opinion" && (
+      <p class="sp-card__type">
+        <span data-field="format">{f.formatLabel}</span>
+        {f.purposeLabel && `｜${f.purposeLabel}`}
+      </p>
+    )}
+    {f.reason && <p class="sp-card__reason">{f.reason}</p>}
+    {kind === "guide" && emphasis !== "compact" && <p class="sp-card__lead">{f.description}</p>}
+    {kind === "tutorial" && f.steps && (
+      <p class="sp-card__steps" data-field="steps">
+        <span class="dd-visually-hidden">手順 {f.steps}</span>
+        {Array.from({ length: f.steps }, () => (
+          <i aria-hidden="true" />
+        ))}
+      </p>
+    )}
+    {kind === "comparison" && f.compare && (
+      <p class="sp-card__cols" data-field="cols" style={`--cols:${f.compare.items + 1}`}>
+        <span class="dd-visually-hidden">
+          {f.compare.items}件を{f.compare.axes}項目で比較
+        </span>
+        {Array.from({ length: f.compare.items + 1 }, () => (
+          <i aria-hidden="true" />
+        ))}
+      </p>
+    )}
+    {kind === "opinion" && f.speaker && <p class="sp-card__speaker">{f.speaker}</p>}
+  </article>
+)}

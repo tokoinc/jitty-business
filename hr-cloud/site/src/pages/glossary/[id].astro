@@ -1,0 +1,140 @@
+---
+import { render } from "astro:content";
+import { ArticleFace, CheckPanel, FaceGrid } from "@/generated/ui";
+import ListLayout from "@/layouts/ListLayout.astro";
+import { getSiteData } from "@/utils/content";
+import { formatDate } from "@/utils/dates";
+import { articlesUsingTerm, faceItems, listCrumbs } from "@/utils/lists";
+import { compareReading } from "@/utils/text";
+import { frameProps } from "@/utils/nav";
+import { glossaryHref, href } from "@/utils/url";
+
+export async function getStaticPaths() {
+  const d = await getSiteData();
+  return d.glossary.map((entry) => ({ params: { id: entry.id } }));
+}
+
+const id = Astro.params.id;
+if (!id) throw new Error("id がない");
+const d = await getSiteData();
+const entry = d.glossary.find((item) => item.id === id);
+if (!entry) throw new Error(`用語がない: ${id}`);
+const { Content } = await render(entry);
+const related = entry.data.related
+  .map((ref) => {
+    const item = d.glossary.find((term) => term.id === ref.id);
+    if (!item) throw new Error(`glossary/${id}: 関連用語 ${ref.id} がない`);
+    return item;
+  })
+  .sort((a, b) => compareReading(a.data.reading, b.data.reading) || a.id.localeCompare(b.id));
+const sources = entry.data.sources.map((ref) => {
+  const item = d.sources.find((source) => source.id === ref.id);
+  if (!item) throw new Error(`glossary/${id}: 情報源 ${ref.id} がない`);
+  return item;
+});
+const articles = articlesUsingTerm(d, id);
+const faces = faceItems(articles, d);
+const frame = await frameProps("page", { current: "glossary" });
+// 確かめる領域は本文側の節への入口と件数（2.3：使われている記事・関連用語）
+const toc = [
+  { label: `関連する用語 ${related.length}件`, href: "#related-terms" },
+  { label: `使われている記事 ${faces.length}件`, href: "#used-articles" },
+  { label: `出典 ${sources.length}件`, href: "#term-sources" },
+];
+---
+
+<ListLayout
+  title={entry.data.term}
+  description={entry.data.short}
+  frame={frame}
+  page="page"
+  tab="用語"
+  crumbs={listCrumbs([{ label: "用語集", href: href("glossary/") }, { label: entry.data.term }])}
+  noindex={entry.data.sample}
+>
+  {entry.data.sample && (
+    <p class="dd-sample">サンプルの用語です。説明は簡略化してあり、実際の制度の案内ではありません。</p>
+  )}
+  <div data-pagefind-body>
+    <h1 class="dd-title" data-pagefind-meta="title">
+      {entry.data.term}
+    </h1>
+    <span hidden data-pagefind-meta="shelf:用語"></span>
+    <span hidden data-pagefind-meta="formatLabel:用語"></span>
+    <dl class="dd-facts">
+      <dt>よみ</dt>
+      <dd>{entry.data.reading}</dd>
+      <dt>短い定義</dt>
+      <dd>{entry.data.short}</dd>
+    </dl>
+    <div class="dd-prose">
+      <Content />
+    </div>
+  </div>
+  <section aria-labelledby="related-terms">
+    <div class="dd-prose">
+      <h2 id="related-terms">関連する用語</h2>
+      {related.length === 0 && <p>関連する用語はまだありません。</p>}
+    </div>
+    {related.length > 0 && (
+      <ul class="dd-index">
+        {related.map((term) => (
+          <li>
+            <a href={glossaryHref(term.id)}>{term.data.term}</a>
+            <p>{term.data.reading}</p>
+            <p>{term.data.short}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+  <section aria-labelledby="used-articles">
+    <div class="dd-prose">
+      <h2 id="used-articles">使われている記事</h2>
+      {faces.length === 0 && <p>公開中の記事では、まだ使われていません。</p>}
+    </div>
+    {faces.length > 0 && (
+      <FaceGrid layout="list">
+        {faces.map(({ face, index }) => (
+          <ArticleFace face={face} emphasis="default" headingLevel={3} index={index} />
+        ))}
+      </FaceGrid>
+    )}
+  </section>
+  <section class="dd-foot" aria-labelledby="term-sources">
+    <h2 id="term-sources">出典</h2>
+    {sources.length > 0 ? (
+      <ol>
+        {sources.map((source) => (
+          <li>
+            {source.data.title}
+            <span>{source.data.publisher}</span>
+            <time datetime={source.data.checkedAt}>確認日 {formatDate(source.data.checkedAt)}</time>
+            <a href={source.data.url}>{source.data.url}</a>
+          </li>
+        ))}
+      </ol>
+    ) : (
+      <p>出典はまだ登録されていません。</p>
+    )}
+  </section>
+  <CheckPanel
+    slot="check"
+    kind="toc"
+    title="目次"
+    items={toc.map((item, i) => ({ ...item, index: i + 1 }))}
+  />
+  {related.length > 0 && (
+    <CheckPanel
+      slot="check"
+      kind="terms"
+      title="関連する用語"
+      count={related.length}
+      items={related.map((term, i) => ({
+        label: term.data.term,
+        href: glossaryHref(term.id),
+        index: i + 1,
+      }))}
+    />
+  )}
+</ListLayout>

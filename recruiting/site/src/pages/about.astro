@@ -1,0 +1,33 @@
+---
+import SampleCopy from "@/components/common/SampleCopy.astro";
+import ListLayout from "@/layouts/ListLayout.astro";
+import { site } from "@/site.config";
+import { listCrumbs } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { href } from "@/utils/url";
+
+const frame = await frameProps("page");
+const lead = site.description;
+---
+
+<ListLayout
+  title="このサイトについて"
+  description={lead}
+  frame={frame}
+  page="page"
+  tab="サイト"
+  crumbs={listCrumbs([{ label: "このサイトについて" }])}
+  heading="このサイトについて"
+  lead={lead}
+>
+  <SampleCopy />
+  <div class="dd-prose">
+    <p>
+      {site.name}は、「{site.tagline}」をテーマにしたメディアの見本です。{site.organization.name}は、この見本のための架空の組織です。
+    </p>
+    <p>記事は、棚・目的・タグから探せます。条件や金額を書く記事には、確認した日と出典を付けます。</p>
+    <p>
+      <a href={href("disclosure/")}>広告と編集方針</a>、<a href={href("privacy/")}>プライバシー</a>、<a href={href("contact/")}>お問い合わせ</a>
+    </p>
+  </div>
+</ListLayout>

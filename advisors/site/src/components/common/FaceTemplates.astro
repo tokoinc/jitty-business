@@ -1,0 +1,37 @@
+---
+import type { FaceData, Format } from "@/design-sets/contract";
+import { ArticleFace } from "@/generated/ui";
+import { FORMAT_LABELS } from "@/utils/labels";
+
+const formats = [
+  "guide",
+  "tutorial",
+  "comparison",
+  "news",
+  "opinion",
+  "interview",
+] as const satisfies readonly Format[];
+const shelf = { id: "placeholder", label: "棚", slot: 1, number: "01" };
+
+function face(format: Format): FaceData {
+  return {
+    id: "placeholder",
+    href: "#",
+    title: "題名",
+    description: "",
+    format,
+    formatLabel: FORMAT_LABELS[format],
+    shelf,
+    date: "2026-01-01",
+    dateLabel: "2026.01.01",
+    steps: format === "tutorial" ? 1 : undefined,
+    compare: format === "comparison" ? { items: 1, axes: 1 } : undefined,
+  };
+}
+---
+
+{formats.map((format) => (
+  <template id={`face-${format}`}>
+    <ArticleFace face={face(format)} emphasis="default" headingLevel={2} />
+  </template>
+))}

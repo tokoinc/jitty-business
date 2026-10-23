@@ -1,0 +1,10 @@
+---
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+---
+
+<button type="button" class="dd-save" data-save={id} hidden aria-pressed="false">
+  あとで読む
+</button>

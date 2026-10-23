@@ -1,0 +1,18 @@
+---
+import type { CategoryMarkProps } from "../../contract";
+type Props = CategoryMarkProps;
+const { shelf, format, context } = Astro.props;
+---
+
+<p class={`bo-plate bo-plate--${context}`} style={`--slot:${shelf.slot}`} data-sig="s2">
+  <b class="bo-plate__num" aria-hidden="true">{shelf.number}</b>
+  <span class="bo-plate__name">
+    <span class="dd-visually-hidden">棚：</span>
+    <span data-field="shelf">{shelf.label}</span>
+  </span>
+  {format && (
+    <span class="bo-plate__format" aria-hidden="true" data-pagefind-ignore>
+      {format.label}
+    </span>
+  )}
+</p>

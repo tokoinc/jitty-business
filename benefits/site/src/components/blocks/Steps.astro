@@ -1,0 +1,29 @@
+---
+interface Item {
+  title: string;
+  body: string;
+}
+interface Props {
+  items: Item[];
+}
+const { items } = Astro.props;
+const articleId = Astro.locals.dd?.article.id ?? "unknown";
+if (!items?.length) throw new Error(`articles/${articleId}: <Steps> に items が必要`);
+items.forEach((item, i) => {
+  if (!item?.title || !item?.body) {
+    throw new Error(`articles/${articleId} の <Steps>: items[${i}] に title と body が必要`);
+  }
+});
+---
+
+<ol class="dd-steps">
+  {items.map((item, i) => (
+    <li>
+      <span class="dd-steps__mark" aria-hidden="true">
+        {i + 1}
+      </span>
+      <p class="dd-steps__title">{item.title}</p>
+      <p class="dd-steps__body">{item.body}</p>
+    </li>
+  ))}
+</ol>

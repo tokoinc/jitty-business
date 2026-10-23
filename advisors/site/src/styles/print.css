@@ -1,0 +1,16 @@
+@media print {
+  [data-sig="s1"] nav,
+  aside,
+  .dd-settings,
+  .dd-notice {
+    display: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background-image: none !important;
+  }
+}

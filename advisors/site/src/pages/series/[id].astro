@@ -1,0 +1,61 @@
+---
+import { ArticleFace, CheckPanel, FaceGrid } from "@/generated/ui";
+import ListLayout from "@/layouts/ListLayout.astro";
+import { toFace } from "@/utils/cards";
+import { getSiteData } from "@/utils/content";
+import { emptyTargets, episodesOf, listCrumbs, relatedTermLinks } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { articleHref } from "@/utils/url";
+
+export async function getStaticPaths() {
+  const d = await getSiteData();
+  return d.series.map((series) => ({ params: { id: series.id } }));
+}
+
+const id = Astro.params.id;
+if (!id) throw new Error("id がない");
+const d = await getSiteData();
+const series = d.series.find((item) => item.id === id);
+if (!series) throw new Error(`連載がない: ${id}`);
+const episodes = episodesOf(d, id);
+const planned = series.data.total
+  ? `全${series.data.total}回の予定です。公開中の回だけを、回の順に並べます。`
+  : "公開中の回だけを、回の順に並べます。";
+const frame = await frameProps("list");
+---
+
+<ListLayout
+  title={series.data.title}
+  description={series.data.description}
+  frame={frame}
+  tab="連載"
+  crumbs={listCrumbs([{ label: series.data.title }])}
+  heading={series.data.title}
+  lead={`${series.data.description}${planned}`}
+  faces={episodes.length > 0 ? undefined : []}
+  terms={relatedTermLinks(d, episodes)}
+  empty={emptyTargets(d)}
+>
+  {episodes.length > 0 && (
+    <FaceGrid layout="list">
+      {episodes.map((article, i) => (
+        <div class="dd-episode">
+          <p class="dd-kicker">第{article.data.series?.order}回</p>
+          <ArticleFace face={toFace(article, d)} emphasis="default" headingLevel={2} index={i + 1} />
+        </div>
+      ))}
+    </FaceGrid>
+  )}
+  {episodes.length > 0 && (
+    <CheckPanel
+      slot="check"
+      kind="series"
+      title="回"
+      items={episodes.map((article) => ({
+        label: `第${article.data.series?.order}回　${article.data.title}`,
+        href: articleHref(article.id),
+        index: article.data.series?.order,
+      }))}
+    />
+  )}
+</ListLayout>

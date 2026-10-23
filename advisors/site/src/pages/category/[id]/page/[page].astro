@@ -1,0 +1,23 @@
+---
+import ShelfArticles from "@/components/lists/ShelfArticles.astro";
+import { site } from "@/site.config";
+import { getSiteData } from "@/utils/content";
+import { articlesOnShelf, shelvesWithArticles } from "@/utils/lists";
+import { pageSlice } from "@/utils/paginate";
+
+export async function getStaticPaths() {
+  const d = await getSiteData();
+  return shelvesWithArticles(d).flatMap((shelf) => {
+    const { total } = pageSlice(articlesOnShelf(d, shelf.id), 1, site.articlesPerPage);
+    return Array.from({ length: Math.max(0, total - 1) }, (_, i) => ({
+      params: { id: shelf.id, page: String(i + 2) },
+    }));
+  });
+}
+
+const id = Astro.params.id;
+const page = Number(Astro.params.page);
+if (!id) throw new Error("id がない");
+---
+
+<ShelfArticles id={id} page={page} />

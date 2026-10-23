@@ -1,0 +1,51 @@
+:root[data-inspect] body {
+  filter: grayscale(1);
+}
+:root[data-inspect] [data-logo] {
+  visibility: hidden;
+}
+:root[data-inspect] [data-photo] {
+  background: #bdbdbd !important;
+}
+:root[data-inspect] [data-photo] img {
+  opacity: 0 !important;
+}
+:root[data-inspect="L2"] body *,
+:root[data-inspect="L3"] body * {
+  text-shadow: none !important;
+  color: transparent !important;
+  text-decoration-line: line-through !important;
+  text-decoration-color: #9a9a9a !important;
+  text-decoration-thickness: 0.72em !important;
+  text-decoration-skip-ink: none !important;
+}
+:root[data-inspect="L3"] {
+  --c-bg: #fff;
+  --c-surface: #fff;
+  --c-fill: #fff;
+  --c-face: #fff;
+  --c-panel: #fff;
+  --c-band: #fff;
+  --c-shade: #fff;
+  --c-on-panel: #1d232b;
+}
+:root[data-inspect="L3"] [data-photo] {
+  background: #fff !important;
+}
+.dd-inspect {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 200;
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background: #22262c;
+  color: #fff;
+  font: 12px/1.4 system-ui;
+  filter: none;
+}
+.dd-inspect button[aria-pressed="true"] {
+  background: #fff;
+  color: #22262c;
+}

@@ -1,0 +1,17 @@
+---
+interface Props {
+  items: { q: string; a: string }[];
+}
+const { items } = Astro.props;
+const articleId = Astro.locals.dd?.article.id ?? "unknown";
+if (!items?.length) throw new Error(`articles/${articleId}: <Faq> に items が必要`);
+---
+
+<div class="dd-faq">
+  {items.map((item) => (
+    <details>
+      <summary>{item.q}</summary>
+      <p>{item.a}</p>
+    </details>
+  ))}
+</div>

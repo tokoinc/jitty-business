@@ -1,0 +1,6 @@
+---
+const articleId = Astro.locals.dd?.article.id ?? "unknown";
+throw new Error(
+  `articles/${articleId}: <DecisionBrief> は本文に書かない。論点帯は frontmatter の brief から出す`,
+);
+---

@@ -1,0 +1,14 @@
+---
+const { id } = Astro.props as { id: string };
+const ctx = Astro.locals.dd!;
+const n = ctx.article.data.sources.findIndex((s) => s.id === id) + 1;
+if (n === 0) {
+  throw new Error(`articles/${ctx.article.id} の <Cite id="${id}">: frontmatter の sources に宣言する`);
+}
+---
+
+<sup class="dd-cite">
+  <a href={`#src-${id}`} aria-label={`出典${n}`}>
+    [{n}]
+  </a>
+</sup>

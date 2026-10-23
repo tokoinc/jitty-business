@@ -1,0 +1,76 @@
+{
+  "set": "spread",
+  "finish": "real",
+  "keyboard": {
+    "first": "skip",
+    "outline": {
+      "outlineStyle": "solid",
+      "outlineWidth": "3px"
+    },
+    "order": [
+      "a:Decision Desk 仕事とお",
+      "a:ホーム",
+      "a:仕事",
+      "a:ビジネス",
+      "a:お金",
+      "input:",
+      "button:検索",
+      "a:知りたい"
+    ]
+  },
+  "zoom200": [
+    {
+      "id": "home",
+      "page": false
+    },
+    {
+      "id": "list",
+      "page": false
+    },
+    {
+      "id": "search",
+      "page": false
+    },
+    {
+      "id": "article",
+      "page": false
+    },
+    {
+      "id": "compare",
+      "page": false
+    }
+  ],
+  "width320": [
+    {
+      "id": "home",
+      "page": false
+    },
+    {
+      "id": "list",
+      "page": false
+    },
+    {
+      "id": "search",
+      "page": false
+    },
+    {
+      "id": "article",
+      "page": false
+    },
+    {
+      "id": "compare",
+      "page": false
+    }
+  ],
+  "forcedColors": {
+    "main": true,
+    "h1": 1,
+    "color": "rgb(0, 0, 0)",
+    "landmarks": 8
+  },
+  "reducedMotion": {
+    "matches": true,
+    "duration": "1e-05s",
+    "transition": "1e-05s"
+  }
+}

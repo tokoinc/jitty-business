@@ -1,0 +1,52 @@
+---
+import ListLayout from "@/layouts/ListLayout.astro";
+import { getSiteData } from "@/utils/content";
+import {
+  articlesOnShelf,
+  assertListPage,
+  emptyTargets,
+  listCrumbs,
+  pagedFaces,
+  relatedTermLinks,
+  shelfCheck,
+  shelfMark,
+} from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { categoryHref, href } from "@/utils/url";
+
+interface Props {
+  id: string;
+  page: number;
+}
+const { id, page } = Astro.props;
+const d = await getSiteData();
+const shelf = d.shelves.find((item) => item.id === id);
+if (!shelf) throw new Error(`棚がない: ${id}`);
+const articles = articlesOnShelf(d, id);
+const { faces, total } = pagedFaces(articles, d, page);
+assertListPage(page, total, shelf.data.label);
+const frame = await frameProps("list", { shelf: id });
+const crumbs =
+  page === 1
+    ? listCrumbs([{ label: "棚", href: href("category/") }, { label: shelf.data.label }])
+    : listCrumbs([
+        { label: "棚", href: href("category/") },
+        { label: shelf.data.label, href: categoryHref(id) },
+        { label: `${page}ページ目` },
+      ]);
+---
+
+<ListLayout
+  title={page === 1 ? shelf.data.label : `${shelf.data.label}（${page}ページ目）`}
+  description={shelf.data.description}
+  frame={frame}
+  crumbs={crumbs}
+  heading={shelf.data.label}
+  lead={shelf.data.description}
+  shelf={shelfMark(shelf)}
+  faces={faces}
+  pager={{ base: `category/${id}/`, page, total }}
+  shelfInfo={shelfCheck(d, shelf)}
+  terms={relatedTermLinks(d, articles, [id])}
+  empty={emptyTargets(d, id)}
+/>

@@ -1,0 +1,35 @@
+---
+import ListLayout from "@/layouts/ListLayout.astro";
+import { getSiteData } from "@/utils/content";
+import { assertListPage, emptyTargets, listCrumbs, pagedFaces, relatedTermLinks } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { href } from "@/utils/url";
+
+interface Props {
+  page: number;
+}
+const { page } = Astro.props;
+const d = await getSiteData();
+const { faces, total } = pagedFaces(d.articles, d, page);
+assertListPage(page, total, "記事一覧");
+const frame = await frameProps("list");
+const lead = "公開している記事を、新しい順に並べています。";
+---
+
+<ListLayout
+  title={page === 1 ? "記事" : `記事（${page}ページ目）`}
+  description={lead}
+  frame={frame}
+  tab="記事"
+  crumbs={listCrumbs(
+    page === 1
+      ? [{ label: "記事" }]
+      : [{ label: "記事", href: href("articles/") }, { label: `${page}ページ目` }],
+  )}
+  heading="記事"
+  lead={lead}
+  faces={faces}
+  pager={{ base: "articles/", page, total }}
+  terms={relatedTermLinks(d, d.articles)}
+  empty={emptyTargets(d)}
+/>

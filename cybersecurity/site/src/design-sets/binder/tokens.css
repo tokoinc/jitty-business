@@ -1,0 +1,32 @@
+/* src/design-sets/binder/tokens.css */
+:root {
+  color-scheme: light dark;
+  /* 意味トークン：light-dark(light, dark) */
+  --c-bg: light-dark(#ECE9E2, #121418);
+  --c-surface: light-dark(#FBFAF7, #1B1F26);
+  --c-fill: light-dark(#F1EEE7, #232830);
+  --c-ink: light-dark(#1D232B, #E8EAED);
+  --c-ink-soft: light-dark(#545C66, #A9B0BA);
+  --c-line: light-dark(#1D232B, #C9CED6);
+  --c-hair: light-dark(#C8C3B8, #3A414C);
+  --c-accent: light-dark(#3D55D6, #8FA2FF);
+  --c-on-accent: light-dark(#FFFFFF, #10131A);
+  --c-focus: light-dark(#3D55D6, #8FA2FF);
+  --shelf-hue-1: 40; --shelf-hue-2: 150; --shelf-hue-3: 260; --shelf-hue-4: 330; --shelf-hue-5: 200;
+  /* 幾何トークン（manifest.geometry と一致） */
+  --g-line: 1.5px;
+  --g-protrude: 0.75rem;
+  --g-tab-h: 1.75rem;
+  --g-tab-shoulder: 0.625rem;
+  --g-radius: 0;
+  --g-step: 5;
+  --g-gap: 1.5rem;
+  --g-rail: 15rem;
+  --g-flags: 17.5rem;
+  /* 日付の爪。表示は 2026.10.04（見本の「10.04」より長い） */
+  --g-binder-date: 5.75rem;
+  /* 書体 */
+  --f-sans: system-ui, -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, "Noto Sans JP", sans-serif;
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }

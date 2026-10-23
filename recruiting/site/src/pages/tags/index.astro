@@ -1,0 +1,42 @@
+---
+import ListLayout from "@/layouts/ListLayout.astro";
+import { getSiteData } from "@/utils/content";
+import { articlesForTag, emptyTargets, listCrumbs, relatedTermLinks, tagRows } from "@/utils/lists";
+import { frameProps } from "@/utils/nav";
+import { tagHref } from "@/utils/url";
+
+const d = await getSiteData();
+const rows = tagRows(d.tags);
+const frame = await frameProps("list");
+const lead = "タグを五十音順に並べています。";
+---
+
+<ListLayout
+  title="タグ"
+  description={lead}
+  frame={frame}
+  tab="タグ"
+  crumbs={listCrumbs([{ label: "タグ" }])}
+  heading="タグ"
+  lead={lead}
+  faces={rows.length === 0 ? [] : undefined}
+  terms={relatedTermLinks(d, d.articles)}
+  empty={emptyTargets(d)}
+>
+  {rows.map((group) => (
+    <section aria-labelledby={`kana-${group.row}`}>
+      <h2 id={`kana-${group.row}`} class="dd-row">
+        {group.row}行
+      </h2>
+      <ul class="dd-index">
+        {group.tags.map((tag) => (
+          <li>
+            <a href={tagHref(tag.id)}>{tag.data.label}</a>
+            <p>{tag.data.reading}</p>
+            <p>{articlesForTag(d, tag.id).length}件</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</ListLayout>
