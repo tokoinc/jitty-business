@@ -14,6 +14,11 @@ export default defineConfig({
   projects: [
     { name: "desktop", testDir: "tests/e2e", use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 900 } } },
     { name: "mobile", testDir: "tests/e2e", use: { ...devices["Pixel 7"] } },
-    { name: "identity", testDir: "tests/identity", use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 900 } } },
+    // 識別検査は .dd-inspect を隠す style を差し込む。ページの CSP（meta）が止めるので、このプロジェクトだけ外して開く
+    {
+      name: "identity",
+      testDir: "tests/identity",
+      use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 900 }, bypassCSP: true },
+    },
   ],
 });
