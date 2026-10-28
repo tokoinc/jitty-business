@@ -8,5 +8,5 @@ function pick<T extends string>(name: string, value: string, allowed: readonly T
   return value as T;
 }
 
-export const set: SetId = pick("DD_DESIGN_SET", process.env.DD_DESIGN_SET ?? "binder", SET_IDS);
+export const set: SetId = pick("DD_DESIGN_SET", process.env.DD_DESIGN_SET ?? "tally", SET_IDS);
 export const finish: Finish = pick("DD_FINISH", process.env.DD_FINISH ?? "flat", FINISHES);

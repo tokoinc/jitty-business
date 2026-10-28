@@ -24,12 +24,6 @@ function currentId(): string | null {
 function apply() {
   const id = currentId();
   for (const sel of [
-    ".bi-flag--toc a",
-    ".bi-checkrow a",
-    ".bo-meter--toc a",
-    ".bo-checkrow a",
-    ".sp-spine__item--toc a",
-    ".sp-checkrow a",
     ".ta-panel--toc a",
     ".ta-checkrow a",
     ".an-panel--toc a",

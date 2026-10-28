@@ -1,15 +1,12 @@
 // finish-real.css のソースを検査する（ADR-0010）。npm run build の先頭で呼ぶ。
 // 寸法を変えるプロパティと、許されない transform が無いかを見る。
-// 引数が無ければ全セット。Binder だけ、検索条件の 5 度と perspective を要する。
+// 引数が無ければ全セット。傾き（rotate・perspective・transform-origin）は、どのセットにも許さない。
 import { readFileSync } from "node:fs";
 import { gzipSync } from "node:zlib";
 
 const files = process.argv.slice(2).length
   ? process.argv.slice(2)
   : [
-      "src/design-sets/binder/finish-real.css",
-      "src/design-sets/board/finish-real.css",
-      "src/design-sets/spread/finish-real.css",
       "src/design-sets/tally/finish-real.css",
       "src/design-sets/answer/finish-real.css",
       "src/design-sets/figure/finish-real.css",
@@ -17,7 +14,7 @@ const files = process.argv.slice(2).length
     ];
 
 const errors = [];
-const seen = { decls: 0, tilt: 0, blur: 0, perspective: 0 };
+const seen = { decls: 0, blur: 0 };
 
 function splitSelectors(selector) {
   const parts = [];
@@ -44,11 +41,6 @@ function splitSelectors(selector) {
   }
   parts.push(selector.slice(start).trim());
   return parts.filter(Boolean);
-}
-
-function hasClass(selector, className) {
-  const re = new RegExp(`\\.${className}(?![\\w-])`);
-  return re.test(selector);
 }
 
 function banned(prop) {
@@ -82,23 +74,16 @@ function checkTransform(selector, value) {
   const v = value.replace(/!important/g, "").trim();
   if (v === "none") return;
   if (/:hover\b|:active\b/.test(selector)) return;
-  if (hasClass(selector, "bi-drawer__group") && v === "rotateX(5deg)") return;
   errors.push(`transform が許されない: ${selector} { transform: ${value} }`);
 }
 
 function checkDecl(selector, prop, value) {
   seen.decls += 1;
-  if (prop === "transform" && value.includes("rotateX(5deg)")) seen.tilt += 1;
   if (prop === "backdrop-filter") seen.blur += 1;
-  if (prop === "perspective") seen.perspective += 1;
   if (banned(prop)) errors.push(`禁止プロパティ: ${selector} { ${prop}: ${value.trim()} }`);
   if (prop === "transform") checkTransform(selector, value);
-  if (prop === "transform-origin" && !hasClass(selector, "bi-drawer__group")) {
-    errors.push(`transform-origin が許されない: ${selector}`);
-  }
-  if (prop === "perspective" && !hasClass(selector, "bi-drawer")) {
-    errors.push(`perspective が許されない: ${selector}`);
-  }
+  if (prop === "transform-origin") errors.push(`transform-origin が許されない: ${selector}`);
+  if (prop === "perspective") errors.push(`perspective が許されない: ${selector}`);
 }
 
 function declarations(body) {
@@ -204,25 +189,17 @@ let failed = false;
 for (const file of files) {
   errors.length = 0;
   seen.decls = 0;
-  seen.tilt = 0;
   seen.blur = 0;
-  seen.perspective = 0;
   const css = readFileSync(file, "utf8");
   const gzip = gzipSync(Buffer.from(css));
   console.log(`${file}: gzip ${gzip.length} bytes（目安 8192）`);
   if (gzip.length > 8192) errors.push(`gzip が 8KB を超えた: ${gzip.length}`);
   const stripped = css.replace(/\/\*[\s\S]*?\*\//g, "");
   walk(stripped, 0, stripped.length);
-  const binder = file.includes("/binder/") || file.includes("\\binder\\");
   console.log(
-    `  宣言 ${seen.decls}、tilt ${seen.tilt}、backdrop-filter ${seen.blur}、perspective ${seen.perspective}`,
+    `  宣言 ${seen.decls}、backdrop-filter ${seen.blur}`,
   );
   if (seen.blur < 1) errors.push("backdrop-filter を読み取れていない");
-  if (binder) {
-    if (seen.tilt < 1 || seen.perspective < 1) errors.push("Binder の傾きを読み取れていない");
-  } else if (seen.tilt !== 0 || seen.perspective !== 0) {
-    errors.push("Binder 以外のセットに傾きがある");
-  }
   if (errors.length) {
     failed = true;
     for (const error of errors) console.error(`  ${error}`);

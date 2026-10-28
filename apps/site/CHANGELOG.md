@@ -4,6 +4,7 @@
 
 ## 未リリース（2026-10-28）
 
+- Binder・Board・Spread を削除した。セットは Tally・Answer・Figure・Inline の4つで、既定は Tally。3セットの見本 HTML（`reference/`）、3セット固有の ADR（0006〜0008）、3セットの記録（構造・a11y・性能・寸法・質感の表）、判定前だった識別検査の回答用紙と記録も消した。`check-finish-props` は、どのセットにも傾き（rotate・perspective・transform-origin）を許さない。`scripts/shoot.mjs` は実装だけを撮る。
 - セットを4つ足した。Tally（マス目）、Answer（問いと答えの札）、Figure（大きな数字と太い罫）、Inline（文中の小さな図）。どれも flat と real を持ち、見出し・landmark・リンク・検索の本文は既存のセットと同じ。
 - セットと質感を、サイトごとに `sites/<slug>/site.json` の `design` で選べるようにした。`DD_DESIGN_SET`・`DD_FINISH` があればそちらを使う。
 - `site.json` の `base` で、サイトを business.jitty.jp の直下（`/`）にも置けるようにした。

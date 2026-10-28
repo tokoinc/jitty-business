@@ -1,18 +1,18 @@
 # 1.3 完成の定義
 
-工程20c の時点。根拠はパスか、工程の記録。人の判定が残るものは ⏳。
+工程20c の時点。根拠はパスか、工程の記録。人の判定が残るものは ⏳。2026-10-28 に、セットを Tally・Answer・Figure・Inline の4つに入れ替えた（Binder・Board・Spread は削除）。セットに関わる行は、4セットで確かめ直した。
 
 ## 識別性
 
 | 項目 | 状態 | 根拠 |
 | --- | --- | --- |
-| 識別検査 A〜F に合格し、記録がある | ⏳ 人 | 画像と回答用紙は `docs/identity/kit/`。結果の表は `docs/identity/2026-10-08-impl.md`（判定待ち）。見本の回は `docs/identity/2026-10-05-mock.md`（未実施） |
+| 識別検査 A〜F に合格し、記録がある | ⏳ 人 | 回答用紙はまだ作っていない（`scripts/build-identity-kit.mjs`）。結果の表は `docs/identity/2026-10-28-impl.md`（判定前） |
 | L2 で4画面が同じ媒体に見え、汎用テンプレートと混同されない | ⏳ 人 | L2 は `docs/identity/{set}-{finish}/screen-*-L2.png`。検査A・E |
 | 9枠のすべてに、そのセットの原形の形がある | ✅ | 各セットの README の9枠。4画面で宣言した枠が空でないことは `tests/identity/signature.spec.ts` |
-| 形の予約を守っている | ✅ | Binder の横向き付箋は確認票と条件・根拠。商品枠は文字ラベル（工程7b）。広告に `data-sig` は付いていない |
+| 形の予約を守っている | ✅ | 各セットの README の「形の予約」（Tally のマスは数と進み具合と現在地、Answer の判定の札は条件と答え、Figure の朱の数字は記事の数と締切、Inline の小さな図は数と進み具合と範囲）。商品枠は文字ラベル（工程7b）。広告に `data-sig` は付いていない |
 | 375px でも原形と3領域が残り、索引・本文・条件へ届く | ✅ 自動 / ⏳ 見た目 | 375px の L2 を撮影。E2E は索引の開閉と、目次・条件・根拠への移動（工程20b）。形が残るかの最終判断は検査E |
 | 陰性対照と同じ構図が無い。セット間は 2.9 の差 | ⏳ 人 | 陰性対照は `docs/identity/negative-control/`。検査A〜D に混ぜてある |
-| 形が読みやすさ・条件の発見・操作を下げていない（検査F） | ⏳ 人 | `docs/identity/kit/F-*.md` |
+| 形が読みやすさ・条件の発見・操作を下げていない（検査F） | ⏳ 人 | 検査Fの回答用紙（`scripts/build-identity-kit.mjs` で作る） |
 | flat と real で L1・L2 の配置と輪郭が一致する | ✅ 寸法 / ⏳ 見た目 | `tests/identity/finish.spec.ts` は `[data-sig]` の差が 1px 以内。見た目は `docs/identity/{set}-{finish}/` |
 | real でも forced-colors・印刷で読みやすい表示に戻る | ✅ | `finish.spec.ts`。すりガラスと影が外れる。`a11y-record` は forced-colors でも main と h1 が残る |
 
@@ -63,7 +63,7 @@
 
 | 条件 | 状態 |
 | --- | --- |
-| `npm run verify` | ✅ lint エラー 0、単体 41、build の check-output OK（識別検査モードなし）、E2E 70 passed / 2 skipped |
-| 6通りの check-output | ✅ `DD_INSPECT=1` の6通りと、検査モードなしの binder-flat / board-real / spread-real |
-| 3セットの構造比較 | ✅ 工程20b。`docs/qa/structure-*.json` |
+| `npm run verify` | ✅ lint エラー 0、単体 41、build の check-output OK（識別検査モードなし）、E2E 70 passed / 2 skipped。2026-10-28 の4セットでは、lint エラー 0、単体 53、E2E は各セット 76 passed / 2 skipped |
+| 8通りの check-output | ✅ 2026-10-28。`DD_INSPECT=1` の8通り（4セット × flat・real）と、検査モードなしの4セットの flat |
+| 4セットの構造比較 | ✅ 2026-10-28。`docs/qa/structure-*.json`（`tests/e2e/structure.spec.ts`） |
 | 性能・a11y・識別検査の記録と、1.3 | 記録はある。上の ❌ と ⏳ が残る |

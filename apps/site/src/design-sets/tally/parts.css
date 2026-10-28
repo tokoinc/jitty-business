@@ -1,6 +1,6 @@
 /* Tally のフラット。原形はマス目（1マス＝1つ）。数・進み具合・現在地を、埋めたマスの数と位置で示す。
    探す領域は濃い帯、読む領域は白い面、確かめる領域は角にマスを持つ箱。
-   幅の切替は html の dd-page を見る（Binder と同じ）。 */
+   幅の切替は html の dd-page を見る。 */
 @layer components {
   html:has(.ta-frame) {
     container-type: inline-size;

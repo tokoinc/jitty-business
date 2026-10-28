@@ -4,7 +4,7 @@
   "tagline": "人が集まりにくい業種の採用を、手段から確かめる",
   "description": "介護・建設の採用、スキマバイトの活用、新卒の早期採用など、中小企業の採用手段と条件を整理するメディア。",
   "design": {
-    "designSet": "binder",
+    "designSet": "tally",
     "finish": "flat"
   }
 }

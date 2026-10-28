@@ -3,9 +3,6 @@ import { dateTimeAttr } from "./dates";
 
 /** 画面の最上部の色。theme-color は選んでいるセットとそろえる（多くは --c-bg、上に濃い帯を置く Tally は --c-band） */
 const themeColorBySet = {
-  binder: { light: "#ECE9E2", dark: "#121418" },
-  board: { light: "#E6E9EE", dark: "#0E131B" },
-  spread: { light: "#F4EEE4", dark: "#19150F" },
   tally: { light: "#0C2B22", dark: "#06110D" },
   answer: { light: "#FFFFFF", dark: "#0F1115" },
   figure: { light: "#FFFFFF", dark: "#0D0D0F" },

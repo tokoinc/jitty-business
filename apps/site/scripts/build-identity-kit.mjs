@@ -7,7 +7,9 @@ import { copyFile, mkdir, readdir, readFile, writeFile } from "node:fs/promises"
 import path from "node:path";
 import { chromium } from "@playwright/test";
 
-const sets = ["binder", "board", "spread"];
+const sets = ["tally", "answer", "figure", "inline"];
+const labels = { tally: "Tally", answer: "Answer", figure: "Figure", inline: "Inline" };
+const setNames = sets.map((set) => labels[set]).join(" / ");
 const finishes = ["flat", "real"];
 const screens = ["home", "list", "search", "article"];
 const root = "docs/identity";
@@ -152,7 +154,7 @@ for (const finish of finishes) {
     path.join(kit, `${id}.md`),
     sheet(
       `検査B 部品 ${id}`,
-      "各画像が Binder / Board / Spread のどれか、または対照かを書いてください。部品は見出し枠、記事面、検索面、確認票、補足面、索引です。",
+      `各画像が ${setNames} のどれか、または対照かを書いてください。部品は見出し枠、記事面、検索面、確認票、補足面、索引です。`,
       "6部品中5部品以上で、判定者の過半数が正しいセットを選ぶ。",
       rows,
     ),
@@ -178,7 +180,7 @@ for (const src of takeNegatives(2)) cItems.push({ src, kind: "陰性対照", not
     sheet(
       "検査C セット間",
       "ホームと記事を、セットが違うものとして分けてください。違いは位置・境界・張り出しなどの形の言葉で書いてください。L3 はフラットの build だけを使います（輪郭は質感で変わらないため）。",
-      "全判定者が3セットを区別でき、違いを形の言葉で説明できる。",
+      `全判定者が${sets.length}セットを区別でき、違いを形の言葉で説明できる。`,
       rows,
     ),
   );
@@ -204,7 +206,7 @@ for (const finish of finishes) {
     path.join(kit, `${id}.md`),
     sheet(
       `検査D 縮小 ${id}`,
-      "縮小してぼかした画面のセットを、Binder / Board / Spread または対照で答えてください。",
+      `縮小してぼかした画面のセットを、${setNames} または対照で答えてください。`,
       "判定者の80%以上がセットを当てる。",
       rows,
     ),
@@ -300,13 +302,13 @@ await writeFile(
     "",
     "`answers.md` は答えです。判定者には渡さない。",
     "",
-    "判定者は5名以上、うち制作者以外を3名以上。集めた結果は `docs/identity/2026-10-08-impl.md` の表に書く。",
+    "判定者は5名以上、うち制作者以外を3名以上。集めた結果は `docs/identity/2026-10-28-impl.md` の表に書く。",
     "",
     "検査Cの L3 はフラットの build だけです。リアルと同じ輪郭になるため、質感ごとの L3 は撮りません。",
     "",
     "検査Fは作業の確認です。セットを当てる検査ではないので、陰性対照は混ぜていません。",
     "",
-    `回: ${rounds.join("、")}、B-flat、B-real、C、D-flat、D-real、E-01〜E-06、F-01〜F-06`,
+    `回: ${rounds.join("、")}、B-flat、B-real、C、D-flat、D-real、E-01〜${rounds.at(-1).replace("A-", "E-")}、F-01〜${rounds.at(-1).replace("A-", "F-")}`,
     "",
   ].join("\n"),
 );

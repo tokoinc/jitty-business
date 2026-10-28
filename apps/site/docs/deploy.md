@@ -42,7 +42,7 @@ Node.js は `.nvmrc` の版（22.12 以上の偶数版）。
 npm run build:demo
 ```
 
-`dist-demo/demo/` に、7セット × 2質感と、索引の `index.html` ができる。すべて noindex。Pagefind・sitemap・RSS は各デモの中だけにあり、本番の `dist/` には混ざらない。識別検査モード（`?inspect=L2`）はデモの build にだけ入る。
+`dist-demo/demo/` に、4セット × 2質感と、索引の `index.html` ができる。すべて noindex。Pagefind・sitemap・RSS は各デモの中だけにあり、本番の `dist/` には混ざらない。識別検査モード（`?inspect=L2`）はデモの build にだけ入る。
 
 置く場所は本番とは別（デモ用のサブドメインなど）にする。本番のサイトの公開ディレクトリに `dist-demo` を混ぜない。
 

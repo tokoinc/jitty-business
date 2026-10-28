@@ -1,24 +1,25 @@
 // モバイル Lighthouse を3回測り、中央値を JSON で書く。
 // 前提: http://localhost:4321 で preview が動いている。
-//   node scripts/record-performance.mjs binder flat
+//   node scripts/record-performance.mjs tally flat
 
 import { spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
-import { extname, join, relative } from "node:path";
+import { createRequire } from "node:module";
+import { dirname, extname, join, relative } from "node:path";
 import { chromium } from "@playwright/test";
 
 // 引数はファイル名と Lighthouse の引数に入る。許可した値だけを通す。
 const set = process.argv[2];
 const finish = process.argv[3];
-if (!["binder", "board", "spread"].includes(set) || !["flat", "real"].includes(finish)) {
-  console.error("使い方: node scripts/record-performance.mjs <binder|board|spread> <flat|real>");
+if (!["tally", "answer", "figure", "inline"].includes(set) || !["flat", "real"].includes(finish)) {
+  console.error("使い方: node scripts/record-performance.mjs <tally|answer|figure|inline> <flat|real>");
   process.exit(1);
 }
 
-// shell を通さずに起動する（パスの空白や記号を解釈させない）
-const LIGHTHOUSE = join("node_modules", "lighthouse", "cli", "index.js");
+// shell を通さずに起動する（パスの空白や記号を解釈させない）。依存はルートの node_modules にある（npm workspaces）
+const LIGHTHOUSE = join(dirname(createRequire(import.meta.url).resolve("lighthouse/package.json")), "cli", "index.js");
 const lighthouse = (args) => spawnSync(process.execPath, [LIGHTHOUSE, ...args], { encoding: "utf8" });
 
 const pages = [

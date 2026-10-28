@@ -11,7 +11,6 @@ MIT License。全文はリポジトリ直下の LICENSE。
 フォントファイルは同梱していない。各セットの `tokens.css` が、端末に入っている書体を指名する。
 
 - ゴシック: system-ui、Hiragino Sans、Hiragino Kaku Gothic ProN、Yu Gothic UI、Yu Gothic、Meiryo、Noto Sans JP
-- 明朝（Spread の `--f-serif`）: Hiragino Mincho ProN、Yu Mincho、Noto Serif JP、Noto Serif CJK JP
 - UD ゴシック（Answer の `--f-sans` と `--f-num` の先頭）: BIZ UDPGothic（BIZ UDPゴシック）
 - 数字（`--f-num`）
   - Tally: Bahnschrift、DIN Alternate、Roboto、Helvetica Neue、Arial

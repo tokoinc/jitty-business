@@ -40,7 +40,7 @@ dist/                   build:all の出力（git の対象外）。直下のサ
 
 ## サイトごとのデザイン
 
-デザイン（セット）は、サイトごとに `sites/<slug>/site.json` の `design` で選びます。いまはどのサイトも `binder` です。
+デザイン（セット）は、サイトごとに `sites/<slug>/site.json` の `design` で選びます。いまはどのサイトも `tally`（C）です。
 
 ```json
 "design": { "designSet": "tally", "finish": "flat" }
@@ -48,15 +48,12 @@ dist/                   build:all の出力（git の対象外）。直下のサ
 
 | `designSet` | デザイン | 元にした案 |
 | --- | --- | --- |
-| `binder`（既定） | タブ付きの台紙 | — |
-| `board` | 太い輪郭の差し替えパネル | — |
-| `spread` | 曲面で切った見開き | — |
-| `tally` | マス目。数・進み具合・現在地を埋めたマスで示す | C（Tally） |
+| `tally`（既定） | マス目。数・進み具合・現在地を埋めたマスで示す | C（Tally） |
 | `answer` | 問いと答えの札（Q・A・◯・△・✕・＝） | D（Answer） |
 | `figure` | 大きな数字と太い罫 | E（Figure） |
 | `inline` | 文中の小さな図。控えめ | F（Inline） |
 
-`finish` は `flat`（既定）か `real`（影と光を重ねる）。記事・URL・見出しは、どのデザインでも同じです。変えたら、そのサイトを build し直して配ります。7つのデザインを同じ記事で見比べるときは `npm run site -- advisors build:demo`（`apps/site/dist-demo/demo/index.html`）。各デザインの形は `apps/site/README.md` の「セットと質感」と、`apps/site/src/design-sets/<id>/README.md` にあります。
+`finish` は `flat`（既定）か `real`（影と光を重ねる）。記事・URL・見出しは、どのデザインでも同じです。変えたら、そのサイトを build し直して配ります。4つのデザインを同じ記事で見比べるときは `npm run site -- advisors build:demo`（`apps/site/dist-demo/demo/index.html`）。各デザインの形は `apps/site/README.md` の「セットと質感」と、`apps/site/src/design-sets/<id>/README.md` にあります。
 
 ## 直下とサブディレクトリ
 

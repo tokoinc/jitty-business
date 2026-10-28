@@ -47,23 +47,6 @@ test("質感で寸法が変わらない", async ({ page }) => {
 });
 
 const paintedBySet: Record<string, { glass: string; body: string; painted: string }> = {
-  binder: {
-    glass: ".bi-rail, .bi-flag, .bi-drawer__group, .bi-face--opinion .bi-face__slip",
-    body: ".bi-sheet, .bi-face",
-    painted: ".bi-rail, .bi-flag, .bi-drawer__group, .bi-face--opinion .bi-face__slip, .bi-sheet, .bi-face",
-  },
-  board: {
-    glass: ".bo-meter, .bo-query__field",
-    body: ".bo-panel, .bo-face",
-    painted: ".bo-board, .bo-meter, .bo-query__field, .bo-panel, .bo-face",
-  },
-  spread: {
-    glass:
-      ".sp-stamps .sp-stamp-link:not([aria-current='page']), .sp-tabstrip .sp-stamp-link:not([aria-current='page']), .sp-spine, .sp-questions--row .sp-q",
-    body: ".sp-face, .sp-nextface",
-    painted:
-      ".sp-stamps .sp-stamp-link, .sp-tabstrip .sp-stamp-link, .sp-spine, .sp-questions--row .sp-q, .sp-face, .sp-nextface",
-  },
   tally: {
     glass: ".ta-panel, .ta-filters__group, .ta-checkrow a",
     body: ".ta-main, .ta-face",

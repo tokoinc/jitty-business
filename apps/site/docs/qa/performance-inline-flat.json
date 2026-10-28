@@ -1,0 +1,140 @@
+{
+  "set": "inline",
+  "finish": "flat",
+  "measuredAt": "2026-10-28T21:54:23.271Z",
+  "node": "v22.22.0",
+  "lighthouse": "13.5.0",
+  "chrome": "/opt/pw-browsers/chromium（--no-sandbox を足すラッパー経由）",
+  "formFactor": "mobile",
+  "throttling": "simulate",
+  "runs": 3,
+  "budgets": {
+    "css": 11031,
+    "maxJs": 3983
+  },
+  "pages": [
+    {
+      "id": "home",
+      "scores": [
+        {
+          "performance": 1,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1231.4859000000001,
+          "cls": 0,
+          "tbt": 0
+        },
+        {
+          "performance": 1,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1377.065,
+          "cls": 0,
+          "tbt": 0
+        },
+        {
+          "performance": 1,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1389.8980000000001,
+          "cls": 0,
+          "tbt": 0
+        }
+      ],
+      "median": {
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 0.66,
+        "lcp": 1377.065,
+        "cls": 0,
+        "tbt": 0
+      }
+    },
+    {
+      "id": "article",
+      "scores": [
+        {
+          "performance": 1,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1235.7283,
+          "cls": 0.01542552487757917,
+          "tbt": 0
+        },
+        {
+          "performance": 1,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1245.4478000000001,
+          "cls": 0.01542552487757917,
+          "tbt": 0
+        },
+        {
+          "performance": 1,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1242.7889,
+          "cls": 0.01542552487757917,
+          "tbt": 0
+        }
+      ],
+      "median": {
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 0.66,
+        "lcp": 1242.7889,
+        "cls": 0.01542552487757917,
+        "tbt": 0
+      }
+    },
+    {
+      "id": "search",
+      "scores": [
+        {
+          "performance": 0.86,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1232.0898,
+          "cls": 0.27972661859969755,
+          "tbt": 0
+        },
+        {
+          "performance": 0.86,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1262.5209499999999,
+          "cls": 0.27972661859969755,
+          "tbt": 0
+        },
+        {
+          "performance": 0.86,
+          "accessibility": 1,
+          "bestPractices": 1,
+          "seo": 0.66,
+          "lcp": 1267.85715,
+          "cls": 0.27972661859969755,
+          "tbt": 0
+        }
+      ],
+      "median": {
+        "performance": 0.86,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 0.66,
+        "lcp": 1262.5209499999999,
+        "cls": 0.27972661859969755,
+        "tbt": 0
+      }
+    }
+  ]
+}

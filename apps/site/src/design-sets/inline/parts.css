@@ -1,6 +1,6 @@
 /* Inline のフラット。原形は「文中の小さな図」。字の高さに収まる短い棒・目盛り・細い線で、
    数と進み具合を文字のすぐ横に置く。面は白と淡い灰、線は細く、色は藍1色。れんが色は今日と注意だけ。
-   幅の切替は html の dd-page を見る（Binder と同じ）。 */
+   幅の切替は html の dd-page を見る。 */
 @layer components {
   html:has(.il-frame) {
     container-type: inline-size;

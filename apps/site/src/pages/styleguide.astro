@@ -583,63 +583,81 @@ const toc = [
           </thead>
           <tbody>
             <tr>
-              <th scope="row">Binder</th>
+              <th scope="row">Tally</th>
               <td>light</td>
-              <td>surface 15.16、bg 13.05</td>
-              <td>surface 6.49、bg 5.59</td>
-              <td>6.05</td>
-              <td>5.80</td>
-              <td>—</td>
+              <td>surface 17.85、bg 17.85</td>
+              <td>surface 9.01、bg 9.01</td>
+              <td>6.49</td>
+              <td>6.49</td>
+              <td>on-band 15.17、on-band-soft 9.55、on-lit 8.22、warn-ink／warn-fill 5.89</td>
             </tr>
             <tr>
-              <th scope="row">Binder</th>
+              <th scope="row">Tally</th>
               <td>dark</td>
-              <td>surface 13.71、bg 15.30</td>
-              <td>surface 7.56、bg 8.43</td>
-              <td>7.77</td>
-              <td>6.91</td>
-              <td>—</td>
+              <td>surface 14.98、bg 15.84</td>
+              <td>surface 9.01、bg 9.53</td>
+              <td>10.25</td>
+              <td>9.64</td>
+              <td>on-band 16.16、on-band-soft 9.05、on-lit 10.40、warn-ink／warn-fill 9.79</td>
             </tr>
             <tr>
-              <th scope="row">Board</th>
+              <th scope="row">Answer</th>
               <td>light</td>
-              <td>surface 16.38、bg 13.46</td>
-              <td>surface 6.56、bg 5.39</td>
-              <td>5.62</td>
-              <td>5.62</td>
-              <td>on-panel 12.33、on-band 11.84</td>
+              <td>surface 18.58、bg 18.58</td>
+              <td>surface 10.56、bg 10.56</td>
+              <td>7.21</td>
+              <td>7.21</td>
+              <td>on-plate 18.58、on-no 4.81、on-cond 9.86、tint-ink／tint 6.18</td>
             </tr>
             <tr>
-              <th scope="row">Board</th>
+              <th scope="row">Answer</th>
               <td>dark</td>
-              <td>surface 13.99、bg 15.56</td>
-              <td>surface 7.39、bg 8.22</td>
-              <td>6.92</td>
-              <td>6.23</td>
-              <td>on-panel 15.89、on-band 9.00</td>
+              <td>surface 15.00、bg 16.27</td>
+              <td>surface 8.85、bg 9.60</td>
+              <td>8.08</td>
+              <td>7.45</td>
+              <td>on-plate 16.00、on-no 8.22、on-cond 9.86、tint-ink／tint 8.11</td>
             </tr>
             <tr>
-              <th scope="row">Spread</th>
+              <th scope="row">Figure</th>
               <td>light</td>
-              <td>surface 14.55、face 10.92</td>
-              <td>surface 7.55、face 5.67</td>
-              <td>4.90</td>
-              <td>6.73</td>
-              <td>accent-ink／face 5.05</td>
+              <td>surface 19.28、bg 19.28</td>
+              <td>surface 11.19、bg 11.19</td>
+              <td>19.28</td>
+              <td>4.31</td>
+              <td>accent-ink／bg 5.70、on-accent／accent-ink 5.70、mute／bg 6.37</td>
             </tr>
             <tr>
-              <th scope="row">Spread</th>
+              <th scope="row">Figure</th>
               <td>dark</td>
-              <td>surface 13.79、face 12.68</td>
-              <td>surface 8.77、face 8.06</td>
-              <td>7.53</td>
-              <td>8.31</td>
-              <td>accent-ink／face 7.64</td>
+              <td>surface 16.40、bg 17.32</td>
+              <td>surface 9.41、bg 9.94</td>
+              <td>17.32</td>
+              <td>6.50</td>
+              <td>accent-ink／bg 7.57、on-accent／accent-ink 7.57、mute／bg 7.01</td>
+            </tr>
+            <tr>
+              <th scope="row">Inline</th>
+              <td>light</td>
+              <td>surface 15.27、bg 15.27</td>
+              <td>surface 8.17、bg 8.17</td>
+              <td>8.55</td>
+              <td>8.55</td>
+              <td>on-brick 6.01、brick／surface 6.01、mute／surface 5.73</td>
+            </tr>
+            <tr>
+              <th scope="row">Inline</th>
+              <td>dark</td>
+              <td>surface 14.33、bg 15.16</td>
+              <td>surface 8.46、bg 8.95</td>
+              <td>8.75</td>
+              <td>8.27</td>
+              <td>on-brick 7.02、brick／surface 6.63、mute／surface 6.78</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p>hair は 1.4〜1.7:1 しかないため、装飾の区切り線だけに使います。</p>
+      <p>主操作の文字は、検索ボタンの文字と地（Answer は yes、Figure は invert）。フォーカスは輪郭の色と surface。hair は 1.2〜1.7:1 しかないため、装飾の区切り線だけに使います。</p>
     </div>
     <Fragment slot="check">
       <SearchSurface part="aside" {...surface} />

@@ -529,3 +529,11 @@
   - 5.5 は `docs/qa/release-checklist.md`。検索の CLS は工程20c の ❌ のまま。
 - 残課題：GitHub への公開と、テンプレートとしての設定（`npm create astro@latest -- --template <github-user>/decision-desk-template`）。制作者以外の人が README だけで導入できるかの確認。識別検査 A〜F、読み上げ、実機のブラウザ確認。ホスティング、本番 URL、実コンテンツへの置き換えは工程21のまま。
 
+
+## セットの入れ替え — 2026-10-28
+
+- 内容：Binder・Board・Spread を削除し、デザイン案 C〜F から作った Tally・Answer・Figure・Inline の4セットにした。既定のセットは Tally。全サイトの `sites/*/site.json` も Tally にした。
+- 一緒に消したもの：3セットの部品と CSS、見本 HTML（`reference/`）、3セット固有の ADR（0006〜0008）、3セットの記録（構造・a11y・性能・寸法、`docs/qa/finish.md`）、判定前だった識別検査の回答用紙と記録（`docs/identity/kit/`、`2026-10-05-mock.md`、`2026-10-08-impl.md`）。この上の工程の記録にある Binder・Board・Spread、`reference/`、ADR-0006〜0008 は、当時の記録として残す。
+- 変えたもの：`check-finish-props` は、どのセットにも傾き（rotate・perspective・transform-origin）を許さない。`scripts/shoot.mjs` は実装だけを撮る。`scripts/record-performance.mjs` は Lighthouse をルートの `node_modules` から探す（npm workspaces に移ってから見つからなかった）。スタイルガイドのコントラスト比の表は4セットの値にした。識別検査の記録は `docs/identity/2026-10-28-impl.md`。
+- 確認：lint エラー 0。単体 53。4セットとも build（`check-output: OK`）と E2E（desktop・mobile、76 passed・2 skipped）。識別検査のテスト（flat・real）は削除の前に4セットで通した（4セットの CSS は変えていない）。性能は `docs/qa/performance.md`。`npm run build:demo` は8通りとも `check-output: OK`、HTML 369件がすべて noindex。`npm run build:all` は11サイトとも `check-output: OK`。
+- 残課題：検索の CLS（Tally・Figure・Inline が 0.05 を超える）。人による識別検査（判定者5名以上）。

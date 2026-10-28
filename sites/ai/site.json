@@ -4,7 +4,7 @@
   "tagline": "中小企業の生成AI導入を、業種と業務から確かめる",
   "description": "見積・提案書のAI、AI研修と助成金、社内ルールづくりまで、中小企業が生成AIを導入するときの条件と根拠を整理するメディア。",
   "design": {
-    "designSet": "binder",
+    "designSet": "tally",
     "finish": "flat"
   }
 }

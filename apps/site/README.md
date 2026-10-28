@@ -36,7 +36,7 @@ Windows で環境変数を付けてコマンドを走らせるときは、`npx c
 | `base` | `DD_BASE`。未設定なら `sites/<slug>/site.json` の `base`、それも無ければ `/<slug>/` | `/` で始まり `/` で終わる。`/` は business.jitty.jp の直下 |
 | `outDir` | `DD_OUT_DIR`。未設定なら `./dist` | build の出力 |
 | `lang` / `locale` / `timezone` | `ja` / `ja_JP` / `Asia/Tokyo` | 言語と日付 |
-| `design.designSet` | `DD_DESIGN_SET`。未設定なら `sites/<slug>/site.json` の `design.designSet`、それも無ければ `binder` | `binder` / `board` / `spread` / `tally` / `answer` / `figure` / `inline` |
+| `design.designSet` | `DD_DESIGN_SET`。未設定なら `sites/<slug>/site.json` の `design.designSet`、それも無ければ `tally` | `tally` / `answer` / `figure` / `inline` |
 | `design.finish` | `DD_FINISH`。未設定なら `sites/<slug>/site.json` の `design.finish`、それも無ければ `flat` | `flat` / `real` |
 | `inspect` | `DD_INSPECT=1` のときだけ | 識別検査モード。production では拒否する |
 | `storage.namespace` | `decision-desk:v1` | ブラウザ内の保存キー。変えると、そのブラウザに残っていた保存は読めなくなる |
@@ -72,10 +72,7 @@ production の build は、次のどれかがあると止まります。
 
 | セット | 原形 | 向く媒体 |
 | --- | --- | --- |
-| Binder（既定） | タブ付きの台紙。索引の爪が開き、確かめる領域の付箋が台紙の右辺へ差し込まれる | 仕事・ビジネス・金融を横断し、解説と比較が中心の媒体 |
-| Board | 太い輪郭の差し替えパネル。左が濃い固定盤、右が明るいパネル | 短報・実務・比較が多く、更新が多い媒体 |
-| Spread | 大きな曲面で切った見開き。右端に縦の章標題 | 人物・論考・連載・特集が中心の媒体 |
-| Tally | マス目（1マス＝1つ）。濃い帯の索引と、角にマスを持つ確かめる箱。数・進み具合・現在地を埋めたマスで示す | 件数・期限・手順など、数で判断する記事が多い媒体 |
+| Tally（既定） | マス目（1マス＝1つ）。濃い帯の索引と、角にマスを持つ確かめる箱。数・進み具合・現在地を埋めたマスで示す | 件数・期限・手順など、数で判断する記事が多い媒体 |
 | Answer | 角の丸い札（Q・A・◯・△・✕・＝）。見出しは Q の札、確かめる情報は答えの面 | 「使える？」「いつまで？」のような問いに答える記事が中心の媒体 |
 | Figure | 大きな数字と太い罫（新聞の組み）。8px の罫の題字と、縦の罫で分けた確かめる欄 | 統計・ニュース・制度の数字を前に出す媒体 |
 | Inline | 文中の小さな図。字の高さの短い棒・目盛り・細い線で数と進み具合を示す。控えめ | 長い解説を落ち着いて読ませたい媒体 |
@@ -87,18 +84,18 @@ production の build は、次のどれかがあると止まります。
 切り替えの例です。開発サーバーが動いているときは、一度止めてから実行します。
 
 ```sh
-npx cross-env DD_DESIGN_SET=board DD_FINISH=real npm run dev
+npx cross-env DD_DESIGN_SET=answer DD_FINISH=real npm run dev
 ```
 
-`DD_DESIGN_SET` は `binder`、`board`、`spread`、`tally`、`answer`、`figure`、`inline`。`DD_FINISH` は `flat`、`real`。環境変数は site.json より優先します（比較・検査用）。
+`DD_DESIGN_SET` は `tally`、`answer`、`figure`、`inline`。`DD_FINISH` は `flat`、`real`。環境変数は site.json より優先します（比較・検査用）。
 
-14通り（7セット × 2質感）を並べて見るときは、次を実行します。
+8通り（4セット × 2質感）を並べて見るときは、次を実行します。
 
 ```sh
 npm run build:demo
 ```
 
-`dist-demo/demo/index.html` から、7セットと flat / real の14通りを開けます。中身は同じ記事です。すべて noindex で、本番の `dist/` には入りません。
+`dist-demo/demo/index.html` から、4セットと flat / real の8通りを開けます。中身は同じ記事です。すべて noindex で、本番の `dist/` には入りません。
 
 ## 記事の書き方
 
@@ -232,10 +229,11 @@ build コマンド、出力 `dist`、環境変数、ヘッダー、失敗した�
 
 セットの形が、色や書体を外しても見分けられるかを人が判定します。判定そのものは、このリポジトリの中ではまだ行われていません。
 
-1. 判定者に渡すのは `docs/identity/kit/` の画像と、同じ名前の回答用紙だけです。`docs/identity/kit/answers.md` は答えなので、判定者には渡しません。
-2. 判定者は5名以上、うち制作者以外を3名以上にします。
-3. 結果は `docs/identity/2026-10-08-impl.md` の表に書きます。合格の基準もそのファイルにあります。
-4. 実装を撮るときは、`DD_INSPECT=1` を付けて build し、`npm run test:identity` を実行します。終わったら `DD_INSPECT` を外して build し直し、通常の出力に検査モードが残っていないことを確かめます。
+1. セットと質感ごとに、`DD_INSPECT=1` を付けて build し、`npm run test:identity` を実行して画像を撮ります（`docs/identity/<set>-<finish>/`）。終わったら `DD_INSPECT` を外して build し直し、通常の出力に検査モードが残っていないことを確かめます。
+2. 陰性対照（このテンプレートではない画面の画像）を `docs/identity/negative-control/` に置き、`node scripts/build-identity-kit.mjs` で `docs/identity/kit/` に画像と回答用紙を作ります。
+3. 判定者に渡すのは `docs/identity/kit/` の画像と、同じ名前の回答用紙だけです。`docs/identity/kit/answers.md` は答えなので、判定者には渡しません。
+4. 判定者は5名以上、うち制作者以外を3名以上にします。
+5. 結果は `docs/identity/2026-10-28-impl.md` の表に書きます。合格の基準もそのファイルにあります。
 
 読み上げ（NVDA または VoiceOver）の手順は [docs/qa/a11y.md](docs/qa/a11y.md) の末尾です。
 
@@ -281,4 +279,4 @@ JavaScript が動かないブラウザでは、保存した一覧は表示しま
 | `npm test` | 単体テスト |
 | `npm run test:e2e` | ブラウザの操作テスト。先に `npm run build` |
 | `npm run verify` | lint、単体、build、E2E |
-| `npm run build:demo` | 14通りの比較デモ |
+| `npm run build:demo` | 8通りの比較デモ |

@@ -1,16 +1,16 @@
 {
-  "set": "spread",
-  "finish": "real",
-  "measuredAt": "2026-10-08T13:56:19.125Z",
-  "node": "v24.19.0",
+  "set": "tally",
+  "finish": "flat",
+  "measuredAt": "2026-10-28T22:01:43.172Z",
+  "node": "v22.22.0",
   "lighthouse": "13.5.0",
-  "chrome": "C:\\Users\\espee\\AppData\\Local\\ms-playwright\\chromium-1243\\chrome-win64\\chrome.exe",
+  "chrome": "/opt/pw-browsers/chromium（--no-sandbox を足すラッパー経由）",
   "formFactor": "mobile",
   "throttling": "simulate",
   "runs": 3,
   "budgets": {
-    "css": 12142,
-    "maxJs": 3924
+    "css": 11489,
+    "maxJs": 3983
   },
   "pages": [
     {
@@ -21,7 +21,7 @@
           "accessibility": 1,
           "bestPractices": 1,
           "seo": 0.66,
-          "lcp": 1216.70055,
+          "lcp": 1386.5626000000002,
           "cls": 0,
           "tbt": 0
         },
@@ -30,7 +30,7 @@
           "accessibility": 1,
           "bestPractices": 1,
           "seo": 0.66,
-          "lcp": 1210.34955,
+          "lcp": 1388.4430000000002,
           "cls": 0,
           "tbt": 0
         },
@@ -39,7 +39,7 @@
           "accessibility": 1,
           "bestPractices": 1,
           "seo": 0.66,
-          "lcp": 1210.3419000000001,
+          "lcp": 1202.0538000000001,
           "cls": 0,
           "tbt": 0
         }
@@ -49,7 +49,7 @@
         "accessibility": 1,
         "bestPractices": 1,
         "seo": 0.66,
-        "lcp": 1210.34955,
+        "lcp": 1386.5626000000002,
         "cls": 0,
         "tbt": 0
       }
@@ -62,8 +62,8 @@
           "accessibility": 1,
           "bestPractices": 1,
           "seo": 0.66,
-          "lcp": 1137.5171249999999,
-          "cls": 0.00902190237905782,
+          "lcp": 1244.01185,
+          "cls": 0.0165693667646878,
           "tbt": 0
         },
         {
@@ -71,8 +71,8 @@
           "accessibility": 1,
           "bestPractices": 1,
           "seo": 0.66,
-          "lcp": 1133.55375,
-          "cls": 0.00902190237905782,
+          "lcp": 1247.083,
+          "cls": 0.0165693667646878,
           "tbt": 0
         },
         {
@@ -80,9 +80,9 @@
           "accessibility": 1,
           "bestPractices": 1,
           "seo": 0.66,
-          "lcp": 1135.43025,
-          "cls": 0.00902190237905782,
-          "tbt": 0
+          "lcp": 1248.894,
+          "cls": 0.0165693667646878,
+          "tbt": 2.5
         }
       ],
       "median": {
@@ -90,8 +90,8 @@
         "accessibility": 1,
         "bestPractices": 1,
         "seo": 0.66,
-        "lcp": 1135.43025,
-        "cls": 0.00902190237905782,
+        "lcp": 1247.083,
+        "cls": 0.0165693667646878,
         "tbt": 0
       }
     },
@@ -99,40 +99,40 @@
       "id": "search",
       "scores": [
         {
-          "performance": 0.89,
+          "performance": 0.93,
           "accessibility": 1,
           "bestPractices": 1,
           "seo": 0.66,
-          "lcp": 1210.16865,
-          "cls": 0.2270554741957799,
+          "lcp": 1242.4890500000001,
+          "cls": 0.16782943492046368,
           "tbt": 0
         },
         {
-          "performance": 0.89,
+          "performance": 0.93,
           "accessibility": 1,
           "bestPractices": 1,
           "seo": 0.66,
-          "lcp": 1212.8374499999998,
-          "cls": 0.2270554741957799,
+          "lcp": 1250.64895,
+          "cls": 0.16782943492046368,
           "tbt": 0
         },
         {
-          "performance": 0.89,
+          "performance": 0.93,
           "accessibility": 1,
           "bestPractices": 1,
           "seo": 0.66,
-          "lcp": 1207.8848999999998,
-          "cls": 0.2270554741957799,
+          "lcp": 1231.5541,
+          "cls": 0.16782943492046368,
           "tbt": 0
         }
       ],
       "median": {
-        "performance": 0.89,
+        "performance": 0.93,
         "accessibility": 1,
         "bestPractices": 1,
         "seo": 0.66,
-        "lcp": 1210.16865,
-        "cls": 0.2270554741957799,
+        "lcp": 1242.4890500000001,
+        "cls": 0.16782943492046368,
         "tbt": 0
       }
     }

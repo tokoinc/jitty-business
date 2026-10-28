@@ -83,7 +83,7 @@
 
 フォルダを足すだけでは使えない。次が揃ってから `registry.ts` に登録する。
 
-- `src/design-sets/<id>/manifest.ts`。`SetManifest` の全項目（`contractVersion` は 3、原形 `primitive`、9枠 `s1`〜`s9`、`reservedShapes`、`geometry`、`finishes.real`、`narrowMax`、`middleMax`）。新しい `id` と `primitive` は `contract.ts` の型に足す。書体（`tokens.css` の `--f-sans` と `--f-serif`）、ライセンス、対応する機能は、そのセットの README に書く。
+- `src/design-sets/<id>/manifest.ts`。`SetManifest` の全項目（`contractVersion` は 3、原形 `primitive`、9枠 `s1`〜`s9`、`reservedShapes`、`geometry`、`finishes.real`、`narrowMax`、`middleMax`）。新しい `id` と `primitive` は `contract.ts` の型に足す。書体（`tokens.css` の `--f-sans`、使うなら `--f-num`・`--f-serif`）、ライセンス、対応する機能は、そのセットの README に書く。
 - `tokens.css`、`parts.css`、`finish-real.css`。
 - 11部品。`Frame`、`CategoryMark`、`SectionHeading`、`ArticleFace`、`FaceGrid`、`SearchSurface`、`CheckSlip`、`CheckPanel`、`CheckRow`、`Popover`、`EndMark`。props の型は既存のセットと同じ。
 - そのセットの README。9枠の形と、形の予約。
@@ -96,6 +96,6 @@
 ## コマンド
 
 - 開発: `npm run dev`
-- セットと質感: サイトごとに `sites/<slug>/site.json` の `design`。試すときは `npx cross-env DD_DESIGN_SET=board DD_FINISH=real npm run dev`
+- セットと質感: サイトごとに `sites/<slug>/site.json` の `design`。試すときは `npx cross-env DD_DESIGN_SET=answer DD_FINISH=real npm run dev`
 - 完了前: `npm run verify`
 - 比較デモ: `npm run build:demo`

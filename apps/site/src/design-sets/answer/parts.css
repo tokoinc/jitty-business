@@ -1,6 +1,6 @@
 /* Answer のフラット。原形は「問いと答えの札」。角の丸い札（Q・A・◯・△・✕・＝・？）を、
    見出し・確かめる情報・現在地に置く。探す領域は白い帯と丸い札の列、確かめる領域は灰の丸い面。
-   幅の切替は html の dd-page を見る（Binder と同じ）。 */
+   幅の切替は html の dd-page を見る。 */
 @layer components {
   html:has(.an-frame) {
     container-type: inline-size;

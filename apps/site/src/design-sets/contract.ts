@@ -30,7 +30,7 @@ export interface FrameProps {
   searchHref: string;
   searchCurrent?: boolean;
   query?: string;
-  questions?: { label: string; href: string }[]; // 編集された問い（Spreadの問いの円等）
+  questions?: { label: string; href: string }[]; // 編集された問い（ホームの問いの欄など）
 }
 // Frame のスロット：default＝読む、check＝確かめる、after＝読む領域の続き（次に確かめる等）
 
@@ -134,9 +134,9 @@ export const SET_COMPONENTS = [
   "EndMark",
 ] as const;
 
-export type SetId = "binder" | "board" | "spread" | "tally" | "answer" | "figure" | "inline";
+export type SetId = "tally" | "answer" | "figure" | "inline";
 export type Finish = "flat" | "real";
-export const SET_IDS = ["binder", "board", "spread", "tally", "answer", "figure", "inline"] as const;
+export const SET_IDS = ["tally", "answer", "figure", "inline"] as const;
 export const FINISHES = ["flat", "real"] as const;
 export const CONTRACT_VERSION = 3;
 
@@ -144,14 +144,7 @@ export interface SetManifest {
   id: SetId;
   label: string;
   contractVersion: typeof CONTRACT_VERSION;
-  primitive:
-    | "tabbed-sheet"
-    | "swap-panel"
-    | "arc-spread"
-    | "tally-cells"
-    | "answer-plate"
-    | "big-figure"
-    | "inline-gauge";
+  primitive: "tally-cells" | "answer-plate" | "big-figure" | "inline-gauge";
   signature: {
     s1: string;
     s2: string;

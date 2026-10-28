@@ -4,7 +4,7 @@
   "tagline": "事業の承継と売却を、業種と費用から確かめる",
   "description": "調剤薬局・介護事業所・工務店の承継や売却、仲介手数料に使える補助金など、M&Aと事業承継の条件を整理するメディア。",
   "design": {
-    "designSet": "binder",
+    "designSet": "tally",
     "finish": "flat"
   }
 }

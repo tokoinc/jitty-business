@@ -10,9 +10,6 @@ const SITE = process.env.DD_SITE ?? "advisors";
 const profile = JSON.parse(await readFile(`../../sites/${SITE}/site.json`, "utf8"));
 const BASE = process.env.DD_BASE ?? profile.base ?? `/${SITE}/`;
 const PREFIX = {
-  binder: "bi-",
-  board: "bo-",
-  spread: "sp-",
   tally: "ta-",
   answer: "an-",
   figure: "fi-",

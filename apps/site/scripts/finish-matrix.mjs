@@ -8,7 +8,7 @@ import path from "node:path";
 import { chromium } from "@playwright/test";
 
 const ORIGIN = "http://localhost:4321";
-const sets = ["binder", "board", "spread", "tally", "answer", "figure", "inline"];
+const sets = ["tally", "answer", "figure", "inline"];
 const finishes = ["flat", "real"];
 const pages = [
   ["home", "/"],
@@ -17,9 +17,6 @@ const pages = [
   ["article", "/articles/sample-social-insurance/"],
 ];
 const bodySelector = {
-  binder: ".bi-sheet, .bi-face",
-  board: ".bo-panel, .bo-face",
-  spread: ".sp-face, .sp-nextface",
   tally: ".ta-main, .ta-face",
   answer: ".an-main, .an-face",
   figure: ".fi-main, .fi-face",
@@ -140,7 +137,7 @@ function stopDev(child) {
 async function shootIdentity(set, finish) {
   const out = `docs/identity/${set}-${finish}`;
   for (const level of ["L1", "L2"]) {
-    await runNode(["scripts/shoot.mjs", "--out", out, "--inspect", level, "--set", set], {});
+    await runNode(["scripts/shoot.mjs", "--out", out, "--inspect", level], {});
   }
 }
 
@@ -285,11 +282,11 @@ if (shootOnly) {
   const lines = [
     "# 質感のすりガラス",
     "",
-    "数えた日: 2026-10-08。幅 1280。`backdrop-filter` が `none` でなく、`checkVisibility()` が真で、`[hidden]` の中に無い要素を1面とした。",
+    `数えた日: ${new Date().toISOString().slice(0, 10)}。幅 1280。\`backdrop-filter\` が \`none\` でなく、\`checkVisibility()\` が真で、\`[hidden]\` の中に無い要素を1面とした。`,
     "",
     "## 本文の面",
     "",
-    "real では、Binder の `.bi-sheet` と `.bi-face`、Board の `.bo-panel` と `.bo-face`、Spread の `.sp-face` と `.sp-nextface` の `backdrop-filter` は `none`（下表の faceGlass が 0）。",
+    `real では、${sets.map((set) => `${set} の \`${bodySelector[set]}\``).join("、")} の \`backdrop-filter\` は \`none\`（下表の faceGlass が 0）。`,
     "",
     "## real の4画面",
     "",
@@ -305,11 +302,9 @@ if (shootOnly) {
   }
   lines.push(
     "",
-    "いずれも 6 面以内。flat の build に `--m-` は無く、real の build にはある。",
+    "上限は 6 面（`docs/adr/0009-glass-budget.md`）。flat の build に `--m-` は無く、real の build にはある。",
     "",
     "forced-colors、印刷、`prefers-reduced-transparency` は `tests/identity/finish.spec.ts` が、各セットの real で通している。",
-    "",
-    "Spread で索引の問いを不透明にした理由は `docs/adr/0009-glass-budget.md`。",
     "",
   );
   await mkdir("docs/qa", { recursive: true });

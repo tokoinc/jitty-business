@@ -1,7 +1,7 @@
 /* Figure のフラット。原形は「大きな数字と太い罫」（新聞の組み）。
    探す領域は 8px の罫で閉じる題字の帯、読む領域と確かめる領域は細い縦の罫で分ける。
    数字は端末の詰めた書体で大きく組み、朱は数と締切だけに使う。
-   幅の切替は html の dd-page を見る（Binder と同じ）。 */
+   幅の切替は html の dd-page を見る。 */
 @layer components {
   html:has(.fi-frame) {
     container-type: inline-size;

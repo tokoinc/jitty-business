@@ -49,7 +49,7 @@ export const site = {
   timezone: "Asia/Tokyo",
   // サイトごとの選択は site.json の design。DD_DESIGN_SET・DD_FINISH があればそちらを使う（比較デモ・検査用）
   design: {
-    designSet: (env.DD_DESIGN_SET ?? profile.design?.designSet ?? "binder") as SetId, // SET_IDS のどれか
+    designSet: (env.DD_DESIGN_SET ?? profile.design?.designSet ?? "tally") as SetId, // SET_IDS のどれか
     finish: (env.DD_FINISH ?? profile.design?.finish ?? "flat") as Finish, // flat | real
   },
   inspect: env.DD_INSPECT === "1", // 開発・デモのbuildだけ。production では validateSite が拒否する
