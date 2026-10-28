@@ -5,8 +5,19 @@ import { parse } from "node-html-parser";
 
 const OUT = process.env.DD_OUT_DIR ?? "dist";
 const MODE = process.env.DD_MODE ?? "demo";
-const BASE = process.env.DD_BASE ?? `/${process.env.DD_SITE ?? "advisors"}/`;
-const PREFIX = { binder: "bi-", board: "bo-", spread: "sp-" };
+// base は site.config.ts と同じ順で決める（DD_BASE → sites/<slug>/site.json の base → /<slug>/）
+const SITE = process.env.DD_SITE ?? "advisors";
+const profile = JSON.parse(await readFile(`../../sites/${SITE}/site.json`, "utf8"));
+const BASE = process.env.DD_BASE ?? profile.base ?? `/${SITE}/`;
+const PREFIX = {
+  binder: "bi-",
+  board: "bo-",
+  spread: "sp-",
+  tally: "ta-",
+  answer: "an-",
+  figure: "fi-",
+  inline: "il-",
+};
 const SAFE_SCHEMES = new Set(["http", "https", "mailto"]);
 const DATA_SCRIPT_TYPES = new Set(["application/ld+json", "application/json"]);
 const errors = [];

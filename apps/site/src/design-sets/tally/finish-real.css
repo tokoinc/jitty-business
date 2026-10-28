@@ -1,0 +1,316 @@
+/* Tally のモダンリアル。色・背景・影・角・透明度・backdrop-filter・transition と、
+   記事面 :hover の transform だけ。寸法は parts.css のまま（ADR-0010）。
+   マスは光を受ける小さなタイル、上の帯は深い面、確かめる箱は浮いた紙。
+   すりガラスは補足・表示設定・本文冒頭の確かめる列だけ。本文の面（.ta-main と記事面）には付けない。 */
+
+:root {
+  --m-hair: light-dark(rgba(15, 23, 42, 0.1), rgba(255, 255, 255, 0.1));
+  --m-edge: inset 0 1px 0 light-dark(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.12));
+  --m-e1:
+    0 1px 2px light-dark(rgba(13, 26, 22, 0.08), transparent),
+    0 1px 1px light-dark(rgba(13, 26, 22, 0.05), transparent),
+    0 1px 2px light-dark(transparent, rgba(0, 0, 0, 0.4));
+  --m-e2:
+    0 1px 2px light-dark(rgba(13, 26, 22, 0.06), transparent),
+    0 6px 12px -4px light-dark(rgba(13, 26, 22, 0.12), transparent),
+    0 16px 32px -12px light-dark(rgba(14, 107, 79, 0.16), transparent),
+    0 1px 2px light-dark(transparent, rgba(0, 0, 0, 0.4)),
+    0 8px 16px -6px light-dark(transparent, rgba(0, 0, 0, 0.5)),
+    0 20px 40px -16px light-dark(transparent, rgba(0, 0, 0, 0.6));
+  --m-e3:
+    0 2px 4px light-dark(rgba(13, 26, 22, 0.06), transparent),
+    0 14px 28px -8px light-dark(rgba(13, 26, 22, 0.16), transparent),
+    0 36px 64px -20px light-dark(rgba(14, 107, 79, 0.22), transparent),
+    0 2px 4px light-dark(transparent, rgba(0, 0, 0, 0.45)),
+    0 16px 32px -8px light-dark(transparent, rgba(0, 0, 0, 0.55)),
+    0 40px 72px -20px light-dark(transparent, rgba(0, 0, 0, 0.65));
+  --m-glass: light-dark(rgba(255, 255, 255, 0.66), rgba(16, 30, 25, 0.6));
+  --m-blur: blur(18px) saturate(160%);
+  --m-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --m-glow: color-mix(in srgb, var(--c-lit) 55%, transparent);
+  --m-tile:
+    inset 0 1px 0 light-dark(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.14)),
+    inset 0 -1px 0 light-dark(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.3));
+  --m-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .05 0 0 0 0 .1 0 0 0 0 .08 0 0 0 .02 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --m-ambient:
+    radial-gradient(
+      900px 620px at 0% 0%,
+      color-mix(in srgb, var(--c-accent) 9%, transparent) 0,
+      transparent 60%
+    ),
+    radial-gradient(
+      760px 560px at 100% 30%,
+      color-mix(in srgb, var(--c-lit) 7%, transparent) 0,
+      transparent 58%
+    );
+}
+
+:root[data-theme="dark"] {
+  --m-blur: blur(18px) saturate(140%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --m-blur: blur(18px) saturate(140%);
+  }
+}
+
+@layer components {
+  .ta-frame {
+    background-color: var(--c-bg);
+    background-image: var(--m-grain), var(--m-ambient);
+  }
+
+  /* 上の帯：深い面と上端の光 */
+  .ta-index,
+  .ta-index[popover],
+  .ta-bar,
+  .ta-tabstrip,
+  .ta-footer {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--c-band) 82%, var(--c-lit)) 0%,
+      var(--c-band) 46%,
+      color-mix(in srgb, var(--c-band) 86%, black) 100%
+    );
+    box-shadow: inset 0 1px 0 color-mix(in srgb, white 14%, transparent);
+  }
+  .ta-tabstrip {
+    box-shadow: none;
+  }
+
+  /* マス：光を受けるタイル */
+  .ta-cells i,
+  .ta-logo__mark i,
+  .ta-h__cells i,
+  .ta-face__steps i,
+  .ta-keys__cell,
+  .ta-filters__cell,
+  .dd-steps__mark,
+  .dd-summary li::before {
+    border-radius: 2px;
+    box-shadow: var(--m-tile);
+  }
+  .ta-h__cells i[data-on],
+  .ta-face__corner,
+  .ta-panel__corner,
+  .ta-slip__corner,
+  .ta-pop__corner {
+    border-radius: 3px;
+    box-shadow:
+      var(--m-tile),
+      0 0 14px -4px var(--m-glow);
+  }
+
+  /* 現在地：埋まったマスが光る */
+  .ta-shelf,
+  .ta-purpose a,
+  .ta-tabstrip__tab {
+    border-radius: 4px;
+    transition:
+      background-color 0.25s var(--m-ease),
+      box-shadow 0.25s var(--m-ease);
+  }
+  .ta-shelf[aria-current="page"],
+  .ta-purpose a[aria-current="page"],
+  .ta-tabstrip__tab[aria-current="page"] {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--c-lit) 80%, white), var(--c-lit));
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, white 45%, transparent),
+      0 0 26px -6px var(--m-glow);
+  }
+  .ta-find input {
+    border-radius: 4px 0 0 4px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
+  }
+  .ta-find button {
+    border-radius: 0 4px 4px 0;
+    box-shadow: var(--m-tile);
+  }
+
+  /* 確かめる箱と記事面：浮いた紙 */
+  .ta-panel,
+  .ta-slip,
+  .ta-filters__group,
+  .dd-callout,
+  .dd-product,
+  .dd-empty {
+    border-radius: 4px;
+    border-color: color-mix(in srgb, var(--c-line) 82%, transparent);
+    box-shadow: var(--m-edge), var(--m-e1);
+  }
+  .ta-face {
+    border-radius: 4px;
+    box-shadow: var(--m-edge), var(--m-e2);
+    transition:
+      transform 0.3s var(--m-ease),
+      box-shadow 0.3s var(--m-ease);
+  }
+  .ta-face--news {
+    box-shadow: none;
+  }
+  .ta-face:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--m-edge), var(--m-e3);
+  }
+  .ta-face--news:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .ta-face__steps,
+  .ta-face__cols,
+  .ta-face__photo {
+    background-image: linear-gradient(180deg, color-mix(in srgb, white 40%, transparent), transparent);
+  }
+  .ta-face__date {
+    border-radius: 3px;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--c-ink) 82%, var(--c-accent)), var(--c-ink));
+    box-shadow: var(--m-tile);
+  }
+
+  /* 検索：押せるキー */
+  .ta-query__field {
+    border-radius: 6px 0 0 6px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+  .ta-query__go {
+    border-radius: 0 6px 6px 0;
+    box-shadow: var(--m-tile);
+  }
+  .ta-keys label,
+  .ta-filters__options label,
+  .dd-shelves a,
+  .dd-pager a,
+  .dd-kana-toc a,
+  .dd-toc a,
+  .dd-steps > li {
+    border-radius: 4px;
+    box-shadow: var(--m-edge), var(--m-e1);
+    transition: box-shadow 0.25s var(--m-ease);
+  }
+  .ta-keys label:has(:checked),
+  .ta-filters__options label:has(:checked),
+  .dd-toc a[aria-current="location"] {
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, white 30%, transparent),
+      0 0 22px -6px var(--m-glow);
+  }
+
+  /* すりガラス：確かめる箱・条件群・補足・表示設定・本文冒頭の確かめる列 */
+  .ta-panel,
+  .ta-filters__group,
+  .ta-pop,
+  .dd-settings,
+  .ta-checkrow a {
+    border-radius: 6px;
+    background: var(--m-glass);
+    -webkit-backdrop-filter: var(--m-blur);
+    backdrop-filter: var(--m-blur);
+    box-shadow: var(--m-edge), var(--m-e3);
+  }
+  .ta-checkrow a {
+    box-shadow: var(--m-edge), var(--m-e1);
+  }
+
+  .dd-home-q,
+  .dd-summary {
+    border-radius: 6px;
+    background: linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--c-band) 80%, var(--c-lit)) 0%,
+      var(--c-band) 55%
+    );
+    box-shadow: var(--m-e2);
+  }
+  .dd-save,
+  .dd-product__links a,
+  .dd-search button,
+  .ta-filters__clear {
+    border-radius: 6px;
+    box-shadow: var(--m-tile), var(--m-e1);
+    transition: box-shadow 0.25s var(--m-ease);
+  }
+  .ta-end__rule {
+    border-radius: 2px;
+    filter: drop-shadow(0 0 6px var(--m-glow));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ta-face,
+    .ta-face:hover {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .ta-panel,
+    .ta-filters__group,
+    .ta-pop,
+    .dd-settings,
+    .ta-checkrow a {
+      background: var(--c-surface);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .ta-panel,
+    .ta-filters__group,
+    .ta-pop,
+    .dd-settings,
+    .ta-checkrow a {
+      background: var(--c-surface);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    .ta-frame {
+      background-image: none;
+    }
+    .ta-frame,
+    .ta-frame *,
+    .dd-settings {
+      box-shadow: none !important;
+      filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+    }
+    .ta-panel,
+    .ta-slip,
+    .ta-face,
+    .ta-filters__group,
+    .dd-callout {
+      border-color: var(--c-line);
+    }
+  }
+
+  @media (forced-colors: active), print {
+    .ta-frame,
+    .ta-frame *,
+    .dd-settings {
+      box-shadow: none !important;
+      background-image: none !important;
+      filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+    }
+    .ta-face:hover {
+      transform: none !important;
+    }
+  }
+
+  :root[data-inspect="L3"] .ta-frame,
+  :root[data-inspect="L3"] .ta-frame * {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background-image: none !important;
+  }
+  :root[data-inspect="L3"] .ta-face:hover {
+    transform: none;
+  }
+}

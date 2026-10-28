@@ -1,0 +1,24 @@
+---
+import type { SectionHeadingProps } from "../../contract";
+type Props = SectionHeadingProps;
+const { id, index, context, label, total } = Astro.props;
+// 節の数だけマスを並べ、読み進めた節まで埋める（総数が無い区画見出しは番号の数だけ）
+const count = Math.min(Math.max(total ?? index, index), 12);
+const cells = Array.from({ length: count }, (_, i) => i + 1);
+const num = String(index).padStart(2, "0");
+const of = total ? ` / ${String(total).padStart(2, "0")}` : "";
+---
+
+<div class={`ta-h ta-h--${context}`} data-sig="s3">
+  <p class="ta-h__count" aria-hidden="true">
+    <span class="ta-h__cells">
+      {cells.map((i) => (
+        <i data-on={i <= index ? "" : undefined} />
+      ))}
+    </span>
+    <span class="ta-h__num">{label ?? `${num}${of}`}</span>
+  </p>
+  <h2 id={id}>
+    <slot />
+  </h2>
+</div>

@@ -44,7 +44,9 @@ function fillFace(item: ArticleIndexItem, position: number): HTMLElement {
       n.hidden = true;
     });
   }
-  el.querySelectorAll(".bi-face__lead, .bo-face__lead, .sp-card__lead").forEach((n) => {
+  el.querySelectorAll(
+    ".bi-face__lead, .bo-face__lead, .sp-card__lead, .ta-face__lead, .an-face__lead, .fi-face__lead, .il-face__lead",
+  ).forEach((n) => {
     if (!n.textContent?.trim()) n.remove();
   });
   return el;

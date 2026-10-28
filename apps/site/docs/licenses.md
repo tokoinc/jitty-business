@@ -1,6 +1,6 @@
 # 依存・書体・画像のライセンス
 
-集計日: 2026-10-09。依存は `node_modules` の package.json（同じ name と version は1行）。
+集計日: 2026-10-09（書体は 2026-10-28 に追記）。依存は `node_modules` の package.json（同じ name と version は1行）。
 
 ## テンプレート本体
 
@@ -12,8 +12,14 @@ MIT License。全文はリポジトリ直下の LICENSE。
 
 - ゴシック: system-ui、Hiragino Sans、Hiragino Kaku Gothic ProN、Yu Gothic UI、Yu Gothic、Meiryo、Noto Sans JP
 - 明朝（Spread の `--f-serif`）: Hiragino Mincho ProN、Yu Mincho、Noto Serif JP、Noto Serif CJK JP
+- UD ゴシック（Answer の `--f-sans` と `--f-num` の先頭）: BIZ UDPGothic（BIZ UDPゴシック）
+- 数字（`--f-num`）
+  - Tally: Bahnschrift、DIN Alternate、Roboto、Helvetica Neue、Arial
+  - Answer: BIZ UDPGothic、system-ui、Hiragino Sans、Helvetica Neue、Arial
+  - Figure: Bahnschrift Condensed、Bahnschrift、Avenir Next Condensed、Roboto Condensed、Arial Narrow、Helvetica Neue、Arial
+  - Inline: system-ui、Segoe UI、Helvetica Neue、Arial
 
-指名した書体が端末に無いときは、並びの次の書体を使う。テンプレートは Noto のファイルを配布も取得もしない。
+指名した書体が端末に無いときは、並びの次の書体を使う（数字は最後にそのセットのゴシック）。テンプレートは Noto・BIZ UDPGothic・Bahnschrift などのファイルを配布も取得もしない。
 
 ## アイコン
 

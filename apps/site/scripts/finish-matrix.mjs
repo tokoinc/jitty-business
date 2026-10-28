@@ -1,4 +1,4 @@
-// 工程18b。3セット×flat/real の build、寸法、L1・L2、スタイルガイド、すりガラスの数。
+// 工程18b。全セット×flat/real の build、寸法、L1・L2、スタイルガイド、すりガラスの数。
 // 工程19b は、サーバーを自分で立てず、次で記事だけを撮れる:
 //   node scripts/finish-matrix.mjs --shoot-only --dest docs/qa/samples --paths /articles/a/,/articles/b/
 
@@ -8,7 +8,7 @@ import path from "node:path";
 import { chromium } from "@playwright/test";
 
 const ORIGIN = "http://localhost:4321";
-const sets = ["binder", "board", "spread"];
+const sets = ["binder", "board", "spread", "tally", "answer", "figure", "inline"];
 const finishes = ["flat", "real"];
 const pages = [
   ["home", "/"],
@@ -20,6 +20,10 @@ const bodySelector = {
   binder: ".bi-sheet, .bi-face",
   board: ".bo-panel, .bo-face",
   spread: ".sp-face, .sp-nextface",
+  tally: ".ta-main, .ta-face",
+  answer: ".an-main, .an-face",
+  figure: ".fi-main, .fi-face",
+  inline: ".il-main, .il-face",
 };
 
 function arg(name) {

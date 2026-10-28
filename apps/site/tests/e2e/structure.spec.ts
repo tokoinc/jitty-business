@@ -1,9 +1,10 @@
 import { expect, test } from "@playwright/test";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { dirname, join, relative } from "node:path";
+import { SET_IDS } from "../../src/design-sets/contract";
 
 const OUT = "dist";
-const SETS = ["binder", "board", "spread"] as const;
+const SETS = SET_IDS;
 
 type Heading = { level: number; text: string };
 type Snapshot = {
@@ -125,7 +126,7 @@ function compare(reports: Report[]): string[] {
   return lines;
 }
 
-test("3セットの構造を書いて比べる", async ({ page }, testInfo) => {
+test("全セットの構造を書いて比べる", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop", "desktop だけ");
   test.setTimeout(180_000);
 
@@ -146,7 +147,7 @@ test("3セットの構造を書いて比べる", async ({ page }, testInfo) => {
     );
   }
   const set = expected || served;
-  if (set !== "binder" && set !== "board" && set !== "spread") {
+  if (!set || !(SETS as readonly string[]).includes(set)) {
     throw new Error(`不明なセット: ${set}`);
   }
 

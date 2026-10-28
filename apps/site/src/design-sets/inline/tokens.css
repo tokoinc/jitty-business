@@ -1,0 +1,49 @@
+/* src/design-sets/inline/tokens.css */
+:root {
+  color-scheme: light dark;
+  /* 意味トークン：light-dark(light, dark) */
+  --c-bg: light-dark(#FFFFFF, #11151B);
+  --c-surface: light-dark(#FFFFFF, #161B22);
+  --c-fill: light-dark(#F5F6F8, #1C222B);
+  --c-ink: light-dark(#1E2630, #E6EAF0);
+  --c-ink-soft: light-dark(#47505C, #AEB6C2);
+  --c-line: light-dark(#7A8491, #7D8794);
+  --c-hair: light-dark(#E3E6EA, #2A313B);
+  --c-accent: light-dark(#2F4C7E, #9DB4E0);
+  --c-on-accent: light-dark(#FFFFFF, #11151B);
+  --c-focus: light-dark(#2F4C7E, #9DB4E0);
+  /* Inline 固有：小さな図の色。棒の地・中間・済んだもの・れんが（今日と注意だけ） */
+  --c-track: light-dark(#DCE3EE, #2A3546);
+  --c-mid: light-dark(#8DA2C6, #5D7299);
+  --c-past: light-dark(#C9D1DD, #3A4452);
+  --c-brick: light-dark(#A4462F, #E08A72);
+  --c-on-brick: light-dark(#FFFFFF, #11151B);
+  --c-warn-fill: light-dark(#F6ECE8, #2B1F1B);
+  --c-mute: light-dark(#5E6773, #9AA3AF);
+  --shelf-hue-1: 218;
+  --shelf-hue-2: 200;
+  --shelf-hue-3: 15;
+  --shelf-hue-4: 240;
+  --shelf-hue-5: 180;
+  /* 幾何トークン（manifest.geometry と一致） */
+  --g-line: 1px;
+  --g-bar: 5px;
+  --g-hair: 2px;
+  --g-radius: 14px;
+  --g-radius-small: 8px;
+  --g-gap: 4rem;
+  --g-side: 18.75rem;
+  --g-max: 78rem;
+  --g-pad: 3rem;
+  /* 書体。フォントファイルは同梱しない */
+  --f-sans:
+    system-ui, -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic",
+    Meiryo, "Noto Sans JP", sans-serif;
+  --f-num: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, var(--f-sans);
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}

@@ -1,0 +1,92 @@
+---
+import type { SearchSurfaceProps } from "../../contract";
+type Props = SearchSurfaceProps;
+const { part, action, query, purposes, groups, questions } = Astro.props;
+const allPurposes = !purposes.some((item) => item.current);
+---
+
+{part === "main" ? (
+  <div class="il-search" data-sig="s5">
+    <form id="dd-search-form" role="search" aria-label="記事を検索" action={action} method="get">
+      <div class="il-query">
+        <label class="dd-visually-hidden" for="dd-search-q">
+          キーワードで検索
+        </label>
+        <input
+          id="dd-search-q"
+          class="il-query__field"
+          name="q"
+          type="search"
+          value={query}
+          placeholder="キーワードで検索"
+        />
+        <button class="il-query__go" type="submit">
+          検索
+        </button>
+      </div>
+      <fieldset class="il-keys">
+        <legend class="il-keys__h">目的</legend>
+        <label>
+          <input type="radio" name="purpose" value="" checked={allPurposes} />
+          すべて
+        </label>
+        {purposes.map((item) => (
+          <label>
+            <input type="radio" name="purpose" value={item.value} checked={item.current} />
+            {item.label}
+          </label>
+        ))}
+      </fieldset>
+    </form>
+    {questions.length > 0 && (
+      <ul class="il-questions">
+        {questions.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    )}
+    <slot />
+  </div>
+) : (
+  <>
+    <div class="il-filters" data-sig="s5">
+      {groups.map((group, index) => (
+        <details class="il-filters__group" data-filter-group={group.id} open style={`--slot:${index + 1}`}>
+          <summary class="il-filters__summary">
+            <span class="dd-visually-hidden">
+              <span data-filter-label>{group.label}</span>
+              <span data-filter-count></span>を開閉
+            </span>
+          </summary>
+          <fieldset>
+            <legend>
+              <span data-filter-label>{group.label}</span>
+              <span data-filter-count></span>
+            </legend>
+            <ul class="il-filters__options">
+              {group.options.map((option) => (
+                <li>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name={group.id}
+                      value={option.value}
+                      checked={option.selected}
+                      form="dd-search-form"
+                    />
+                    {option.label}
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </fieldset>
+        </details>
+      ))}
+    </div>
+    <button class="il-filters__clear" type="button" data-clear-filters>
+      すべて解除
+    </button>
+  </>
+)}

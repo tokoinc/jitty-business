@@ -64,6 +64,26 @@ const paintedBySet: Record<string, { glass: string; body: string; painted: strin
     painted:
       ".sp-stamps .sp-stamp-link, .sp-tabstrip .sp-stamp-link, .sp-spine, .sp-questions--row .sp-q, .sp-face, .sp-nextface",
   },
+  tally: {
+    glass: ".ta-panel, .ta-filters__group, .ta-checkrow a",
+    body: ".ta-main, .ta-face",
+    painted: ".ta-index, .ta-panel, .ta-filters__group, .ta-slip, .ta-face, .ta-checkrow a",
+  },
+  answer: {
+    glass: ".an-find, .an-checkrow a",
+    body: ".an-main, .an-face",
+    painted: ".an-index, .an-find, .an-panel, .an-slip, .an-face, .an-checkrow a",
+  },
+  figure: {
+    glass: ".fi-panel, .fi-filters__group, .fi-checkrow",
+    body: ".fi-main, .fi-face",
+    painted: ".fi-panel, .fi-filters__group, .fi-checkrow, .fi-face",
+  },
+  inline: {
+    glass: ".il-index, .il-checkrow a",
+    body: ".il-main, .il-face",
+    painted: ".il-index, .il-panel, .il-slip, .il-face, .il-checkrow a",
+  },
 };
 
 function surfaces() {

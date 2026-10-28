@@ -85,17 +85,17 @@
 
 - `src/design-sets/<id>/manifest.ts`。`SetManifest` の全項目（`contractVersion` は 3、原形 `primitive`、9枠 `s1`〜`s9`、`reservedShapes`、`geometry`、`finishes.real`、`narrowMax`、`middleMax`）。新しい `id` と `primitive` は `contract.ts` の型に足す。書体（`tokens.css` の `--f-sans` と `--f-serif`）、ライセンス、対応する機能は、そのセットの README に書く。
 - `tokens.css`、`parts.css`、`finish-real.css`。
-- 11部品。`Frame`、`CategoryMark`、`SectionHeading`、`ArticleFace`、`FaceGrid`、`SearchSurface`、`CheckSlip`、`CheckPanel`、`CheckRow`、`Popover`、`EndMark`。props の型は既存の3セットと同じ。
+- 11部品。`Frame`、`CategoryMark`、`SectionHeading`、`ArticleFace`、`FaceGrid`、`SearchSurface`、`CheckSlip`、`CheckPanel`、`CheckRow`、`Popover`、`EndMark`。props の型は既存のセットと同じ。
 - そのセットの README。9枠の形と、形の予約。
-- `src/design-sets/contract.ts` の `SetId` と、`src/design-sets/registry.ts` への登録。
+- `src/design-sets/contract.ts` の `SetId` と、`src/design-sets/registry.ts` への登録。クラスの接頭辞は `scripts/check-output.mjs`、本文の目次の現在地は `src/scripts/toc.ts`、質感の検査は `scripts/check-finish-props.mjs` にも足す。
 - 識別検査 A〜F の合格記録（判定者5名以上、制作者以外3名以上）。
-- 既存の3セットとの差。どの2つを比べても、S1・S2・S4・S5 の形が異なり、残る5枠のうち3枠以上で形が異なる。色、書体、角丸の値の違いだけは、形の差に数えない。
+- 既存のセットとの差。どの2つを比べても（`tests/unit/design-sets.test.ts` が manifest の宣言で確かめる）、S1・S2・S4・S5 の形が異なり、残る5枠のうち3枠以上で形が異なる。色、書体、角丸の値の違いだけは、形の差に数えない。
 
 ページは `src/generated/ui.ts` から、選んだセットの部品だけを読む。共通のページに、セット専用の分岐を足さない。
 
 ## コマンド
 
 - 開発: `npm run dev`
-- セットと質感: `npx cross-env DD_DESIGN_SET=board DD_FINISH=real npm run dev`
+- セットと質感: サイトごとに `sites/<slug>/site.json` の `design`。試すときは `npx cross-env DD_DESIGN_SET=board DD_FINISH=real npm run dev`
 - 完了前: `npm run verify`
 - 比較デモ: `npm run build:demo`

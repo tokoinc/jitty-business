@@ -1,0 +1,115 @@
+---
+import type { FrameProps } from "../../contract";
+type Props = FrameProps;
+const p = Astro.props;
+const cur = (b?: boolean) => (b ? "page" : undefined);
+// 中身が無いとき has("check") が true になり、空の aside が出る
+const checkHtml = ((await Astro.slots.render("check")) ?? "").trim();
+---
+
+<div class="an-frame" data-page={p.page} data-sig="s1">
+  <a class="dd-skip" href="#main">
+    本文へ移動
+  </a>
+  <header class="an-bar">
+    <a class="an-logo" href={p.homeHref} data-logo>
+      <span class="an-logo__mark" aria-hidden="true"><i /></span>
+      <span class="an-logo__name">{p.siteName}</span>
+    </a>
+    <a class="an-bar__btn" href={p.searchHref}>
+      検索
+    </a>
+    <button class="an-bar__btn" type="button" popovertarget="an-index">
+      索引
+    </button>
+  </header>
+  <nav class="an-tabstrip" aria-label="棚">
+    <a class="an-tabstrip__tab" href={p.homeHref} aria-current={cur(p.homeCurrent)}>
+      ホーム
+    </a>
+    {p.shelves.map((s) => (
+      <a class="an-tabstrip__tab" href={s.href} style={`--slot:${s.slot}`} aria-current={cur(s.current)}>
+        {s.label}
+      </a>
+    ))}
+  </nav>
+  <nav class="an-index" id="an-index" aria-label="索引" popover>
+    <div class="an-index__top">
+      <a class="an-logo" href={p.homeHref} data-logo>
+        <span class="an-logo__mark" aria-hidden="true"><i /></span>
+        <span class="an-logo__name">
+          {p.siteName}
+          <small>{p.tagline}</small>
+        </span>
+      </a>
+      <ul class="an-shelves" data-sig="s8">
+        <li>
+          <a class="an-shelf" href={p.homeHref} aria-current={cur(p.homeCurrent)}>
+            ホーム
+          </a>
+        </li>
+        {p.shelves.map((s) => (
+          <li>
+            <a class="an-shelf" href={s.href} style={`--slot:${s.slot}`} aria-current={cur(s.current)}>
+              <span class="an-ring" aria-hidden="true" />
+              {s.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <form class="an-find" role="search" aria-label="索引の検索" action={p.searchHref} method="get">
+        <label class="dd-visually-hidden" for="an-q">
+          キーワードで検索
+        </label>
+        <input id="an-q" name="q" type="search" value={p.query ?? ""} placeholder="問いやキーワードで検索" />
+        <button type="submit">検索</button>
+      </form>
+    </div>
+    <div class="an-index__sub">
+      <p class="an-index__h" id="an-purpose-h">
+        目的から探す
+      </p>
+      <ul class="an-purpose" aria-labelledby="an-purpose-h">
+        {p.purposes.map((x) => (
+          <li>
+            <a href={x.href} aria-current={cur(x.current)}>
+              {x.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <ul class="an-utility">
+        {p.utility.map((u) => (
+          <li>
+            <a href={u.href} aria-current={cur(u.current)}>
+              {u.label}
+            </a>
+          </li>
+        ))}
+        <li>
+          <button type="button" popovertarget="dd-settings">
+            表示設定
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="an-body">
+    <main id="main" class="an-main" tabindex="-1">
+      <slot />
+      <slot name="after" />
+    </main>
+    {/* eslint-disable-next-line astro/no-set-html-directive -- Astro.slots.render の結果（Astro がエスケープ済みの HTML） */}
+    {checkHtml.length > 0 && <aside class="an-side" aria-label="確かめる" set:html={checkHtml} />}
+  </div>
+  <footer class="an-footer">
+    <span class="an-logo__mark" aria-hidden="true"><i /></span>
+    <ul>
+      {p.footer.map((f) => (
+        <li>
+          <a href={f.href}>{f.label}</a>
+        </li>
+      ))}
+    </ul>
+  </footer>
+</div>

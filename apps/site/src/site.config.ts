@@ -16,7 +16,16 @@ export const siteRoot = `../../sites/${siteSlug}`;
 export const siteDir = resolve(process.cwd(), siteRoot);
 const profile = readProfile();
 
-function readProfile(): { name: string; tagline: string; description: string } {
+/** sites/<slug>/site.json。base を "/" にしたサイトは business.jitty.jp の直下に置く */
+interface Profile {
+  name: string;
+  tagline: string;
+  description: string;
+  base?: string;
+  design?: { designSet?: string; finish?: string };
+}
+
+function readProfile(): Profile {
   const file = resolve(siteDir, "site.json");
   try {
     return JSON.parse(readFileSync(file, "utf8"));
@@ -25,20 +34,23 @@ function readProfile(): { name: string; tagline: string; description: string } {
   }
 }
 
+const base = env.DD_BASE ?? profile.base ?? `/${siteSlug}/`;
+
 export const site = {
   name: profile.name,
   tagline: profile.tagline,
   description: profile.description,
   mode, // production ではサンプル・仮URL・識別検査モードを拒否する
-  url: env.DD_SITE_URL ?? `https://business.jitty.jp/${siteSlug}`,
-  base: env.DD_BASE ?? `/${siteSlug}/`,
+  url: env.DD_SITE_URL ?? `https://business.jitty.jp${base.replace(/\/$/, "")}`,
+  base,
   outDir: env.DD_OUT_DIR ?? "./dist",
   lang: "ja",
   locale: "ja_JP",
   timezone: "Asia/Tokyo",
+  // サイトごとの選択は site.json の design。DD_DESIGN_SET・DD_FINISH があればそちらを使う（比較デモ・検査用）
   design: {
-    designSet: (env.DD_DESIGN_SET ?? "binder") as SetId, // binder | board | spread
-    finish: (env.DD_FINISH ?? "flat") as Finish, // flat | real
+    designSet: (env.DD_DESIGN_SET ?? profile.design?.designSet ?? "binder") as SetId, // SET_IDS のどれか
+    finish: (env.DD_FINISH ?? profile.design?.finish ?? "flat") as Finish, // flat | real
   },
   inspect: env.DD_INSPECT === "1", // 開発・デモのbuildだけ。production では validateSite が拒否する
   storage: { namespace: `${siteSlug}:v1` },

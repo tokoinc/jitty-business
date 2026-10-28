@@ -6,6 +6,6 @@ const list = Astro.locals.dd?.h2 ?? [];
 const index = Math.max(1, list.findIndex((h) => h.id === id) + 1);
 ---
 
-<SectionHeading id={id} index={index} context="article">
+<SectionHeading id={id} index={index} context="article" total={list.length}>
   <slot />
 </SectionHeading>

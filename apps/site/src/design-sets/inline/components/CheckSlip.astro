@@ -1,0 +1,24 @@
+---
+import type { CheckSlipProps } from "../../contract";
+type Props = CheckSlipProps;
+const { kind, title, id } = Astro.props;
+const tag = { brief: "", conditions: "条件欄", evidence: "根拠欄" }[kind];
+const H = kind === "brief" ? "h2" : "h3";
+---
+
+<section class={`il-slip il-slip--${kind}`} id={id} aria-labelledby={`${id}-t`} data-sig="s6">
+  <div class="il-slip__head">
+    {tag && (
+      <span class="il-slip__tag" aria-hidden="true">
+        {tag}
+      </span>
+    )}
+    <H class="il-slip__title" id={`${id}-t`}>
+      {tag && <span class="dd-visually-hidden">{kind === "conditions" ? "条件" : "根拠"}：</span>}
+      {title}
+    </H>
+  </div>
+  <div class="il-slip__body">
+    <slot />
+  </div>
+</section>

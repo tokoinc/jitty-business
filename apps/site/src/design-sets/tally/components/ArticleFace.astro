@@ -1,0 +1,94 @@
+---
+import { Image } from "astro:assets";
+import type { ArticleFaceProps } from "../../contract";
+import CategoryMark from "./CategoryMark.astro";
+type Props = ArticleFaceProps;
+const { face: f, emphasis, headingLevel = 3 } = Astro.props;
+const H = headingLevel === 2 ? "h2" : "h3";
+const kind = f.format === "interview" ? "opinion" : f.format;
+---
+
+{kind === "news" ? (
+  <article class={`ta-face ta-face--news ta-face--${emphasis}`} data-sig="s4" data-format={f.format}>
+    <p class="ta-face__date">
+      <time datetime={f.date} data-field="date">
+        {f.dateLabel}
+      </time>
+    </p>
+    <div class="ta-face__news-body">
+      {f.purposeLabel && <p class="ta-face__type">{f.purposeLabel}</p>}
+      <H class="ta-face__title">
+        <a href={f.href} data-field="title" data-field-href>
+          {f.title}
+        </a>
+      </H>
+      <p class="dd-visually-hidden">
+        <span data-field="shelf">{f.shelf.label}</span>・<span data-field="format">{f.formatLabel}</span>
+      </p>
+      {f.reason && <p class="ta-face__reason">{f.reason}</p>}
+    </div>
+  </article>
+) : (
+  <article
+    class={`ta-face ta-face--${kind} ta-face--${emphasis}`}
+    data-sig="s4"
+    data-format={f.format}
+    style={`--slot:${f.shelf.slot}`}
+  >
+    <span class="ta-face__corner" aria-hidden="true" />
+    {kind === "opinion" && (
+      <div class="ta-face__photo" data-photo>
+        {f.cover && (
+          <Image
+            src={f.cover.src}
+            alt={f.cover.alt}
+            widths={[480, 800]}
+            sizes="(max-width: 839px) 100vw, 40vw"
+          />
+        )}
+      </div>
+    )}
+    <div class="ta-face__body">
+      <div class="ta-face__kicker">
+        <CategoryMark shelf={f.shelf} context="card" />
+        <p class="ta-face__type">
+          <span class="ta-face__format" data-field="format">
+            {f.formatLabel}
+          </span>
+          {f.purposeLabel && (
+            <>
+              <span class="dd-visually-hidden">｜</span>
+              <span class="ta-face__purpose">{f.purposeLabel}</span>
+            </>
+          )}
+        </p>
+      </div>
+      <H class="ta-face__title">
+        <a href={f.href} data-field="title" data-field-href>
+          {f.title}
+        </a>
+      </H>
+      {f.reason && <p class="ta-face__reason">{f.reason}</p>}
+      {kind === "guide" && emphasis !== "compact" && <p class="ta-face__lead">{f.description}</p>}
+      {kind === "opinion" && f.speaker && <p class="ta-face__speaker">{f.speaker}</p>}
+    </div>
+    {kind === "tutorial" && f.steps && (
+      <p class="ta-face__steps" data-field="steps">
+        <span class="dd-visually-hidden">手順 {f.steps}</span>
+        {Array.from({ length: f.steps }, () => (
+          <i aria-hidden="true" />
+        ))}
+      </p>
+    )}
+    {kind === "comparison" && f.compare && (
+      <p class="ta-face__cols" data-field="cols" style={`--cols:${f.compare.items + 1}`}>
+        <span class="dd-visually-hidden">
+          {f.compare.items}件を{f.compare.axes}項目で比較
+        </span>
+        {Array.from({ length: f.compare.items + 1 }, () => (
+          <i aria-hidden="true" />
+        ))}
+      </p>
+    )}
+  </article>
+)}

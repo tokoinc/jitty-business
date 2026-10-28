@@ -1,0 +1,116 @@
+---
+import type { FrameProps } from "../../contract";
+type Props = FrameProps;
+const p = Astro.props;
+const cur = (b?: boolean) => (b ? "page" : undefined);
+// 中身が無いとき has("check") が true になり、空の aside が出る
+const checkHtml = ((await Astro.slots.render("check")) ?? "").trim();
+---
+
+<div class="fi-frame" data-page={p.page} data-sig="s1">
+  <a class="dd-skip" href="#main">
+    本文へ移動
+  </a>
+  <header class="fi-bar">
+    <a class="fi-logo" href={p.homeHref} data-logo>
+      {p.siteName}
+    </a>
+    <a class="fi-bar__btn" href={p.searchHref}>
+      検索
+    </a>
+    <button class="fi-bar__btn" type="button" popovertarget="fi-index">
+      索引
+    </button>
+  </header>
+  <nav class="fi-tabstrip" aria-label="棚">
+    <a class="fi-tabstrip__tab" href={p.homeHref} aria-current={cur(p.homeCurrent)}>
+      ホーム
+    </a>
+    {p.shelves.map((s) => (
+      <a class="fi-tabstrip__tab" href={s.href} style={`--slot:${s.slot}`} aria-current={cur(s.current)}>
+        <b class="fi-num" aria-hidden="true">
+          {s.number}
+        </b>
+        {s.label}
+      </a>
+    ))}
+  </nav>
+  <nav class="fi-index" id="fi-index" aria-label="索引" popover>
+    <div class="fi-index__top">
+      <a class="fi-logo" href={p.homeHref} data-logo>
+        {p.siteName}
+        <small>{p.tagline}</small>
+      </a>
+      <ul class="fi-shelves" data-sig="s8">
+        <li>
+          <a class="fi-shelf" href={p.homeHref} aria-current={cur(p.homeCurrent)}>
+            <b class="fi-num" aria-hidden="true">00</b>
+            ホーム
+          </a>
+        </li>
+        {p.shelves.map((s) => (
+          <li>
+            <a class="fi-shelf" href={s.href} style={`--slot:${s.slot}`} aria-current={cur(s.current)}>
+              <b class="fi-num" aria-hidden="true">
+                {s.number}
+              </b>
+              {s.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <form class="fi-find" role="search" aria-label="索引の検索" action={p.searchHref} method="get">
+        <label class="dd-visually-hidden" for="fi-q">
+          キーワードで検索
+        </label>
+        <input id="fi-q" name="q" type="search" value={p.query ?? ""} placeholder="キーワードで検索" />
+        <button type="submit">検索</button>
+      </form>
+    </div>
+    <div class="fi-index__sub">
+      <p class="fi-index__h" id="fi-purpose-h">
+        目的から探す
+      </p>
+      <ul class="fi-purpose" aria-labelledby="fi-purpose-h">
+        {p.purposes.map((x) => (
+          <li>
+            <a href={x.href} aria-current={cur(x.current)}>
+              {x.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <ul class="fi-utility">
+        {p.utility.map((u) => (
+          <li>
+            <a href={u.href} aria-current={cur(u.current)}>
+              {u.label}
+            </a>
+          </li>
+        ))}
+        <li>
+          <button type="button" popovertarget="dd-settings">
+            表示設定
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="fi-body">
+    <main id="main" class="fi-main" tabindex="-1">
+      <slot />
+      <slot name="after" />
+    </main>
+    {/* eslint-disable-next-line astro/no-set-html-directive -- Astro.slots.render の結果（Astro がエスケープ済みの HTML） */}
+    {checkHtml.length > 0 && <aside class="fi-side" aria-label="確かめる" set:html={checkHtml} />}
+  </div>
+  <footer class="fi-footer">
+    <ul>
+      {p.footer.map((f) => (
+        <li>
+          <a href={f.href}>{f.label}</a>
+        </li>
+      ))}
+    </ul>
+  </footer>
+</div>

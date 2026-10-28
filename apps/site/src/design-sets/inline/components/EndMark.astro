@@ -1,0 +1,10 @@
+---
+import type { EndMarkProps } from "../../contract";
+type Props = EndMarkProps;
+const { label } = Astro.props;
+---
+
+<div class="il-end">
+  <hr class="il-end__rule" aria-label={label ?? "本文ここまで"} data-sig="s9" />
+  <p class="il-end__label" aria-hidden="true">ここまで</p>
+</div>

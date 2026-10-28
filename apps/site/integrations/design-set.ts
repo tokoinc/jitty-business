@@ -15,7 +15,7 @@ export default function designSet(opts: { set: string; finish: string; inspect: 
     hooks: {
       "astro:config:setup": async ({ config, logger }) => {
         if (!SET_IDS.includes(opts.set as SetId))
-          throw new Error(`design.designSet が不明: ${opts.set}（binder / board / spread）`);
+          throw new Error(`design.designSet が不明: ${opts.set}（${SET_IDS.join(" / ")}）`);
         if (!FINISHES.includes(opts.finish as Finish))
           throw new Error(`design.finish が不明: ${opts.finish}（flat / real）`);
         const m = registry[opts.set as SetId];

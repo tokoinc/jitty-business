@@ -1,0 +1,14 @@
+---
+import type { SectionHeadingProps } from "../../contract";
+type Props = SectionHeadingProps;
+const { id, index, context, label } = Astro.props;
+---
+
+<div class={`an-h an-h--${context}`} data-sig="s3">
+  <span class="an-h__plate" aria-hidden="true">
+    {label ?? `Q${index}`}
+  </span>
+  <h2 id={id}>
+    <slot />
+  </h2>
+</div>

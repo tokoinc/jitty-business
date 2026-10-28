@@ -148,6 +148,10 @@ function face(d: Result, index: number): HTMLElement {
     document.getElementById("face-guide")) as HTMLTemplateElement;
   const el = tpl.content.firstElementChild!.cloneNode(true) as HTMLElement;
   el.style.setProperty("--slot", d.meta.shelfSlot ?? "1");
+  // 棚の印は自分の style に --slot を持つ（型紙は棚1）。保存一覧と同じく、印にも入れ直す
+  el.querySelectorAll<HTMLElement>('[data-sig="s2"]').forEach((n) =>
+    n.style.setProperty("--slot", d.meta.shelfSlot ?? "1"),
+  );
   const set = (f: string, t: string) =>
     el.querySelectorAll<HTMLElement>(`[data-field="${f}"]`).forEach((n) => (n.textContent = t));
   set("title", d.meta.title ?? "");

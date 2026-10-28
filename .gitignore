@@ -5,3 +5,6 @@ dist/
 
 # テンプレート本体（別リポジトリ。取り込み元は README.md）
 decision-desk-template/
+
+# build:all が直下のサイトを一時的に置く
+.dist-root/

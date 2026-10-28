@@ -33,11 +33,11 @@ Windows で環境変数を付けてコマンドを走らせるときは、`npx c
 | `description` | （ファイルを参照） | サイトの説明 |
 | `mode` | `DD_MODE`。未設定なら `demo` | `demo` は全ページ noindex で、サンプルを許可する。`production` は本番 |
 | `url` | `DD_SITE_URL`。未設定なら `https://example.com` | canonical と RSS の起点。production では `example.com` / `example.org` / `example.net` を拒否する |
-| `base` | `DD_BASE`。未設定なら `/` | `/` で始まり `/` で終わる |
+| `base` | `DD_BASE`。未設定なら `sites/<slug>/site.json` の `base`、それも無ければ `/<slug>/` | `/` で始まり `/` で終わる。`/` は business.jitty.jp の直下 |
 | `outDir` | `DD_OUT_DIR`。未設定なら `./dist` | build の出力 |
 | `lang` / `locale` / `timezone` | `ja` / `ja_JP` / `Asia/Tokyo` | 言語と日付 |
-| `design.designSet` | `DD_DESIGN_SET`。未設定なら `binder` | `binder` / `board` / `spread` |
-| `design.finish` | `DD_FINISH`。未設定なら `flat` | `flat` / `real` |
+| `design.designSet` | `DD_DESIGN_SET`。未設定なら `sites/<slug>/site.json` の `design.designSet`、それも無ければ `binder` | `binder` / `board` / `spread` / `tally` / `answer` / `figure` / `inline` |
+| `design.finish` | `DD_FINISH`。未設定なら `sites/<slug>/site.json` の `design.finish`、それも無ければ `flat` | `flat` / `real` |
 | `inspect` | `DD_INSPECT=1` のときだけ | 識別検査モード。production では拒否する |
 | `storage.namespace` | `decision-desk:v1` | ブラウザ内の保存キー。変えると、そのブラウザに残っていた保存は読めなくなる |
 | `editorial.sensitiveCategories` | `finance` | 影響の大きい棚の目安。実際の必須条件は棚の `reviewProfile` |
@@ -62,13 +62,23 @@ production の build は、次のどれかがあると止まります。
 
 ## セットと質感
 
-セットは配色ではなく、空間の規則です。記事のデータ、URL、見出し、条件・根拠・広告の意味は3セットで同じです。セットを変えて再 build すると、全ページと12ブロックの見た目が切り替わります。
+セットは配色ではなく、空間の規則です。記事のデータ、URL、見出し、条件・根拠・広告の意味は全セットで同じです。セットを変えて再 build すると、全ページと12ブロックの見た目が切り替わります。
+
+サイトごとのセットと質感は、`sites/<slug>/site.json` の `design` に書きます。
+
+```json
+"design": { "designSet": "tally", "finish": "flat" }
+```
 
 | セット | 原形 | 向く媒体 |
 | --- | --- | --- |
 | Binder（既定） | タブ付きの台紙。索引の爪が開き、確かめる領域の付箋が台紙の右辺へ差し込まれる | 仕事・ビジネス・金融を横断し、解説と比較が中心の媒体 |
 | Board | 太い輪郭の差し替えパネル。左が濃い固定盤、右が明るいパネル | 短報・実務・比較が多く、更新が多い媒体 |
 | Spread | 大きな曲面で切った見開き。右端に縦の章標題 | 人物・論考・連載・特集が中心の媒体 |
+| Tally | マス目（1マス＝1つ）。濃い帯の索引と、角にマスを持つ確かめる箱。数・進み具合・現在地を埋めたマスで示す | 件数・期限・手順など、数で判断する記事が多い媒体 |
+| Answer | 角の丸い札（Q・A・◯・△・✕・＝）。見出しは Q の札、確かめる情報は答えの面 | 「使える？」「いつまで？」のような問いに答える記事が中心の媒体 |
+| Figure | 大きな数字と太い罫（新聞の組み）。8px の罫の題字と、縦の罫で分けた確かめる欄 | 統計・ニュース・制度の数字を前に出す媒体 |
+| Inline | 文中の小さな図。字の高さの短い棒・目盛り・細い線で数と進み具合を示す。控えめ | 長い解説を落ち着いて読ませたい媒体 |
 
 質感は `design.finish` です。`flat` が既定です。`real` は、選んだセットの CSS の上に `finish-real.css` を重ねます。`flat` の build には、リアル用の層は入りません。
 
@@ -80,15 +90,15 @@ production の build は、次のどれかがあると止まります。
 npx cross-env DD_DESIGN_SET=board DD_FINISH=real npm run dev
 ```
 
-`DD_DESIGN_SET` は `binder`、`board`、`spread`。`DD_FINISH` は `flat`、`real`。
+`DD_DESIGN_SET` は `binder`、`board`、`spread`、`tally`、`answer`、`figure`、`inline`。`DD_FINISH` は `flat`、`real`。環境変数は site.json より優先します（比較・検査用）。
 
-6通りを並べて見るときは、次を実行します。
+14通り（7セット × 2質感）を並べて見るときは、次を実行します。
 
 ```sh
 npm run build:demo
 ```
 
-`dist-demo/demo/index.html` から、binder / board / spread と flat / real の6通りを開けます。中身は同じ記事です。すべて noindex で、本番の `dist/` には入りません。
+`dist-demo/demo/index.html` から、7セットと flat / real の14通りを開けます。中身は同じ記事です。すべて noindex で、本番の `dist/` には入りません。
 
 ## 記事の書き方
 
@@ -271,4 +281,4 @@ JavaScript が動かないブラウザでは、保存した一覧は表示しま
 | `npm test` | 単体テスト |
 | `npm run test:e2e` | ブラウザの操作テスト。先に `npm run build` |
 | `npm run verify` | lint、単体、build、E2E |
-| `npm run build:demo` | 6通りの比較デモ |
+| `npm run build:demo` | 14通りの比較デモ |

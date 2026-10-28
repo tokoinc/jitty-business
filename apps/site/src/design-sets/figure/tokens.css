@@ -1,0 +1,50 @@
+/* src/design-sets/figure/tokens.css */
+:root {
+  color-scheme: light dark;
+  /* 意味トークン：light-dark(light, dark) */
+  --c-bg: light-dark(#FFFFFF, #0D0D0F);
+  --c-surface: light-dark(#FFFFFF, #141417);
+  --c-fill: light-dark(#F0F1F2, #1C1C20);
+  --c-ink: light-dark(#0E0E10, #F2F2F0);
+  --c-ink-soft: light-dark(#3A3B3F, #B9B9BE);
+  --c-line: light-dark(#0E0E10, #F2F2F0);
+  --c-hair: light-dark(#D9DADC, #3A3A40);
+  --c-accent: light-dark(#E5361B, #FF6A4D);
+  --c-on-accent: light-dark(#FFFFFF, #0D0D0F);
+  --c-focus: light-dark(#E5361B, #FF6A4D);
+  /* Figure 固有：朱の文字と、白い小さな字を載せる朱の地（どちらも 4.5:1 を満たす）、数字の控え、反転の行 */
+  --c-accent-ink: light-dark(#C42A12, #FF7A5C);
+  --c-mute: light-dark(#5D5F66, #9A9BA2);
+  --c-invert: light-dark(#0E0E10, #F2F2F0);
+  --c-on-invert: light-dark(#FFFFFF, #0D0D0F);
+  --c-on-invert-accent: light-dark(#FF7A5C, #C42A12);
+  --shelf-hue-1: 10;
+  --shelf-hue-2: 30;
+  --shelf-hue-3: 0;
+  --shelf-hue-4: 200;
+  --shelf-hue-5: 260;
+  /* 幾何トークン（manifest.geometry と一致） */
+  --g-line: 1px;
+  --g-rule: 4px;
+  --g-heavy: 8px;
+  --g-double: 9px;
+  --g-numeral: 4.5rem;
+  --g-radius: 0;
+  --g-gap: 2.5rem;
+  --g-side: 19rem;
+  --g-max: 80rem;
+  --g-pad: 2.5rem;
+  /* 書体。数字は端末にある詰めた書体（Bahnschrift・Avenir Next Condensed など）。フォントファイルは同梱しない */
+  --f-sans:
+    system-ui, -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic",
+    Meiryo, "Noto Sans JP", sans-serif;
+  --f-num:
+    "Bahnschrift Condensed", "Bahnschrift", "Avenir Next Condensed", "Roboto Condensed",
+    "sans-serif-condensed", "Arial Narrow", "Helvetica Neue", Arial, var(--f-sans);
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}

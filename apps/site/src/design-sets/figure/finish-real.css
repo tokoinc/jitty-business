@@ -1,0 +1,224 @@
+/* Figure のモダンリアル。色・背景・影・角・透明度・backdrop-filter・transition と、
+   記事面 :hover の transform だけ。寸法は parts.css のまま（ADR-0010）。
+   紙面はわずかに光を受け、太い罫は墨のつや、数字は印刷の濃さで出す。
+   すりガラスは補足・表示設定・本文冒頭の確かめる列だけ。本文の面（.fi-main と記事面）には付けない。 */
+
+:root {
+  --m-hair: light-dark(rgba(14, 14, 16, 0.1), rgba(255, 255, 255, 0.1));
+  --m-edge: inset 0 1px 0 light-dark(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.12));
+  --m-e1:
+    0 1px 2px light-dark(rgba(14, 14, 16, 0.06), transparent),
+    0 1px 1px light-dark(rgba(14, 14, 16, 0.04), transparent),
+    0 1px 2px light-dark(transparent, rgba(0, 0, 0, 0.4));
+  --m-e2:
+    0 1px 2px light-dark(rgba(14, 14, 16, 0.05), transparent),
+    0 6px 12px -4px light-dark(rgba(14, 14, 16, 0.1), transparent),
+    0 16px 32px -12px light-dark(rgba(14, 14, 16, 0.14), transparent),
+    0 1px 2px light-dark(transparent, rgba(0, 0, 0, 0.4)),
+    0 8px 16px -6px light-dark(transparent, rgba(0, 0, 0, 0.5)),
+    0 20px 40px -16px light-dark(transparent, rgba(0, 0, 0, 0.6));
+  --m-e3:
+    0 2px 4px light-dark(rgba(14, 14, 16, 0.05), transparent),
+    0 14px 28px -8px light-dark(rgba(14, 14, 16, 0.14), transparent),
+    0 36px 64px -20px light-dark(rgba(229, 54, 27, 0.16), transparent),
+    0 2px 4px light-dark(transparent, rgba(0, 0, 0, 0.45)),
+    0 16px 32px -8px light-dark(transparent, rgba(0, 0, 0, 0.55)),
+    0 40px 72px -20px light-dark(transparent, rgba(0, 0, 0, 0.65));
+  --m-glass: light-dark(rgba(255, 255, 255, 0.7), rgba(24, 24, 28, 0.62));
+  --m-blur: blur(18px) saturate(160%);
+  --m-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --m-glow: color-mix(in srgb, var(--c-accent) 55%, transparent);
+  --m-ink: linear-gradient(180deg, color-mix(in srgb, var(--c-invert) 78%, white), var(--c-invert) 60%);
+  --m-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .1 0 0 0 0 .1 0 0 0 .025 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --m-ambient:
+    radial-gradient(
+      1000px 640px at 100% 0%,
+      color-mix(in srgb, var(--c-accent) 8%, transparent) 0,
+      transparent 60%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--c-bg) 96%, var(--c-ink)), var(--c-bg) 40%);
+}
+
+:root[data-theme="dark"] {
+  --m-blur: blur(18px) saturate(140%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --m-blur: blur(18px) saturate(140%);
+  }
+}
+
+@layer components {
+  .fi-frame {
+    background-color: var(--c-bg);
+    background-image: var(--m-grain), var(--m-ambient);
+  }
+
+  /* 反転の行と札：墨のつや */
+  .fi-shelf[aria-current="page"],
+  .fi-tabstrip__tab[aria-current="page"],
+  .fi-purpose a[aria-current="page"],
+  .fi-utility a[aria-current="page"],
+  .fi-panel__items a[aria-current],
+  .dd-toc a[aria-current="location"],
+  .fi-keys label:has(:checked),
+  .fi-filters__options label:has(:checked),
+  .fi-index__h,
+  .fi-slip__tag,
+  .fi-pop__tag,
+  .dd-callout__label,
+  .fi-mark--sheet .fi-mark__num,
+  .fi-mark--sheet .fi-mark__name,
+  .dd-page-mark,
+  .fi-h--section .fi-h__num,
+  .dd-faq summary::before {
+    background-image: var(--m-ink);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, white 18%, transparent);
+  }
+  .fi-shelf,
+  .fi-purpose a,
+  .fi-panel__items a,
+  .fi-keys label,
+  .fi-filters__options label {
+    transition:
+      background-color 0.25s var(--m-ease),
+      box-shadow 0.25s var(--m-ease);
+  }
+
+  /* 数字：印刷の濃さ */
+  .fi-h__num,
+  .fi-face__num,
+  .dd-summary li::before,
+  .fi-face__steps::after,
+  .dd-shelves__count {
+    text-shadow: none;
+    filter: drop-shadow(0 1px 0 color-mix(in srgb, var(--c-bg) 60%, transparent));
+  }
+
+  /* 紙面：記事面はわずかに浮く */
+  .fi-face {
+    transition:
+      transform 0.3s var(--m-ease),
+      box-shadow 0.3s var(--m-ease);
+  }
+  .fi-face:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 32px -24px rgba(14, 14, 16, 0.5);
+  }
+  .fi-face--news:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .dd-callout,
+  .fi-face__photo,
+  .fi-face__cols i:first-of-type,
+  .dd-stale,
+  .dd-compare th[scope="row"],
+  .dd-compare thead th:first-child {
+    background-image: linear-gradient(180deg, color-mix(in srgb, white 30%, transparent), transparent);
+  }
+
+  /* すりガラス：確かめる欄・条件群・補足・表示設定・本文冒頭の確かめる列 */
+  .fi-panel,
+  .fi-filters__group,
+  .fi-pop,
+  .dd-settings,
+  .fi-checkrow {
+    background: var(--m-glass);
+    -webkit-backdrop-filter: var(--m-blur);
+    backdrop-filter: var(--m-blur);
+    box-shadow: var(--m-edge), var(--m-e3);
+  }
+  .fi-panel,
+  .fi-filters__group,
+  .fi-checkrow {
+    box-shadow: var(--m-e1);
+  }
+  .fi-query__go,
+  .fi-find button,
+  .dd-search button,
+  .dd-product__links a,
+  .dd-settings button,
+  .fi-pop > button {
+    background-image: var(--m-ink);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, white 18%, transparent),
+      var(--m-e1);
+  }
+  .dd-home-q__kicker {
+    box-shadow: 0 6px 16px -8px var(--m-glow);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fi-face,
+    .fi-face:hover {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .fi-panel,
+    .fi-filters__group,
+    .fi-pop,
+    .dd-settings,
+    .fi-checkrow {
+      background: var(--c-surface);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .fi-panel,
+    .fi-filters__group,
+    .fi-pop,
+    .dd-settings,
+    .fi-checkrow {
+      background: var(--c-surface);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    .fi-frame {
+      background-image: none;
+    }
+    .fi-frame,
+    .fi-frame *,
+    .dd-settings {
+      box-shadow: none !important;
+      filter: none !important;
+      background-image: none !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+    }
+  }
+
+  @media (forced-colors: active), print {
+    .fi-frame,
+    .fi-frame *,
+    .dd-settings {
+      box-shadow: none !important;
+      background-image: none !important;
+      filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+    }
+    .fi-face:hover {
+      transform: none !important;
+    }
+  }
+
+  :root[data-inspect="L3"] .fi-frame,
+  :root[data-inspect="L3"] .fi-frame * {
+    box-shadow: none !important;
+    filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background-image: none !important;
+  }
+  :root[data-inspect="L3"] .fi-face:hover {
+    transform: none;
+  }
+}

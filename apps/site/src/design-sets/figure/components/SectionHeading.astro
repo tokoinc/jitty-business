@@ -1,0 +1,16 @@
+---
+import type { SectionHeadingProps } from "../../contract";
+type Props = SectionHeadingProps;
+const { id, index, context, label, total } = Astro.props;
+const num = String(index).padStart(2, "0");
+---
+
+<div class={`fi-h fi-h--${context}`} data-sig="s3">
+  <p class="fi-h__fig" aria-hidden="true">
+    <span class="fi-h__num">{context === "section" && label ? label : num}</span>
+    {total && <span class="fi-h__of">/{String(total).padStart(2, "0")}</span>}
+  </p>
+  <h2 id={id}>
+    <slot />
+  </h2>
+</div>

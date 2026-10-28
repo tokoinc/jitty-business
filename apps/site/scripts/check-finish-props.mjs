@@ -1,6 +1,6 @@
 // finish-real.css のソースを検査する（ADR-0010）。npm run build の先頭で呼ぶ。
 // 寸法を変えるプロパティと、許されない transform が無いかを見る。
-// 引数が無ければ 3 セット。Binder だけ、検索条件の 5 度と perspective を要する。
+// 引数が無ければ全セット。Binder だけ、検索条件の 5 度と perspective を要する。
 import { readFileSync } from "node:fs";
 import { gzipSync } from "node:zlib";
 
@@ -10,6 +10,10 @@ const files = process.argv.slice(2).length
       "src/design-sets/binder/finish-real.css",
       "src/design-sets/board/finish-real.css",
       "src/design-sets/spread/finish-real.css",
+      "src/design-sets/tally/finish-real.css",
+      "src/design-sets/answer/finish-real.css",
+      "src/design-sets/figure/finish-real.css",
+      "src/design-sets/inline/finish-real.css",
     ];
 
 const errors = [];
@@ -217,7 +221,7 @@ for (const file of files) {
   if (binder) {
     if (seen.tilt < 1 || seen.perspective < 1) errors.push("Binder の傾きを読み取れていない");
   } else if (seen.tilt !== 0 || seen.perspective !== 0) {
-    errors.push("Board と Spread に傾きがある");
+    errors.push("Binder 以外のセットに傾きがある");
   }
   if (errors.length) {
     failed = true;

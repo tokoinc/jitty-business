@@ -1,0 +1,26 @@
+---
+import type { SectionHeadingProps } from "../../contract";
+type Props = SectionHeadingProps;
+const { id, index, context, label, total } = Astro.props;
+// 見出しの下の細い線。記事の中で何節目まで来たかを長さで示す
+const progress = total ? Math.min(100, Math.round((index / total) * 10000) / 100) : 0;
+---
+
+<div class={`il-h il-h--${context}`} data-sig="s3" style={`--progress:${progress}%`}>
+  {context === "section" && label && (
+    <span class="il-h__label" aria-hidden="true">
+      {label}
+    </span>
+  )}
+  <h2 id={id}>
+    <slot />
+  </h2>
+  {total && (
+    <p class="il-h__line" aria-hidden="true">
+      <span class="il-h__track" />
+      <span class="il-h__num">
+        {index} / {total}
+      </span>
+    </p>
+  )}
+</div>

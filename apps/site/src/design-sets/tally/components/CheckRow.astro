@@ -1,0 +1,11 @@
+---
+import type { CheckRowProps } from "../../contract";
+type Props = CheckRowProps;
+const { items } = Astro.props;
+---
+
+<nav class="ta-checkrow" aria-label="この記事で確かめる">
+  {items.map((item) => (
+    <a href={item.href}>{item.count !== undefined ? `${item.label} ${item.count}` : item.label}</a>
+  ))}
+</nav>

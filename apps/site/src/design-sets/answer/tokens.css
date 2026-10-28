@@ -1,0 +1,55 @@
+/* src/design-sets/answer/tokens.css */
+:root {
+  color-scheme: light dark;
+  /* 意味トークン：light-dark(light, dark) */
+  --c-bg: light-dark(#FFFFFF, #0F1115);
+  --c-surface: light-dark(#FFFFFF, #171A20);
+  --c-fill: light-dark(#F3F4F6, #1E222A);
+  --c-ink: light-dark(#111318, #ECEEF2);
+  --c-ink-soft: light-dark(#3B3F47, #B4B9C3);
+  --c-line: light-dark(#111318, #ECEEF2);
+  --c-hair: light-dark(#D9DCE1, #2F343D);
+  --c-accent: light-dark(#1F45D9, #8EA5FF);
+  --c-on-accent: light-dark(#FFFFFF, #0F1115);
+  --c-focus: light-dark(#1F45D9, #8EA5FF);
+  /* Answer 固有：判定の札（◯ はい・△ 条件つき・✕ いいえ・＝ 値・？ 未確定） */
+  --c-yes: light-dark(#1F45D9, #8EA5FF);
+  --c-on-yes: light-dark(#FFFFFF, #0F1115);
+  --c-cond: light-dark(#F2B200, #F2B200);
+  --c-on-cond: light-dark(#111318, #111318);
+  --c-no: light-dark(#D23A1E, #FF8A73);
+  --c-on-no: light-dark(#FFFFFF, #0F1115);
+  --c-unknown: light-dark(#8A909A, #8A909A);
+  --c-tint: light-dark(#E8EDFF, #1C2440);
+  --c-tint-ink: light-dark(#1F45D9, #A9BAFF);
+  --c-cond-tint: light-dark(#FFF5D6, #2B2512);
+  --c-plate: light-dark(#111318, #ECEEF2);
+  --c-on-plate: light-dark(#FFFFFF, #111318);
+  --c-on-plate-soft: light-dark(#D5D8DE, #3B3F47);
+  --shelf-hue-1: 228;
+  --shelf-hue-2: 45;
+  --shelf-hue-3: 10;
+  --shelf-hue-4: 200;
+  --shelf-hue-5: 280;
+  /* 幾何トークン（manifest.geometry と一致） */
+  --g-line: 1.5px;
+  --g-radius: 16px;
+  --g-radius-small: 10px;
+  --g-pill: 999px;
+  --g-plate: 2.5rem;
+  --g-gap: 2.75rem;
+  --g-side: 19rem;
+  --g-max: 78rem;
+  --g-pad: 2.5rem;
+  /* 書体。Windows では UD 書体（BIZ UDPゴシック）を使う。フォントファイルは同梱しない */
+  --f-sans:
+    "BIZ UDPGothic", "BIZ UDPゴシック", system-ui, -apple-system, "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, "Noto Sans JP", sans-serif;
+  --f-num: "BIZ UDPGothic", system-ui, -apple-system, "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}

@@ -1,0 +1,29 @@
+---
+import type { CheckSlipProps } from "../../contract";
+type Props = CheckSlipProps;
+const { kind, title, id } = Astro.props;
+const tag = { brief: "", conditions: "条件", evidence: "根拠" }[kind];
+// 札：論点帯は答え（A）、条件は決まった値（＝）、根拠は出どころ（根）
+const plate = { brief: "A", conditions: "＝", evidence: "根" }[kind];
+const H = kind === "brief" ? "h2" : "h3";
+---
+
+<section class={`an-slip an-slip--${kind}`} id={id} aria-labelledby={`${id}-t`} data-sig="s6">
+  <div class="an-slip__head">
+    <span class="an-slip__plate" aria-hidden="true">
+      {plate}
+    </span>
+    {tag && (
+      <span class="an-slip__tag" aria-hidden="true">
+        {tag}
+      </span>
+    )}
+    <H class="an-slip__title" id={`${id}-t`}>
+      {tag && <span class="dd-visually-hidden">{tag}：</span>}
+      {title}
+    </H>
+  </div>
+  <div class="an-slip__body">
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,24 @@
+---
+import type { CategoryMarkProps } from "../../contract";
+type Props = CategoryMarkProps;
+const { shelf, format, context } = Astro.props;
+// 2×2のマスのうち、棚の番号の数だけ埋める（--slot と --i）
+const cells = [1, 2, 3, 4];
+---
+
+<p class={`ta-mark ta-mark--${context}`} style={`--slot:${shelf.slot}`} data-sig="s2">
+  <span class="ta-cells" aria-hidden="true">
+    {cells.map((i) => (
+      <i style={`--i:${i}`} />
+    ))}
+  </span>
+  <span class="ta-mark__name">
+    <span class="dd-visually-hidden">棚：</span>
+    <span data-field="shelf">{shelf.label}</span>
+  </span>
+  {format && (
+    <span class="ta-mark__format" aria-hidden="true" data-pagefind-ignore>
+      {format.label}
+    </span>
+  )}
+</p>

@@ -1,0 +1,20 @@
+---
+import type { PopoverProps } from "../../contract";
+type Props = PopoverProps;
+const { id, heading } = Astro.props;
+---
+
+<div class="an-pop" id={id} popover role="dialog" aria-labelledby={`${id}-h`} data-sig="s7">
+  <p class="an-pop__tag" aria-hidden="true">
+    <span class="an-pop__plate">？</span>用語
+  </p>
+  <p class="an-pop__h" id={`${id}-h`}>
+    {heading}
+  </p>
+  <div class="an-pop__body">
+    <slot />
+  </div>
+  <button type="button" popovertarget={id} popovertargetaction="hide">
+    閉じる
+  </button>
+</div>

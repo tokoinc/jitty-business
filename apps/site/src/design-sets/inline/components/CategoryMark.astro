@@ -1,0 +1,24 @@
+---
+import type { CategoryMarkProps } from "../../contract";
+type Props = CategoryMarkProps;
+const { shelf, format, context } = Astro.props;
+// 短い棒の列。棚の位置の棒だけ色が付く（--slot と --i）
+const bars = [1, 2, 3, 4];
+---
+
+<p class={`il-mark il-mark--${context}`} style={`--slot:${shelf.slot}`} data-sig="s2">
+  <span class="il-bars" aria-hidden="true">
+    {bars.map((i) => (
+      <i style={`--i:${i}`} />
+    ))}
+  </span>
+  <span class="il-mark__name">
+    <span class="dd-visually-hidden">棚：</span>
+    <span data-field="shelf">{shelf.label}</span>
+  </span>
+  {format && (
+    <span class="il-mark__format" aria-hidden="true" data-pagefind-ignore>
+      {format.label}
+    </span>
+  )}
+</p>

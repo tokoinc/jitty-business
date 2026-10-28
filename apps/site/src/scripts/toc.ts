@@ -30,6 +30,14 @@ function apply() {
     ".bo-checkrow a",
     ".sp-spine__item--toc a",
     ".sp-checkrow a",
+    ".ta-panel--toc a",
+    ".ta-checkrow a",
+    ".an-panel--toc a",
+    ".an-checkrow a",
+    ".fi-panel--toc a",
+    ".fi-checkrow a",
+    ".il-panel--toc a",
+    ".il-checkrow a",
     ".dd-toc a",
   ]) {
     for (const a of document.querySelectorAll<HTMLAnchorElement>(sel)) {

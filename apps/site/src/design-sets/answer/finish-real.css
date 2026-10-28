@@ -1,0 +1,266 @@
+/* Answer のモダンリアル。色・背景・影・角・透明度・backdrop-filter・transition と、
+   記事面 :hover の transform だけ。寸法は parts.css のまま（ADR-0010）。
+   札はつやのある小さな面、答えの面はやわらかく浮いた面。
+   すりガラスは補足・表示設定・本文冒頭の確かめる列・検索欄だけ。本文の面（.an-main と記事面）には付けない。 */
+
+:root {
+  --m-hair: light-dark(rgba(15, 23, 42, 0.1), rgba(255, 255, 255, 0.1));
+  --m-edge: inset 0 1px 0 light-dark(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.12));
+  --m-e1:
+    0 1px 2px light-dark(rgba(17, 19, 24, 0.06), transparent),
+    0 1px 1px light-dark(rgba(17, 19, 24, 0.04), transparent),
+    0 1px 2px light-dark(transparent, rgba(0, 0, 0, 0.4));
+  --m-e2:
+    0 1px 2px light-dark(rgba(17, 19, 24, 0.05), transparent),
+    0 6px 12px -4px light-dark(rgba(17, 19, 24, 0.1), transparent),
+    0 16px 32px -12px light-dark(rgba(31, 69, 217, 0.16), transparent),
+    0 1px 2px light-dark(transparent, rgba(0, 0, 0, 0.4)),
+    0 8px 16px -6px light-dark(transparent, rgba(0, 0, 0, 0.5)),
+    0 20px 40px -16px light-dark(transparent, rgba(0, 0, 0, 0.6));
+  --m-e3:
+    0 2px 4px light-dark(rgba(17, 19, 24, 0.05), transparent),
+    0 14px 28px -8px light-dark(rgba(17, 19, 24, 0.14), transparent),
+    0 36px 64px -20px light-dark(rgba(31, 69, 217, 0.22), transparent),
+    0 2px 4px light-dark(transparent, rgba(0, 0, 0, 0.45)),
+    0 16px 32px -8px light-dark(transparent, rgba(0, 0, 0, 0.55)),
+    0 40px 72px -20px light-dark(transparent, rgba(0, 0, 0, 0.65));
+  --m-glass: light-dark(rgba(255, 255, 255, 0.62), rgba(30, 34, 44, 0.55));
+  --m-blur: blur(18px) saturate(160%);
+  --m-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --m-glow: color-mix(in srgb, var(--c-yes) 55%, transparent);
+  --m-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 55%);
+  --m-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .12 0 0 0 0 .2 0 0 0 .02 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --m-ambient:
+    radial-gradient(
+      900px 620px at 0% 0%,
+      color-mix(in srgb, var(--c-yes) 10%, transparent) 0,
+      transparent 60%
+    ),
+    radial-gradient(
+      760px 560px at 100% 24%,
+      color-mix(in srgb, var(--c-cond) 9%, transparent) 0,
+      transparent 58%
+    );
+}
+
+:root[data-theme="dark"] {
+  --m-blur: blur(18px) saturate(140%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --m-blur: blur(18px) saturate(140%);
+  }
+}
+
+@layer components {
+  .an-frame {
+    background-color: var(--c-bg);
+    background-image: var(--m-grain), var(--m-ambient);
+  }
+  .an-index,
+  .an-index[popover] {
+    background: color-mix(in srgb, var(--c-bg) 86%, transparent);
+    border-bottom-color: var(--m-hair);
+    box-shadow: var(--m-e1);
+  }
+
+  /* 札：つやのある小さな面 */
+  .an-h__plate,
+  .an-slip__plate,
+  .an-end__plate,
+  .an-face__q,
+  .an-questions__q,
+  .an-panel__h::before,
+  .dd-callout__label::before,
+  .dd-faq summary::before,
+  .dd-summary h2::before,
+  .dd-next h2::before,
+  .dd-foot h2::before,
+  .an-face__steps i,
+  .an-face__date,
+  .dd-steps__mark,
+  .dd-shelves__count {
+    background-image: var(--m-gloss);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      var(--m-e1);
+  }
+  .an-shelf,
+  .an-purpose a,
+  .an-tabstrip__tab {
+    transition:
+      background-color 0.25s var(--m-ease),
+      box-shadow 0.25s var(--m-ease);
+  }
+  .an-shelf[aria-current="page"],
+  .an-purpose a[aria-current="page"],
+  .an-tabstrip__tab[aria-current="page"],
+  .an-panel__items a[aria-current],
+  .dd-toc a[aria-current="location"],
+  .an-types label:has(:checked),
+  .an-filters__options label:has(:checked) {
+    background-image: var(--m-gloss);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 6px 18px -8px rgba(17, 19, 24, 0.55),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+  .an-logo__mark i {
+    background-image: var(--m-gloss);
+    box-shadow: 0 4px 12px -4px var(--m-glow);
+  }
+
+  /* 答えの面：やわらかく浮いた面 */
+  .an-panel,
+  .an-slip,
+  .an-filters__group,
+  .dd-callout,
+  .dd-steps > li,
+  .dd-faq details,
+  .dd-home-q,
+  .dd-proscons section,
+  .dd-index > li,
+  .dd-foot #sources li {
+    box-shadow: var(--m-edge), var(--m-e1);
+  }
+  .an-face {
+    box-shadow: var(--m-edge), var(--m-e2);
+    transition:
+      transform 0.3s var(--m-ease),
+      box-shadow 0.3s var(--m-ease);
+  }
+  .an-face--news {
+    box-shadow: none;
+  }
+  .an-face:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--m-edge), var(--m-e3);
+  }
+  .an-face--news:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .an-face__lead,
+  .an-face__cols,
+  .an-panel__items a,
+  .an-slip dd li,
+  .an-slip th,
+  .an-slip td,
+  .an-slip--evidence li {
+    box-shadow: var(--m-e1);
+  }
+  .dd-summary,
+  .an-end {
+    background-image: linear-gradient(160deg, rgba(255, 255, 255, 0.08), transparent 60%);
+    box-shadow: var(--m-e2);
+  }
+
+  /* すりガラス：検索欄・補足・表示設定・本文冒頭の確かめる列 */
+  .an-find,
+  .an-pop,
+  .dd-settings,
+  .an-checkrow a {
+    background: var(--m-glass);
+    -webkit-backdrop-filter: var(--m-blur);
+    backdrop-filter: var(--m-blur);
+    box-shadow: var(--m-edge), var(--m-e1);
+  }
+  .an-pop,
+  .dd-settings {
+    box-shadow: var(--m-edge), var(--m-e3);
+  }
+  .an-pop::after {
+    background: color-mix(in srgb, var(--c-surface) 92%, transparent);
+  }
+  .an-query__field {
+    box-shadow: inset 0 1px 3px rgba(17, 19, 24, 0.1);
+  }
+  .an-query__go,
+  .dd-search button,
+  .dd-product__links a,
+  .dd-save[aria-pressed="true"] {
+    background-image: var(--m-gloss);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 8px 20px -8px var(--m-glow);
+    transition: box-shadow 0.25s var(--m-ease);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .an-face,
+    .an-face:hover {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .an-find,
+    .an-pop,
+    .dd-settings,
+    .an-checkrow a {
+      background: var(--c-surface);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    .an-find {
+      background: var(--c-fill);
+    }
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .an-find,
+    .an-pop,
+    .dd-settings,
+    .an-checkrow a {
+      background: var(--c-surface);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    .an-find {
+      background: var(--c-fill);
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    .an-frame {
+      background-image: none;
+    }
+    .an-frame,
+    .an-frame *,
+    .dd-settings {
+      box-shadow: none !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+    }
+    .an-index,
+    .an-index[popover] {
+      background: var(--c-bg);
+      border-bottom-color: var(--c-line);
+    }
+  }
+
+  @media (forced-colors: active), print {
+    .an-frame,
+    .an-frame *,
+    .dd-settings {
+      box-shadow: none !important;
+      background-image: none !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+    }
+    .an-face:hover {
+      transform: none !important;
+    }
+  }
+
+  :root[data-inspect="L3"] .an-frame,
+  :root[data-inspect="L3"] .an-frame * {
+    box-shadow: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background-image: none !important;
+  }
+  :root[data-inspect="L3"] .an-face:hover {
+    transform: none;
+  }
+}
